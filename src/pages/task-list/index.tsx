@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { TaskRow, getTasksThunk } from "@/entities/task";
 import { taskModel } from "@/entities/task";
+import { RefreshTasksButton } from "@/features/refresh-tasks";
 import { RemoveTaskButton } from "@/features/remove-task";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
@@ -45,6 +46,7 @@ export const TaskListPage = () => {
       {saveAviable && <SaveTasksButton />}
       <AddTaskDialog />
       <TaskFiltersMenu />
+      <RefreshTasksButton />
     </Box>
   );
 
