@@ -6,9 +6,11 @@ import { RemoveTaskButton } from "@/features/remove-task";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
+import { Icon } from "@/shared/ui";
 import { AddTaskDialog } from "@/widgets/add-task-dialog";
 import { TaskListHeader } from "@/widgets/task-list-header";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { ViewerMenu } from "@/widgets/viewer-menu";
+import { Box, IconButton, Skeleton, Tooltip, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 const tasksSkeleton = (
@@ -70,7 +72,18 @@ export const TaskListPage = () => {
 
   return (
     <>
-      <TaskListHeader />
+      <TaskListHeader
+        before={
+          <Tooltip title="Coming soon">
+            <span>
+              <IconButton disabled>
+                <Icon>menu</Icon>
+              </IconButton>
+            </span>
+          </Tooltip>
+        }
+        after={<ViewerMenu />}
+      />
 
       <Box
         sx={{

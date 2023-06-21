@@ -4,11 +4,10 @@ import { ReactNode, FC } from "react";
 
 interface ViewerDataProps extends BoxProps {
   after?: ReactNode;
-  fullWidth?: boolean;
 }
 
 export const ViewerData: FC<ViewerDataProps> = (props) => {
-  const { after, fullWidth, sx, ...other } = props;
+  const { after, sx, ...other } = props;
   const viewer = useViewer();
 
   if (viewer) {
@@ -17,20 +16,20 @@ export const ViewerData: FC<ViewerDataProps> = (props) => {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 1,
-          width: fullWidth ? "100%" : undefined,
+          flexDirection: "column",
+          justifyContent: "center",
           ...sx,
         }}
         {...other}
       >
-        <Avatar src={viewer.photoURL ? viewer.photoURL : undefined} />
-        <Box sx={{ flexGrow: fullWidth ? 1 : 0 }}>
-          <Typography>{viewer.displayName}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {viewer.email}
-          </Typography>
-        </Box>
-        {after}
+        <Avatar
+          sx={{ width: 50, height: 50 }}
+          src={viewer.photoURL ? viewer.photoURL : undefined}
+        />
+        <Typography sx={{ mt: 2 }}>{viewer.displayName}</Typography>
+        <Typography variant="body2" color="text.secondary">
+          {viewer.email}
+        </Typography>
       </Box>
     );
   } else {
