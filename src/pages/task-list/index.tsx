@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { TaskRow, getTasksThunk } from "@/entities/task";
 import { taskModel } from "@/entities/task";
+import { RemoveTaskButton } from "@/features/remove-task";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
@@ -56,6 +57,7 @@ export const TaskListPage = () => {
               key={task.id}
               data={task}
               before={<ToggleTask color={task.color} id={task.id} />}
+              after={<RemoveTaskButton id={task.id} />}
             />
           );
         })}

@@ -47,6 +47,12 @@ export const taskSlice = createSlice({
       });
       state.saveAviable = true;
     },
+    removeTask(state, action: PayloadAction<number>) {
+      const taskIndex = state.data.findIndex(
+        (task) => task.id === action.payload
+      );
+      state.data.splice(taskIndex, 1);
+    },
     setQueryConfig(state, action: PayloadAction<QueryConfig>) {
       state.queryConfig = action.payload;
     },
@@ -69,5 +75,10 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { addTask, toggleTask, setQueryConfig, setSaveAviable } =
-  taskSlice.actions;
+export const {
+  addTask,
+  toggleTask,
+  removeTask,
+  setQueryConfig,
+  setSaveAviable,
+} = taskSlice.actions;

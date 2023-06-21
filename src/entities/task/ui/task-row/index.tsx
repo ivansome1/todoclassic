@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 interface TaskRowProps {
   data: Task;
   before?: ReactNode;
+  after?: ReactNode;
 }
 
 export const TaskRow: FC<TaskRowProps> = (props) => {
-  const { data, before } = props;
+  const { data, before, after } = props;
 
   const color = data.color ? data.color : "primary.main";
 
@@ -30,6 +31,7 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
           {data.description}
         </Typography>
       </Box>
+      <Box sx={{ ml: "auto", mr: 1 }}>{after}</Box>
     </Paper>
   );
 };
