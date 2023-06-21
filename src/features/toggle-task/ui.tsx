@@ -20,6 +20,7 @@ export const ToggleTask: FC<ToggleTaskProps> = (props) => {
       <Checkbox
         checked={task.completed}
         onChange={() => {
+          dispatch(taskModel.setSaveAviable(true));
           dispatch(taskModel.toggleTask(id));
         }}
         sx={{
