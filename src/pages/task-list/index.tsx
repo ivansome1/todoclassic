@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from "@/app/store";
 import { TaskRow, getTasksThunk } from "@/entities/task";
 import { taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/refresh-tasks";
-import { RemoveTaskButton } from "@/features/remove-task";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
 import { Icon } from "@/shared/ui";
 import { AddTaskDialog } from "@/widgets/add-task-dialog";
 import { TaskListHeader } from "@/widgets/task-list-header";
+import { TaskMenu } from "@/widgets/task-menu";
 import { ViewerMenu } from "@/widgets/viewer-menu";
 import {
   Box,
@@ -70,7 +70,7 @@ export const TaskListPage = () => {
               key={task.id}
               data={task}
               before={<ToggleTask color={task.color} id={task.id} />}
-              after={<RemoveTaskButton id={task.id} />}
+              after={<TaskMenu id={task.id} />}
             />
           );
         })}
