@@ -5,6 +5,7 @@ import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store";
 import { viewerModel } from "@/entities/viewer";
+import { taskModel } from "@/entities/task";
 
 const auth = getAuth(app);
 
@@ -29,6 +30,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
 
         dispatch(viewerModel.setViewer(viewer));
         setLoading(false);
+        dispatch(taskModel.clearTasks());
         navigate("/tasks");
       } else {
         dispatch(viewerModel.setViewer(undefined));

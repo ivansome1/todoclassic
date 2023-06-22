@@ -19,7 +19,7 @@ export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
         dispatch(setSaveAviable(true));
       }}
     >
-      <Icon>remove</Icon>
+      <Icon>delete</Icon>
     </IconButton>
   );
 };

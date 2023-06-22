@@ -10,8 +10,17 @@ import { Icon } from "@/shared/ui";
 import { AddTaskDialog } from "@/widgets/add-task-dialog";
 import { TaskListHeader } from "@/widgets/task-list-header";
 import { ViewerMenu } from "@/widgets/viewer-menu";
-import { Box, IconButton, Skeleton, Tooltip, Typography } from "@mui/material";
-import { useEffect } from "react";
+import {
+  Box,
+  Fab,
+  Fade,
+  IconButton,
+  Skeleton,
+  Tooltip,
+  Typography,
+  useScrollTrigger,
+} from "@mui/material";
+import { useEffect, useId } from "react";
 
 const tasksSkeleton = (
   <Box
@@ -70,8 +79,32 @@ export const TaskListPage = () => {
       <Box>No tasks here</Box>
     );
 
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 20,
+  });
+
+  const backToTopAnchorId = useId();
+
+  const backToTop = (
+    <Fade in={trigger}>
+      <Fab
+        onClick={() => {
+          document
+            .getElementById(backToTopAnchorId)
+            ?.scrollIntoView({ block: "center" });
+        }}
+        size="small"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        <Icon>expand_less</Icon>
+      </Fab>
+    </Fade>
+  );
+
   return (
     <>
+      <div id={backToTopAnchorId}></div>
       <TaskListHeader
         before={
           <Tooltip title="Coming soon">
@@ -93,6 +126,7 @@ export const TaskListPage = () => {
           mx: "auto",
           display: "flex",
           flexDirection: "column",
+          mb: 7,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -103,6 +137,8 @@ export const TaskListPage = () => {
         </Box>
         {loading ? tasksSkeleton : tasksRoot}
       </Box>
+
+      {backToTop}
     </>
   );
 };

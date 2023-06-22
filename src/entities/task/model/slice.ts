@@ -53,6 +53,9 @@ export const taskSlice = createSlice({
       );
       state.data.splice(taskIndex, 1);
     },
+    clearTasks(state) {
+      state.data = [];
+    },
     setQueryConfig(state, action: PayloadAction<QueryConfig>) {
       state.queryConfig = action.payload;
     },
@@ -80,5 +83,6 @@ export const {
   toggleTask,
   removeTask,
   setQueryConfig,
+  clearTasks,
   setSaveAviable,
 } = taskSlice.actions;
