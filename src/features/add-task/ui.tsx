@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { FC, useState } from "react";
 import { addTask } from "./model";
+import { ButtonColorPicker } from "@/shared/ui";
 
 interface AddTaskDialogFormProps {
   onCancel: () => void;
@@ -61,21 +62,20 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
           variant="standard"
           label="Description"
         />
-        <Box sx={{ display: "flex", gap: 1 }}>
-          Color:
-          <input
+        <Box>
+          <ButtonColorPicker
             value={color}
             onChange={(event) => {
               setColor(event.target.value);
             }}
-            type="color"
-            id="inpre"
-          ></input>
+          />
         </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel}>cancel</Button>
-        <Button onClick={add}>add</Button>
+        <Button disabled={!title} onClick={add}>
+          add
+        </Button>
       </DialogActions>
     </>
   );
