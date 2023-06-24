@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import "@fontsource/roboto";
 import { AuthProvider } from "./providers";
+import { FooterProvider } from "./providers/footer";
 
 const theme = createTheme({
   palette: {
@@ -27,7 +28,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <AuthProvider>
-              <Routing />
+              <FooterProvider>
+                <Routing />
+              </FooterProvider>
             </AuthProvider>
           </CssBaseline>
         </ThemeProvider>
