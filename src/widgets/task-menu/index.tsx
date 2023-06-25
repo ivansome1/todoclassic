@@ -4,7 +4,7 @@ import { IconButton, Menu } from "@mui/material";
 import { FC, useState } from "react";
 
 interface TaskMenuProps {
-  id: number;
+  id: string;
 }
 
 export const TaskMenu: FC<TaskMenuProps> = ({ id }) => {

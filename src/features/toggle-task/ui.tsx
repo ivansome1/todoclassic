@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/app/store";
 import { taskModel } from "@/entities/task";
 
 interface ToggleTaskProps {
-  id: number;
+  id: string;
   color?: string;
   showStatus?: boolean;
 }
