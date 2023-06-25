@@ -35,19 +35,20 @@ export const ViewerMenu = () => {
           setAnchor(null);
         }}
         PaperProps={{
+          elevation: 15,
           sx: {
+            mt: 2,
             width: "210px",
             overflow: "visible",
-            mt: 1.5,
             "&:before": {
               content: '""',
               display: "block",
               position: "absolute",
               top: 0,
-              right: 22,
+              right: 35,
               width: 10,
               height: 10,
-              bgcolor: lighten(theme.palette.background.paper, 5 * 0.025),
+              bgcolor: lighten(theme.palette.background.paper, 6.1 * 0.023),
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },

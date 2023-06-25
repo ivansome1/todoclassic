@@ -27,7 +27,6 @@ export const ButtonColorPicker: FC<ButtonColorPickerProps> = (props) => {
           component="label"
           htmlFor={id}
           variant="contained"
-          sx={{ mt: 1 }}
           endIcon={<Icon>expand_more</Icon>}
         >
           Color: {value}
