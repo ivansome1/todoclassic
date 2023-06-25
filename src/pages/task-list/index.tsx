@@ -5,12 +5,12 @@ import { RefreshTasksButton } from "@/features/refresh-tasks";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
-import { Icon } from "@/shared/ui";
-import { AddTaskDialog } from "@/widgets/add-task-dialog";
+import { AddTaskDialogButton } from "@/widgets/add-task-dialog";
+import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
 import { TaskMenu } from "@/widgets/task-menu";
 import { ViewerMenu } from "@/widgets/viewer-menu";
-import { Box, IconButton, Skeleton, Tooltip, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 const tasksSkeleton = (
@@ -46,7 +46,7 @@ export const TaskListPage = () => {
   const actions = (
     <Box sx={{ ml: "auto" }}>
       {saveAviable && <SaveTasksButton />}
-      <AddTaskDialog />
+      <AddTaskDialogButton />
       <TaskFiltersMenu />
       <RefreshTasksButton />
     </Box>
@@ -72,18 +72,7 @@ export const TaskListPage = () => {
 
   return (
     <>
-      <TaskListHeader
-        before={
-          <Tooltip title="Coming soon">
-            <span>
-              <IconButton disabled>
-                <Icon>menu</Icon>
-              </IconButton>
-            </span>
-          </Tooltip>
-        }
-        after={<ViewerMenu />}
-      />
+      <TaskListHeader before={<TaskListDrawer />} after={<ViewerMenu />} />
 
       <Box
         sx={{
