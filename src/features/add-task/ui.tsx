@@ -40,26 +40,26 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: 1,
+          gap: 2,
           alignItems: "start",
         }}
       >
         <TextField
+          sx={{ mt: 2 }}
           value={title}
           onChange={(event) => {
             setTitle(event.target.value);
           }}
           fullWidth
-          variant="standard"
           label="Title"
         />
         <TextField
+          size="small"
           value={description}
           onChange={(event) => {
             setDescription(event.target.value);
           }}
           fullWidth
-          variant="standard"
           label="Description"
         />
         <Box>

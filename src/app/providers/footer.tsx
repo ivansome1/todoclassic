@@ -6,7 +6,7 @@ export const FooterProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Box
       sx={{
-        height: "100dvh",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
