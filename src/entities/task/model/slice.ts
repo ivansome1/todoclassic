@@ -1,6 +1,7 @@
 import { Task } from "@/shared/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getTasksThunk } from "../api";
+import { nanoid } from "nanoid";
 
 export type QueryConfig = {
   completed?: boolean;
@@ -23,7 +24,7 @@ export const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    toggleTask(state, action: PayloadAction<number>) {
+    toggleTask(state, action: PayloadAction<string>) {
       const targetTask = state.data.find((task) => task.id === action.payload);
 
       if (targetTask) {
@@ -39,7 +40,7 @@ export const taskSlice = createSlice({
       }>
     ) {
       state.data.unshift({
-        id: state.data.length,
+        id: nanoid(),
         completed: false,
         title: action.payload.title,
         description: action.payload.description,
@@ -47,7 +48,7 @@ export const taskSlice = createSlice({
       });
       state.saveAviable = true;
     },
-    removeTask(state, action: PayloadAction<number>) {
+    removeTask(state, action: PayloadAction<string>) {
       const taskIndex = state.data.findIndex(
         (task) => task.id === action.payload
       );

@@ -4,7 +4,6 @@ import { Card, CardContent, CardActions, Typography, Box } from "@mui/material";
 
 interface TaskCardProps {
   data: Task;
-  index: number;
   actions?: ReactNode;
 }
 

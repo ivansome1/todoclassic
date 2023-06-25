@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/app/store";
 
-export function useTask(taskId: number) {
+export function useTask(taskId: string) {
   return useAppSelector((state) =>
     state.task.data.find((task) => task.id === taskId)
   );

@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { setSaveAviable } from "@/entities/task/model";
 
 interface RemoveTaskButtonProps {
-  id: number;
+  id: string;
 }
 
 export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
@@ -30,7 +30,7 @@ export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
 };
 
 interface RemoveTaskMenuItemProps {
-  id: number;
+  id: string;
 }
 
 export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({ id }) => {
