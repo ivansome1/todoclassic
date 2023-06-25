@@ -1,4 +1,3 @@
-import { Icon } from "@/shared/ui";
 import {
   IconButton,
   ListItemIcon,
@@ -9,6 +8,7 @@ import { removeTask } from "./model";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
 import { setSaveAviable } from "@/entities/task/model";
+import { Delete } from "@mui/icons-material";
 
 interface RemoveTaskButtonProps {
   id: string;
@@ -24,7 +24,7 @@ export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
         dispatch(setSaveAviable(true));
       }}
     >
-      <Icon>delete</Icon>
+      <Delete />
     </IconButton>
   );
 };
@@ -44,7 +44,7 @@ export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({ id }) => {
       }}
     >
       <ListItemIcon>
-        <Icon>delete</Icon>
+        <Delete />
       </ListItemIcon>
       <ListItemText>Remove</ListItemText>
     </MenuItem>

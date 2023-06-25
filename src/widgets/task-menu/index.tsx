@@ -1,5 +1,5 @@
 import { RemoveTaskMenuItem } from "@/features/remove-task";
-import { Icon } from "@/shared/ui";
+import { MoreVert } from "@mui/icons-material";
 import { IconButton, Menu } from "@mui/material";
 import { FC, useState } from "react";
 
@@ -18,7 +18,7 @@ export const TaskMenu: FC<TaskMenuProps> = ({ id }) => {
           setAnchorEl(event.currentTarget);
         }}
       >
-        <Icon>more_vert</Icon>
+        <MoreVert />
       </IconButton>
 
       <Menu

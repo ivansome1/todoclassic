@@ -1,6 +1,6 @@
+import { ExpandMore } from "@mui/icons-material";
 import { Button, ThemeProvider, createTheme } from "@mui/material";
 import { FC, ChangeEvent, useId } from "react";
-import { Icon } from ".";
 
 interface ButtonColorPickerProps {
   value: string;
@@ -27,7 +27,7 @@ export const ButtonColorPicker: FC<ButtonColorPickerProps> = (props) => {
           component="label"
           htmlFor={id}
           variant="contained"
-          endIcon={<Icon>expand_more</Icon>}
+          endIcon={<ExpandMore />}
         >
           Color: {value}
           <input
