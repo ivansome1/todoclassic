@@ -1,4 +1,3 @@
-import { Icon } from "@/shared/ui";
 import {
   Box,
   Divider,
@@ -13,6 +12,7 @@ import {
 import { useState } from "react";
 import { AddTaskDialogListItemButton } from "../add-task-dialog";
 import { RefreshTasksListItemButton } from "@/features/refresh-tasks";
+import { ChevronLeft, Menu, Settings } from "@mui/icons-material";
 
 export const TaskListDrawer = () => {
   const [open, setOpen] = useState(false);
@@ -24,14 +24,9 @@ export const TaskListDrawer = () => {
           setOpen(true);
         }}
       >
-        <Icon>menu</Icon>
+        <Menu />
       </IconButton>
       <Drawer
-        PaperProps={{
-          sx: {
-            boxShadow: "none",
-          },
-        }}
         anchor="left"
         open={open}
         onClose={() => {
@@ -51,7 +46,7 @@ export const TaskListDrawer = () => {
               setOpen(false);
             }}
           >
-            <Icon>chevron_left</Icon>
+            <ChevronLeft />
           </IconButton>
         </Box>
         <Divider />
@@ -70,7 +65,7 @@ export const TaskListDrawer = () => {
               <span>
                 <ListItemButton disabled>
                   <ListItemIcon>
-                    <Icon>settings</Icon>
+                    <Settings />
                   </ListItemIcon>
                   <ListItemText primary="Settings" />
                 </ListItemButton>

@@ -1,4 +1,3 @@
-import { Icon } from "@/shared/ui";
 import {
   IconButton,
   ListItemButton,
@@ -8,6 +7,7 @@ import {
 import { getTasksThunk } from "./api";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { taskModel } from "@/entities/task";
+import { Refresh } from "@mui/icons-material";
 
 export const RefreshTasksButton = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export const RefreshTasksButton = () => {
         dispatch(taskModel.setSaveAviable(false));
       }}
     >
-      <Icon>refresh</Icon>
+      <Refresh />
     </IconButton>
   );
 };
@@ -39,7 +39,7 @@ export const RefreshTasksListItemButton = () => {
       }}
     >
       <ListItemIcon>
-        <Icon>refresh</Icon>
+        <Refresh />
       </ListItemIcon>
       <ListItemText primary="Refresh tasks" />
     </ListItemButton>

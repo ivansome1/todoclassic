@@ -1,5 +1,5 @@
 import { AddTaskDialogForm } from "@/features/add-task";
-import { Icon } from "@/shared/ui";
+import { Add, AddBox } from "@mui/icons-material";
 import {
   ListItemText,
   Dialog,
@@ -24,7 +24,7 @@ export const AddTaskDialogButton = () => {
           setOpen(true);
         }}
       >
-        <Icon>add</Icon>
+        <Add />
       </IconButton>
       <Dialog
         PaperProps={{
@@ -67,7 +67,7 @@ export const AddTaskDialogListItemButton = ({
         }}
       >
         <ListItemIcon>
-          <Icon>add_box</Icon>
+          <AddBox />
         </ListItemIcon>
         <ListItemText primary="New task" />
       </ListItemButton>

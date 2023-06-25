@@ -7,7 +7,7 @@ import {
   OutlinedInputProps,
 } from "@mui/material";
 import { useState, useId, FC } from "react";
-import { Icon } from "..";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const PasswordInput: FC<OutlinedInputProps> = (props) => {
   const { ...other } = props;
@@ -29,7 +29,7 @@ export const PasswordInput: FC<OutlinedInputProps> = (props) => {
                 setExposed((prev) => !prev);
               }}
             >
-              <Icon>{exposed ? "visibility_off" : "visibility"}</Icon>
+              {exposed ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }

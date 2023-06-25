@@ -1,8 +1,8 @@
-import { Icon } from "@/shared/ui";
 import { IconButton } from "@mui/material";
 import { saveTasks } from "./api";
 import { useDispatch } from "react-redux";
 import { setSaveAviable } from "@/entities/task/model";
+import { Save } from "@mui/icons-material";
 
 export const SaveTasksButton = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const SaveTasksButton = () => {
 
   return (
     <IconButton onClick={onClick}>
-      <Icon>save</Icon>
+      <Save />
     </IconButton>
   );
 };

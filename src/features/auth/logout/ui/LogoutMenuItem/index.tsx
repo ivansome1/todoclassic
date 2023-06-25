@@ -1,12 +1,12 @@
-import { Icon } from "@/shared/ui";
 import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
 import { logout } from "../../api";
+import { Logout } from "@mui/icons-material";
 
 export const LogoutMenuItem = () => {
   return (
     <MenuItem onClick={logout}>
       <ListItemIcon>
-        <Icon>logout</Icon>
+        <Logout />
       </ListItemIcon>
       <ListItemText>Logout</ListItemText>
     </MenuItem>

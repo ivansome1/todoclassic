@@ -1,5 +1,5 @@
 import { SignInForm } from "@/features/auth/sign-in";
-import { Icon } from "@/shared/ui";
+import { Lock } from "@mui/icons-material";
 import { Avatar, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const icon = (
     }}
   >
     <Avatar sx={{ bgcolor: "success.main", mx: "auto" }}>
-      <Icon>lock</Icon>
+      <Lock />
     </Avatar>
     <Typography sx={{ mx: "auto", width: "fit-content" }} variant="h5">
       Sign in
