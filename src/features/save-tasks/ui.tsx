@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { saveTasks } from "./api";
 import { useDispatch } from "react-redux";
 import { setSaveAviable } from "@/entities/task/model";
@@ -13,8 +13,10 @@ export const SaveTasksButton = () => {
   }
 
   return (
-    <IconButton onClick={onClick}>
-      <Save />
-    </IconButton>
+    <Tooltip title="Save tasks">
+      <IconButton onClick={onClick}>
+        <Save />
+      </IconButton>
+    </Tooltip>
   );
 };

@@ -10,24 +10,39 @@ import {
 const auth = getAuth(app);
 
 export async function signUp(name: string, email: string, password: string) {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await updateProfile(userCredential.user, { displayName: name });
+
+    console.log(auth.currentUser);
+
+    return auth.currentUser;
+  } catch (err) {
+    alert(err);
+  }
 }
 
 export async function signIn(email: string, password: string) {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  return userCredential.user;
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user;
+  } catch (err) {
+    alert(err);
+  }
 }
 
 export async function logout() {
-  await signOut(auth);
+  try {
+    await signOut(auth);
+  } catch (err) {
+    alert(err);
+  }
 }

@@ -10,6 +10,7 @@ import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
 import { TaskMenu } from "@/widgets/task-menu";
 import { ViewerMenu } from "@/widgets/viewer-menu";
+import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 
@@ -67,7 +68,21 @@ export const TaskListPage = () => {
         })}
       </Box>
     ) : (
-      <Box>No tasks here</Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ mx: "auto" }}>
+            <SentimentNeutral sx={{ color: "text.disabled" }} />
+          </Box>
+          <Typography color="text.disabled">No tasks here</Typography>
+        </Box>
+      </Box>
     );
 
   return (
@@ -82,6 +97,7 @@ export const TaskListPage = () => {
           mx: "auto",
           display: "flex",
           flexDirection: "column",
+          height: "100%",
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>

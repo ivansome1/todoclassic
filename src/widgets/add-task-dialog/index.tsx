@@ -6,35 +6,33 @@ import {
   IconButton,
   ListItemButton,
   ListItemIcon,
-  useMediaQuery,
-  useTheme,
+  Tooltip,
 } from "@mui/material";
 import { useState } from "react";
 
 export const AddTaskDialogButton = () => {
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
     <>
-      <IconButton
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        <Add />
-      </IconButton>
+      <Tooltip title="Add task">
+        <IconButton
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Add />
+        </IconButton>
+      </Tooltip>
+
       <Dialog
         PaperProps={{
-          sx: { width: !fullScreen ? "500px" : undefined },
+          sx: { width: "500px", m: 2 },
         }}
         open={open}
         onClose={() => {
           setOpen(false);
         }}
-        fullScreen={fullScreen}
       >
         <AddTaskDialogForm
           onCancel={() => {
@@ -56,9 +54,6 @@ export const AddTaskDialogListItemButton = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
     <>
       <ListItemButton
@@ -73,13 +68,12 @@ export const AddTaskDialogListItemButton = ({
       </ListItemButton>
       <Dialog
         PaperProps={{
-          sx: { width: !fullScreen ? "500px" : undefined },
+          sx: { width: "500px", m: 2 },
         }}
         open={open}
         onClose={() => {
           setOpen(false);
         }}
-        fullScreen={fullScreen}
       >
         <AddTaskDialogForm
           onCancel={() => {

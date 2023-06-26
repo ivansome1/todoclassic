@@ -10,6 +10,7 @@ import {
 import { FC, useState } from "react";
 import { addTask } from "./model";
 import { ButtonColorPicker } from "@/shared/ui";
+import { Cancel, CheckCircle } from "@mui/icons-material";
 
 interface AddTaskDialogFormProps {
   onCancel: () => void;
@@ -45,7 +46,18 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
         }}
       >
         <TextField
-          sx={{ mt: 2 }}
+          autoComplete="off"
+          sx={{
+            mt: 2,
+            "& label.Mui-focused": {
+              color: color,
+            },
+            "& .MuiOutlinedInput-root": {
+              "&.Mui-focused fieldset": {
+                borderColor: color,
+              },
+            },
+          }}
           value={title}
           onChange={(event) => {
             setTitle(event.target.value);
@@ -54,6 +66,17 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
           label="Title"
         />
         <TextField
+          autoComplete="off"
+          sx={{
+            "& label.Mui-focused": {
+              color: "text.secondary",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&.Mui-focused fieldset": {
+                borderColor: "text.secondary",
+              },
+            },
+          }}
           size="small"
           value={description}
           onChange={(event) => {
@@ -72,8 +95,10 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel}>cancel</Button>
-        <Button disabled={!title} onClick={add}>
+        <Button onClick={onCancel} startIcon={<Cancel />}>
+          cancel
+        </Button>
+        <Button disabled={!title} onClick={add} startIcon={<CheckCircle />}>
           add
         </Button>
       </DialogActions>

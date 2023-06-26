@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 import { DEFAULT_FILTER_ID, Filter, filterList } from "./config";
 import { useAppDispatch, useAppSelector } from "@/app/store";
@@ -22,13 +22,16 @@ export const TaskFiltersMenu = () => {
 
   return (
     <>
-      <IconButton
-        onClick={(e) => {
-          setAnchor(e.currentTarget);
-        }}
-      >
-        <Sort />
-      </IconButton>
+      <Tooltip title="Filters">
+        <IconButton
+          onClick={(e) => {
+            setAnchor(e.currentTarget);
+          }}
+        >
+          <Sort />
+        </IconButton>
+      </Tooltip>
+
       <Menu
         open={open}
         anchorEl={anchor}
