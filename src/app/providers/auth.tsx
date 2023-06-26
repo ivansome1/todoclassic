@@ -3,7 +3,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/shared/model";
+import { useAppDispatch } from "../store";
 import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
 
