@@ -3,6 +3,8 @@ import { LoadingButton } from "@mui/lab";
 import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { signUp } from "./api";
+import { useAppDispatch } from "@/app/store";
+import { userModel } from "@/entities/user";
 
 export const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -12,11 +14,26 @@ export const SignUpForm = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   function onSubmit() {
     setLoading(true);
-    signUp(`${firstName} ${lastName}`, email, password).finally(() => {
-      setLoading(false);
-    });
+    signUp(`${firstName} ${lastName}`, email, password)
+      .then((user) => {
+        if (user) {
+          dispatch(
+            userModel.setUser({
+              displayName: user.displayName as string,
+              photoURL: user.photoURL,
+              uid: user.uid,
+              email: user.email as string,
+            })
+          );
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -40,6 +57,7 @@ export const SignUpForm = () => {
         />
       </Box>
       <TextField
+        type="email"
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
@@ -54,6 +72,8 @@ export const SignUpForm = () => {
         }}
       />
       <LoadingButton
+        type="submit"
+        disabled={!firstName || !email || !password}
         loading={loading}
         onClick={onSubmit}
         variant="contained"

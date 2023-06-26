@@ -7,7 +7,7 @@ interface TaskMenuProps {
   id: string;
 }
 
-export const TaskMenu: FC<TaskMenuProps> = ({ id }) => {
+export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 

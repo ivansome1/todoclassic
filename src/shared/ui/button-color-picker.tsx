@@ -28,6 +28,7 @@ export const ButtonColorPicker: FC<ButtonColorPickerProps> = (props) => {
           htmlFor={id}
           variant="contained"
           endIcon={<ExpandMore />}
+          sx={{ boxShadow: "none", "&:hover": { boxShadow: "none" } }}
         >
           Color: {value}
           <input

@@ -1,15 +1,15 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { TaskRow, getTasksThunk } from "@/entities/task";
-import { taskModel } from "@/entities/task";
+import { TaskRow, getTasksThunk, taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/refresh-tasks";
 import { SaveTasksButton } from "@/features/save-tasks";
-import { TaskFiltersMenu } from "@/features/task-filters";
+import { TaskFiltersMenuButton } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
 import { AddTaskDialogButton } from "@/widgets/add-task-dialog";
 import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
-import { TaskMenu } from "@/widgets/task-menu";
-import { ViewerMenu } from "@/widgets/viewer-menu";
+import { TaskMenuButton } from "@/widgets/task-menu";
+import { UserMenuButton } from "@/widgets/user-menu";
+import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 
@@ -47,7 +47,7 @@ export const TaskListPage = () => {
     <Box sx={{ ml: "auto" }}>
       {saveAviable && <SaveTasksButton />}
       <AddTaskDialogButton />
-      <TaskFiltersMenu />
+      <TaskFiltersMenuButton />
       <RefreshTasksButton />
     </Box>
   );
@@ -61,18 +61,32 @@ export const TaskListPage = () => {
               key={task.id}
               data={task}
               before={<ToggleTask color={task.color} id={task.id} />}
-              after={<TaskMenu id={task.id} />}
+              after={<TaskMenuButton id={task.id} />}
             />
           );
         })}
       </Box>
     ) : (
-      <Box>No tasks here</Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+        }}
+      >
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ mx: "auto" }}>
+            <SentimentNeutral sx={{ color: "text.disabled" }} />
+          </Box>
+          <Typography color="text.disabled">No tasks here</Typography>
+        </Box>
+      </Box>
     );
 
   return (
     <>
-      <TaskListHeader before={<TaskListDrawer />} after={<ViewerMenu />} />
+      <TaskListHeader before={<TaskListDrawer />} after={<UserMenuButton />} />
 
       <Box
         sx={{
@@ -82,6 +96,7 @@ export const TaskListPage = () => {
           mx: "auto",
           display: "flex",
           flexDirection: "column",
+          height: "100%",
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>

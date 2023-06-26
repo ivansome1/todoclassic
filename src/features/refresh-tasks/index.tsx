@@ -3,6 +3,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
 } from "@mui/material";
 import { getTasksThunk } from "./api";
 import { useAppDispatch, useAppSelector } from "@/app/store";
@@ -13,16 +14,25 @@ export const RefreshTasksButton = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((store) => store.task.loading);
 
+  if (loading) {
+    return (
+      <IconButton disabled>
+        <Refresh />
+      </IconButton>
+    );
+  }
+
   return (
-    <IconButton
-      disabled={loading}
-      onClick={() => {
-        dispatch(getTasksThunk());
-        dispatch(taskModel.setSaveAviable(false));
-      }}
-    >
-      <Refresh />
-    </IconButton>
+    <Tooltip title="Refresh">
+      <IconButton
+        onClick={() => {
+          dispatch(getTasksThunk());
+          dispatch(taskModel.setSaveAviable(false));
+        }}
+      >
+        <Refresh />
+      </IconButton>
+    </Tooltip>
   );
 };
 

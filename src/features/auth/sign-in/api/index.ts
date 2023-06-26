@@ -1,1 +1,1 @@
-export { signIn } from "@/entities/viewer";
+export { signIn } from "@/entities/user";
