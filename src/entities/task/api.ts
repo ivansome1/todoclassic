@@ -7,19 +7,19 @@ const db = getDatabase(app);
 
 export async function saveTasks() {
   const tasks = store.getState().task.data;
-  const viewer = store.getState().viewer.data;
+  const user = store.getState().user.data;
 
-  if (viewer) {
-    await set(ref(db, `tasks/${viewer.uid}`), tasks);
+  if (user) {
+    await set(ref(db, `tasks/${user.uid}`), tasks);
   }
 }
 
 export async function getTasks() {
-  const viewer = store.getState().viewer.data;
+  const user = store.getState().user.data;
 
-  if (viewer) {
+  if (user) {
     const tasks: Task[] | null = (
-      await get(ref(db, `tasks/${viewer.uid}`))
+      await get(ref(db, `tasks/${user.uid}`))
     ).val();
 
     if (tasks) {

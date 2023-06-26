@@ -1,1 +1,1 @@
-export { logout } from "@/entities/viewer";
+export { logout } from "@/entities/user";

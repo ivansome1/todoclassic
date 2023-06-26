@@ -1,4 +1,4 @@
-import { ViewerAvatar, ViewerData } from "@/entities/viewer";
+import { UserAvatar, UserData } from "@/entities/user";
 import { LogoutMenuItem } from "@/features/auth/logout";
 import {
   Divider,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export const ViewerMenu = () => {
+export const UserMenu = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const open = !!anchor;
 
@@ -24,7 +24,7 @@ export const ViewerMenu = () => {
             setAnchor(event.currentTarget);
           }}
         >
-          <ViewerAvatar style={{ width: 32, height: 32 }} />
+          <UserAvatar style={{ width: 32, height: 32 }} />
         </IconButton>
       </Tooltip>
 
@@ -55,7 +55,7 @@ export const ViewerMenu = () => {
           },
         }}
       >
-        <ViewerData sx={{ mx: 2, my: 1 }} />
+        <UserData sx={{ mx: 2, my: 1 }} />
         <Divider sx={{ my: 1 }} />
         <LogoutMenuItem />
       </Menu>

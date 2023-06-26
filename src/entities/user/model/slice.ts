@@ -7,14 +7,14 @@ type SliceState = {
 
 const initialState: SliceState = {};
 
-export const viewerSlice = createSlice({
-  name: "viewer",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    setViewer(state, action: PayloadAction<User | undefined>) {
+    setUser(state, action: PayloadAction<User | undefined>) {
       state.data = action.payload;
     },
   },
 });
 
-export const { setViewer } = viewerSlice.actions;
+export const { setUser } = userSlice.actions;

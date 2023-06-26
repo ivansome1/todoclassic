@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store";
-import { viewerModel } from "@/entities/viewer";
+import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
 
 const auth = getAuth(app);
@@ -28,12 +28,12 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
           uid: user.uid,
         };
 
-        dispatch(viewerModel.setViewer(viewer));
+        dispatch(userModel.setUser(viewer));
         setLoading(false);
         dispatch(taskModel.clearTasks());
         navigate("/tasks");
       } else {
-        dispatch(viewerModel.setViewer(undefined));
+        dispatch(userModel.setUser(undefined));
         setLoading(false);
         navigate("/signin");
       }

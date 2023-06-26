@@ -4,7 +4,7 @@ import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { signUp } from "./api";
 import { useAppDispatch } from "@/app/store";
-import { setViewer } from "@/entities/viewer/model";
+import { userModel } from "@/entities/user";
 
 export const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -22,7 +22,7 @@ export const SignUpForm = () => {
       .then((user) => {
         if (user) {
           dispatch(
-            setViewer({
+            userModel.setUser({
               displayName: user.displayName as string,
               photoURL: user.photoURL,
               uid: user.uid,

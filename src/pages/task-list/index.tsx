@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { TaskRow, getTasksThunk } from "@/entities/task";
-import { taskModel } from "@/entities/task";
+import { TaskRow, getTasksThunk, taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/refresh-tasks";
 import { SaveTasksButton } from "@/features/save-tasks";
 import { TaskFiltersMenu } from "@/features/task-filters";
@@ -9,7 +8,7 @@ import { AddTaskDialogButton } from "@/widgets/add-task-dialog";
 import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
 import { TaskMenu } from "@/widgets/task-menu";
-import { ViewerMenu } from "@/widgets/viewer-menu";
+import { UserMenu } from "@/widgets/user-menu";
 import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
@@ -87,7 +86,7 @@ export const TaskListPage = () => {
 
   return (
     <>
-      <TaskListHeader before={<TaskListDrawer />} after={<ViewerMenu />} />
+      <TaskListHeader before={<TaskListDrawer />} after={<UserMenu />} />
 
       <Box
         sx={{
