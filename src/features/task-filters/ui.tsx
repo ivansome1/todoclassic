@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store";
 import { taskModel } from "@/entities/task";
 import { Sort } from "@mui/icons-material";
 
-export const TaskFiltersMenu = () => {
+export const TaskFiltersMenuButton = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const open = Boolean(anchor);
 

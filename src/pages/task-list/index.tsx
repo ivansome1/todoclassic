@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from "@/app/store";
 import { TaskRow, getTasksThunk, taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/refresh-tasks";
 import { SaveTasksButton } from "@/features/save-tasks";
-import { TaskFiltersMenu } from "@/features/task-filters";
+import { TaskFiltersMenuButton } from "@/features/task-filters";
 import { ToggleTask } from "@/features/toggle-task";
 import { AddTaskDialogButton } from "@/widgets/add-task-dialog";
 import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
-import { TaskMenu } from "@/widgets/task-menu";
-import { UserMenu } from "@/widgets/user-menu";
+import { TaskMenuButton } from "@/widgets/task-menu";
+import { UserMenuButton } from "@/widgets/user-menu";
 import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
@@ -47,7 +47,7 @@ export const TaskListPage = () => {
     <Box sx={{ ml: "auto" }}>
       {saveAviable && <SaveTasksButton />}
       <AddTaskDialogButton />
-      <TaskFiltersMenu />
+      <TaskFiltersMenuButton />
       <RefreshTasksButton />
     </Box>
   );
@@ -61,7 +61,7 @@ export const TaskListPage = () => {
               key={task.id}
               data={task}
               before={<ToggleTask color={task.color} id={task.id} />}
-              after={<TaskMenu id={task.id} />}
+              after={<TaskMenuButton id={task.id} />}
             />
           );
         })}
@@ -86,7 +86,7 @@ export const TaskListPage = () => {
 
   return (
     <>
-      <TaskListHeader before={<TaskListDrawer />} after={<UserMenu />} />
+      <TaskListHeader before={<TaskListDrawer />} after={<UserMenuButton />} />
 
       <Box
         sx={{

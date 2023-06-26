@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export const UserMenu = () => {
+export const UserMenuButton = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const open = !!anchor;
 
