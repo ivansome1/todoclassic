@@ -7,7 +7,7 @@ import {
   TextField,
   useTheme,
 } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { addTask } from "./model";
 import { ButtonColorPicker } from "@/shared/ui";
 import { Cancel, CheckCircle } from "@mui/icons-material";
@@ -34,6 +34,12 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
     }
   }
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <>
       <DialogTitle>Add task</DialogTitle>
@@ -46,6 +52,8 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
         }}
       >
         <TextField
+          inputRef={inputRef}
+          autoFocus
           autoComplete="off"
           sx={{
             mt: 2,
