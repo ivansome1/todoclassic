@@ -72,7 +72,7 @@ export const TaskListPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "100%",
+          m: "auto",
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -85,7 +85,7 @@ export const TaskListPage = () => {
     );
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
       <TaskListHeader before={<TaskListDrawer />} after={<UserMenuButton />} />
 
       <Box
@@ -96,7 +96,7 @@ export const TaskListPage = () => {
           mx: "auto",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
+          flexGrow: 1,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -107,6 +107,6 @@ export const TaskListPage = () => {
         </Box>
         {loading ? tasksSkeleton : tasksRoot}
       </Box>
-    </>
+    </Box>
   );
 };
