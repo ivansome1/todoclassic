@@ -1,20 +1,11 @@
 import { UserAvatar, UserData } from "@/entities/user";
 import { LogoutMenuItem } from "@/features/auth/logout";
-import {
-  Divider,
-  IconButton,
-  Menu,
-  Tooltip,
-  lighten,
-  useTheme,
-} from "@mui/material";
+import { Divider, IconButton, Menu, Tooltip } from "@mui/material";
 import { useState } from "react";
 
 export const UserMenuButton = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const open = !!anchor;
-
-  const theme = useTheme();
 
   return (
     <>
@@ -35,24 +26,17 @@ export const UserMenuButton = () => {
           setAnchor(null);
         }}
         PaperProps={{
-          elevation: 15,
           sx: {
-            mt: 2,
             width: "210px",
-            overflow: "visible",
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 35,
-              width: 10,
-              height: 10,
-              bgcolor: lighten(theme.palette.background.paper, 6.1 * 0.023),
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
           },
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
         }}
       >
         <UserData sx={{ mx: 2, my: 1 }} />

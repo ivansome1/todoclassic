@@ -11,7 +11,10 @@ export const FooterProvider: FC<PropsWithChildren> = ({ children }) => {
         flexDirection: "column",
       }}
     >
-      {children}
+      <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+        {children}
+      </Box>
+
       <Box sx={{ mt: "auto" }}>
         <Footer />
       </Box>
