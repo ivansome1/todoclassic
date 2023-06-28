@@ -21,8 +21,12 @@ export const TaskCard: FC<TaskCardProps> = (props) => {
         }}
       ></Box>
       <CardContent>
-        <Typography> {data.title}</Typography>
-        <Typography color="text.secondary" variant="body2">
+        <Typography sx={{ wordBreak: "break-word" }}> {data.title}</Typography>
+        <Typography
+          sx={{ wordBreak: "break-word" }}
+          color="text.secondary"
+          variant="body2"
+        >
           {data.description}
         </Typography>
       </CardContent>

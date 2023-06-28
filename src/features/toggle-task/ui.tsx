@@ -24,8 +24,8 @@ export const ToggleTask: FC<ToggleTaskProps> = (props) => {
           dispatch(taskModel.toggleTask(id));
         }}
         sx={{
-          "&.Mui-checked": {
-            color: color,
+          svg: {
+            fill: color,
           },
         }}
       />

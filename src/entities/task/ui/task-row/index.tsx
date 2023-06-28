@@ -12,8 +12,6 @@ interface TaskRowProps {
 export const TaskRow: FC<TaskRowProps> = (props) => {
   const { data, before, after } = props;
 
-  const color = data.color ? data.color : "primary.main";
-
   return (
     <Paper
       sx={{
@@ -23,15 +21,24 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
     >
       <Box sx={{ p: 1 }}> {before}</Box>
 
-      <Box sx={{ py: 1 }}>
-        <Typography color={color} component={Link} to={"/tasks/" + data.id}>
+      <Box
+        sx={{
+          py: 1,
+          flexGrow: 1,
+          textDecoration: "none",
+          minWidth: "3px",
+        }}
+        component={Link}
+        to={"/tasks/" + data.id}
+      >
+        <Typography noWrap color="text.primary">
           {data.title}
         </Typography>
-        <Typography color="text.secondary" variant="body2">
+        <Typography noWrap color="text.secondary" variant="body2">
           {data.description}
         </Typography>
       </Box>
-      <Box sx={{ ml: "auto", mr: 1 }}>{after}</Box>
+      <Box sx={{ mr: 1, ml: 3 }}>{after}</Box>
     </Paper>
   );
 };

@@ -25,7 +25,7 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [color, setColor] = useState(theme.palette.primary.main);
+  const [color, setColor] = useState(theme.palette.success.main);
 
   function add() {
     addTask(title, description, color);
@@ -93,7 +93,7 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
           fullWidth
           label="Description"
         />
-        <Box>
+        <Box sx={{ display: "flex", gap: 1 }}>
           <ButtonColorPicker
             value={color}
             onChange={(event) => {
