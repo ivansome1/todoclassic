@@ -7,15 +7,16 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Tooltip,
 } from "@mui/material";
 import { useState } from "react";
 import { AddTaskDialogListItemButton } from "../add-task-dialog";
 import { RefreshTasksListItemButton } from "@/features/refresh-tasks";
 import { ChevronLeft, Menu, Settings } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export const TaskListDrawer = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -61,16 +62,16 @@ export const TaskListDrawer = () => {
 
             <Divider sx={{ my: 1 }} />
 
-            <Tooltip title="Coming soon">
-              <span>
-                <ListItemButton disabled>
-                  <ListItemIcon>
-                    <Settings />
-                  </ListItemIcon>
-                  <ListItemText primary="Settings" />
-                </ListItemButton>
-              </span>
-            </Tooltip>
+            <ListItemButton
+              onClick={() => {
+                navigate("/settings");
+              }}
+            >
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </ListItemButton>
           </List>
         </Box>
       </Drawer>

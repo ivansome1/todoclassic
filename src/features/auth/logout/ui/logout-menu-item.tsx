@@ -1,5 +1,5 @@
 import { ListItemIcon, ListItemText, MenuItem } from "@mui/material";
-import { logout } from "../../api";
+import { logout } from "../api";
 import { Logout } from "@mui/icons-material";
 
 export const LogoutMenuItem = () => {
