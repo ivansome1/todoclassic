@@ -57,14 +57,6 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
           autoComplete="off"
           sx={{
             mt: 2,
-            "& label.Mui-focused": {
-              color: color,
-            },
-            "& .MuiOutlinedInput-root": {
-              "&.Mui-focused fieldset": {
-                borderColor: color,
-              },
-            },
           }}
           value={title}
           onChange={(event) => {
@@ -75,16 +67,6 @@ export const AddTaskDialogForm: FC<AddTaskDialogFormProps> = ({
         />
         <TextField
           autoComplete="off"
-          sx={{
-            "& label.Mui-focused": {
-              color: "text.secondary",
-            },
-            "& .MuiOutlinedInput-root": {
-              "&.Mui-focused fieldset": {
-                borderColor: "text.secondary",
-              },
-            },
-          }}
           size="small"
           value={description}
           onChange={(event) => {
