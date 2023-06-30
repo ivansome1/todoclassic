@@ -61,9 +61,6 @@ export const UserDataRow: FC<BoxProps> = (props) => {
         <UserAvatar sx={{ my: "auto" }} />
         <Box sx={{ my: "auto" }}>
           <Typography>{user.displayName}</Typography>
-          <Typography variant="body2" color="text.secondary">
-            {user.email}
-          </Typography>
         </Box>
       </Box>
     );

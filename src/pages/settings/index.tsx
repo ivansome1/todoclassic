@@ -1,16 +1,17 @@
 import { UserDataRow } from "@/entities/user";
 import { LogoutButton } from "@/features/auth/logout";
 import { SettingsHeader } from "@/widgets/settings-header";
-import { AccountCircle, Brush, ChevronRight, Star } from "@mui/icons-material";
+import { ChevronRight } from "@mui/icons-material";
 import {
   Box,
   Divider,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Paper,
+  Switch,
+  Typography,
 } from "@mui/material";
 
 export const SettingsPage = () => {
@@ -25,38 +26,74 @@ export const SettingsPage = () => {
           alignItems: "center",
         }}
       >
-        <Paper sx={{ maxWidth: "700px", width: "100%" }}>
-          <List>
-            <ListItem>
-              <UserDataRow />
-              <LogoutButton sx={{ ml: "auto" }} />
-            </ListItem>
-            <Divider sx={{ my: 1 }} />
-            <ListItemButton>
-              <ListItemIcon>
-                <AccountCircle />
-              </ListItemIcon>
-              <ListItemText primary="Account" />
-              <ChevronRight />
-            </ListItemButton>
-            <Divider sx={{ my: 1 }} />
-            <ListItemButton>
-              <ListItemIcon>
-                <Brush />
-              </ListItemIcon>
-              <ListItemText primary="Appearance" />
-              <ChevronRight />
-            </ListItemButton>
-            <Divider sx={{ my: 1 }} />
-            <ListItemButton>
-              <ListItemIcon>
-                <Star />
-              </ListItemIcon>
-              <ListItemText primary="About Todo Classic" />
-              <ChevronRight />
-            </ListItemButton>
-          </List>
-        </Paper>
+        <Box
+          sx={{
+            maxWidth: "700px",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Paper>
+            <List>
+              <ListItem>
+                <UserDataRow />
+
+                <LogoutButton sx={{ ml: "auto" }} />
+              </ListItem>
+            </List>
+
+            <Divider />
+
+            <List>
+              <Box sx={{ mx: 2, my: 1 }}>
+                <Typography variant="button" color="text.secondary">
+                  account settings
+                </Typography>
+              </Box>
+
+              <ListItemButton>
+                <ListItemText primary="Edit profile" />
+                <ChevronRight />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemText primary="Hide sensetive data" />
+                <Switch />
+              </ListItemButton>
+            </List>
+
+            <Divider />
+
+            <List>
+              <Box sx={{ mx: 2, my: 1 }}>
+                <Typography variant="button" color="text.secondary">
+                  personalization
+                </Typography>
+              </Box>
+
+              <ListItemButton>
+                <ListItemText primary="Dark mode" />
+                <Switch />
+              </ListItemButton>
+            </List>
+
+            <Divider />
+
+            <List>
+              <Box sx={{ mx: 2, my: 1 }}>
+                <Typography variant="button" color="text.secondary">
+                  more
+                </Typography>
+              </Box>
+
+              <ListItemButton>
+                <ListItemText primary="About us" />
+                <ChevronRight />
+              </ListItemButton>
+            </List>
+          </Paper>
+        </Box>
       </Box>
     </Box>
   );
