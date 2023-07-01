@@ -3,7 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { signUp } from "./api";
-import { useAppDispatch } from "@/app/store";
+import { useAppDispatch } from "@/shared/model";
 import { userModel } from "@/entities/user";
 
 export const SignUpForm = () => {

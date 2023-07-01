@@ -1,11 +1,11 @@
-import { User, app } from "@/shared/api";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../store";
 import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
+import { User, app } from "@/shared/api";
+import { useAppDispatch } from "@/shared/model";
 
 const auth = getAuth(app);
 
@@ -19,7 +19,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const viewer: User = {
           displayName: user.displayName as string,
@@ -38,6 +38,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
         navigate("/signin");
       }
     });
+    return () => unsubscribe();
   }, []);
 
   if (loading) {

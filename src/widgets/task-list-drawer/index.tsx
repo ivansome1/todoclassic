@@ -9,8 +9,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useState } from "react";
-import { AddTaskDialogListItemButton } from "../add-task-dialog";
-import { RefreshTasksListItemButton } from "@/features/refresh-tasks";
+import { AddTaskDialogListItemButton } from "@/features/tasks/add-task";
+import { RefreshTasksListItemButton } from "@/features/tasks/refresh-tasks";
 import { ChevronLeft, Menu, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
@@ -53,11 +53,7 @@ export const TaskListDrawer = () => {
         <Divider />
         <Box sx={{ width: "270px" }}>
           <List>
-            <AddTaskDialogListItemButton
-              onAdd={() => {
-                setOpen(false);
-              }}
-            />
+            <AddTaskDialogListItemButton />
             <RefreshTasksListItemButton />
 
             <Divider sx={{ my: 1 }} />

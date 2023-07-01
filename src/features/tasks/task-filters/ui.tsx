@@ -1,7 +1,7 @@
 import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
 import { DEFAULT_FILTER_ID, Filter, filterList } from "./config";
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 import { Sort } from "@mui/icons-material";
 

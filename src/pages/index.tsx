@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { TaskListPage } from "./task-list";
 import { TaskDetails } from "./task-details";
-import { SignInPage } from "./auth/sign-in";
-import { SignUpPage } from "./auth/sign-up";
+import { SignInPage } from "./sign-in";
+import { SignUpPage } from "./sign-up";
 import { SettingsPage } from "./settings";
 
 export const Routing = () => {

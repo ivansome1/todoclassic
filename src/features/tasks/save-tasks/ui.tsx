@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { saveTasks } from "./api";
 import { useDispatch } from "react-redux";
-import { setSaveAviable } from "@/entities/task/model";
+import { taskModel } from "@/entities/task";
 import { Save } from "@mui/icons-material";
 
 export const SaveTasksButton = () => {
@@ -9,7 +9,7 @@ export const SaveTasksButton = () => {
 
   function onClick() {
     saveTasks();
-    dispatch(setSaveAviable(false));
+    dispatch(taskModel.setSaveAviable(false));
   }
 
   return (

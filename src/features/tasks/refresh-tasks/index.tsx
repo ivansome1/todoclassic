@@ -5,8 +5,8 @@ import {
   ListItemText,
   Tooltip,
 } from "@mui/material";
-import { getTasksThunk } from "./api";
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { getTasks } from "./api";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 import { Refresh } from "@mui/icons-material";
 
@@ -26,7 +26,7 @@ export const RefreshTasksButton = () => {
     <Tooltip title="Refresh">
       <IconButton
         onClick={() => {
-          dispatch(getTasksThunk());
+          dispatch(getTasks());
           dispatch(taskModel.setSaveAviable(false));
         }}
       >
@@ -44,7 +44,7 @@ export const RefreshTasksListItemButton = () => {
     <ListItemButton
       disabled={loading}
       onClick={() => {
-        dispatch(getTasksThunk());
+        dispatch(getTasks());
         dispatch(taskModel.setSaveAviable(false));
       }}
     >

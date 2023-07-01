@@ -4,24 +4,24 @@ import {
   ListItemText,
   MenuItem,
 } from "@mui/material";
-import { removeTask } from "./model";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import { setSaveAviable } from "@/entities/task/model";
+import { taskModel } from "@/entities/task";
 import { Delete } from "@mui/icons-material";
+import { useAppDispatch } from "@/shared/model";
 
 interface RemoveTaskButtonProps {
   id: string;
 }
 
 export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <IconButton
       onClick={() => {
-        removeTask(id);
-        dispatch(setSaveAviable(true));
+        dispatch(taskModel.removeTask(id));
+        dispatch(taskModel.setSaveAviable(true));
       }}
     >
       <Delete />
@@ -39,8 +39,8 @@ export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({ id }) => {
   return (
     <MenuItem
       onClick={() => {
-        removeTask(id);
-        dispatch(setSaveAviable(true));
+        dispatch(taskModel.removeTask(id));
+        dispatch(taskModel.setSaveAviable(true));
       }}
     >
       <ListItemIcon>

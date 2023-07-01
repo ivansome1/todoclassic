@@ -1,11 +1,11 @@
 import "./index.css";
-import { Routing } from "@/pages";
-import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { BrowserRouter } from "react-router-dom";
+import { Routing } from "@/pages";
 import { AuthProvider } from "./providers";
 import { FooterProvider } from "./providers/footer";
+import { store } from "./store";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

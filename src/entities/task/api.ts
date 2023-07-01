@@ -1,37 +1,36 @@
-import { RootState, store } from "@/app/store";
 import { Task, app } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { get, getDatabase, ref, set } from "firebase/database";
 
 const db = getDatabase(app);
 
-export async function saveTasks() {
-  const tasks = store.getState().task.data;
-  const user = store.getState().user.data;
+export const saveTasks = createAsyncThunk<void, void, { state: RootState }>(
+  "task/saveTasks",
+  async (_, { getState }) => {
+    const tasks = getState().task.data;
+    const user = getState().user.data;
 
-  if (user) {
-    await set(ref(db, `tasks/${user.uid}`), tasks);
-  }
-}
-
-export async function getTasks() {
-  const user = store.getState().user.data;
-
-  if (user) {
-    const tasks: Task[] | null = (
-      await get(ref(db, `tasks/${user.uid}`))
-    ).val();
-
-    if (tasks) {
-      return tasks;
+    if (user) {
+      await set(ref(db, `tasks/${user.uid}`), tasks);
     }
   }
+);
 
-  return [];
-}
+export const getTasks = createAsyncThunk<Task[], void, { state: RootState }>(
+  "task/getTasks",
+  async (_, { getState }) => {
+    const user = getState().user.data;
 
-export const getTasksThunk = createAsyncThunk<
-  Task[],
-  void,
-  { state: RootState }
->("task/getTasks", getTasks);
+    if (user) {
+      const tasks: Task[] | null = (
+        await get(ref(db, `tasks/${user.uid}`))
+      ).val();
+
+      if (tasks) {
+        return tasks;
+      }
+    }
+
+    return [];
+  }
+);

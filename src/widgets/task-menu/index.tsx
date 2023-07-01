@@ -1,4 +1,4 @@
-import { RemoveTaskMenuItem } from "@/features/remove-task";
+import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
 import { MoreVert } from "@mui/icons-material";
 import { IconButton, Menu } from "@mui/material";
 import { FC, useState } from "react";

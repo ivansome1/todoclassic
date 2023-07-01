@@ -1,9 +1,9 @@
-import { QueryConfig } from "@/entities/task/model";
+import { taskModel } from "@/entities/task";
 
 export type Filter = {
   id: number;
   title: string;
-  config: QueryConfig;
+  config: taskModel.QueryConfig;
 };
 
 export const filterList: Filter[] = [

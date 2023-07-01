@@ -1,6 +1,6 @@
 import { Task } from "@/shared/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getTasksThunk } from "../api";
+import { getTasks } from "../api";
 import { nanoid } from "nanoid";
 
 export type QueryConfig = {
@@ -65,15 +65,15 @@ export const taskSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getTasksThunk.pending, (state) => {
+    builder.addCase(getTasks.pending, (state) => {
       state.loading = true;
       state.data = [];
     });
-    builder.addCase(getTasksThunk.fulfilled, (state, action) => {
+    builder.addCase(getTasks.fulfilled, (state, action) => {
       state.data = action.payload;
       state.loading = false;
     });
-    builder.addCase(getTasksThunk.rejected, (state) => {
+    builder.addCase(getTasks.rejected, (state) => {
       state.loading = false;
     });
   },

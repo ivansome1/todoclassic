@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { useAppDispatch } from "@/app/store";
+import { useAppDispatch } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 
 interface ToggleTaskProps {

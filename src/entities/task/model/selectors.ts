@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/shared/model";
 
 export function useTask(taskId: string) {
   return useAppSelector((state) =>

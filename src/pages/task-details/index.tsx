@@ -1,16 +1,15 @@
-import { TaskCard } from "@/entities/task/ui/task-card";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
-import { ToggleTask } from "@/features/toggle-task";
-import { useTask } from "@/entities/task/model";
+import { ToggleTask } from "@/features/tasks/toggle-task";
+import { taskModel, TaskCard } from "@/entities/task";
 import { TaskDetailsHeader } from "@/widgets/task-details-header";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/shared/model";
+import { Box } from "@mui/material";
 
 export const TaskDetails = () => {
   const taskId = useParams().taskId;
 
   if (taskId) {
-    const task = useTask(taskId);
+    const task = taskModel.useTask(taskId);
     const tasks = useAppSelector((state) => state.task.data);
     const taskIndex = tasks.findIndex((el) => el.id === task?.id);
 

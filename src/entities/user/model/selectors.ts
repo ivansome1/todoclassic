@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/shared/model";
 
 export function useUser() {
   return useAppSelector((state) => state.user.data);

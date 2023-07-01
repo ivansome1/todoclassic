@@ -1,10 +1,9 @@
-import { useAppDispatch, useAppSelector } from "@/app/store";
-import { TaskRow, getTasksThunk, taskModel } from "@/entities/task";
-import { RefreshTasksButton } from "@/features/refresh-tasks";
-import { SaveTasksButton } from "@/features/save-tasks";
-import { TaskFiltersMenuButton } from "@/features/task-filters";
-import { ToggleTask } from "@/features/toggle-task";
-import { AddTaskDialogButton } from "@/widgets/add-task-dialog";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
+import { TaskRow, getTasks, taskModel } from "@/entities/task";
+import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
+import { SaveTasksButton } from "@/features/tasks/save-tasks";
+import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
+import { ToggleTask } from "@/features/tasks/toggle-task";
 import { TaskListDrawer } from "@/widgets/task-list-drawer";
 import { TaskListHeader } from "@/widgets/task-list-header";
 import { TaskMenuButton } from "@/widgets/task-menu";
@@ -12,6 +11,7 @@ import { UserMenuButton } from "@/widgets/user-menu";
 import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
+import { AddTaskDialogButton } from "@/features/tasks/add-task";
 
 const tasksSkeleton = (
   <Box
@@ -39,7 +39,7 @@ export const TaskListPage = () => {
 
   useEffect(() => {
     if (!tasks[0]) {
-      dispatch(getTasksThunk());
+      dispatch(getTasks());
     }
   }, []);
 
