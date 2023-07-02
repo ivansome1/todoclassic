@@ -1,24 +1,23 @@
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, PropsWithChildren, useEffect } from "react";
 import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
 import { User, app } from "@/shared/api";
-import { useAppDispatch } from "@/shared/model";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
+import logo from "./logo.svg";
 
 const auth = getAuth(app);
 
 export const AuthProvider: FC<PropsWithChildren> = (props) => {
   const { children } = props;
 
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const loading = useAppSelector((state) => state.user.loading);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(userModel.setLoading(true));
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const viewer: User = {
@@ -29,14 +28,13 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
         };
 
         dispatch(userModel.setUser(viewer));
-        setLoading(false);
         dispatch(taskModel.clearTasks());
-        navigate("/tasks");
       } else {
         dispatch(userModel.setUser(undefined));
-        setLoading(false);
-        navigate("/signin");
       }
+      setTimeout(() => {
+        dispatch(userModel.setLoading(false));
+      }, 2000);
     });
     return () => unsubscribe();
   }, []);
@@ -44,13 +42,13 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
   if (loading) {
     return (
       <>
-        <Backdrop
-          open
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        {children}
+        <Paper sx={{ borderRadius: 0, height: "100vh", display: "flex" }}>
+          <Box
+            sx={{ width: "70px", height: "70px", m: "auto" }}
+            component="img"
+            src={logo}
+          />
+        </Paper>
       </>
     );
   }
