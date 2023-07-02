@@ -4,10 +4,7 @@ import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
 import { SaveTasksButton } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
-import { TaskListDrawer } from "@/widgets/task-list-drawer";
-import { TaskListHeader } from "@/widgets/task-list-header";
 import { TaskMenuButton } from "@/widgets/task-menu";
-import { UserMenuButton } from "@/widgets/user-menu";
 import { SentimentNeutral } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
@@ -86,8 +83,6 @@ export const TaskListPage = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-      <TaskListHeader before={<TaskListDrawer />} after={<UserMenuButton />} />
-
       <Box
         sx={{
           p: 2,

@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box, CircularProgress, Paper } from "@mui/material";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { userModel } from "@/entities/user";
@@ -44,10 +44,26 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
       <>
         <Paper sx={{ borderRadius: 0, height: "100vh", display: "flex" }}>
           <Box
-            sx={{ width: "70px", height: "70px", m: "auto" }}
-            component="img"
-            src={logo}
-          />
+            sx={{ display: "flex", m: "auto", flexDirection: "column", gap: 3 }}
+          >
+            <Box
+              sx={{ width: "60px", height: "60px", mx: "auto" }}
+              component="img"
+              src={logo}
+            />
+            <CircularProgress
+              color="inherit"
+              size={20}
+              sx={{
+                mx: "auto",
+                width: "10px",
+                height: "10px",
+                circle: {
+                  backgroundColor: "red",
+                },
+              }}
+            />
+          </Box>
         </Paper>
       </>
     );

@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Routing } from "@/pages";
 import { AuthProvider } from "./providers";
-import { FooterProvider } from "./providers/footer";
 import { store } from "./store";
 
 import "@fontsource/roboto/300.css";
@@ -32,9 +31,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <AuthProvider>
-              <FooterProvider>
-                <Routing />
-              </FooterProvider>
+              <Routing />
             </AuthProvider>
           </CssBaseline>
         </ThemeProvider>

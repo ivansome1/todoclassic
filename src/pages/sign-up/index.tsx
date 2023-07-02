@@ -24,7 +24,7 @@ export function SignUpPage() {
   return (
     <Box
       sx={{
-        height: "100dvh",
+        flexGrow: 1,
         width: "100%",
         p: 2,
         display: "flex",

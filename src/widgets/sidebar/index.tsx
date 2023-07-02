@@ -4,7 +4,7 @@ import { AddTaskDialogListItemButton } from "@/features/tasks/add-task";
 import { RefreshTasksListItemButton } from "@/features/tasks/refresh-tasks";
 import { ChevronLeft, Menu } from "@mui/icons-material";
 
-export const TaskListDrawer = () => {
+export const Sidebar = () => {
   const [open, setOpen] = useState(false);
 
   return (

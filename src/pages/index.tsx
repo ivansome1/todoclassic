@@ -5,6 +5,7 @@ import { SignInPage } from "./sign-in";
 import { SignUpPage } from "./sign-up";
 import { FC, ReactNode } from "react";
 import { userModel } from "@/entities/user";
+import { MainLayout } from "./layouts";
 
 const GuestGuard: FC<{ children: ReactNode }> = (props) => {
   const { children } = props;
@@ -27,41 +28,43 @@ const AuthGuard: FC<{ children: ReactNode }> = (props) => {
 export const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/tasks" />} />
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Navigate to="/tasks" />} />
 
-      <Route
-        path="/signup"
-        element={
-          <AuthGuard>
-            <SignUpPage />
-          </AuthGuard>
-        }
-      />
-      <Route
-        path="/signin"
-        element={
-          <AuthGuard>
-            <SignInPage />
-          </AuthGuard>
-        }
-      />
+        <Route
+          path="/signup"
+          element={
+            <AuthGuard>
+              <SignUpPage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <AuthGuard>
+              <SignInPage />
+            </AuthGuard>
+          }
+        />
 
-      <Route
-        path="/tasks"
-        element={
-          <GuestGuard>
-            <TaskListPage />
-          </GuestGuard>
-        }
-      />
-      <Route
-        path="/tasks/:taskId"
-        element={
-          <GuestGuard>
-            <TaskDetails />
-          </GuestGuard>
-        }
-      />
+        <Route
+          path="/tasks"
+          element={
+            <GuestGuard>
+              <TaskListPage />
+            </GuestGuard>
+          }
+        />
+        <Route
+          path="/tasks/:taskId"
+          element={
+            <GuestGuard>
+              <TaskDetails />
+            </GuestGuard>
+          }
+        />
+      </Route>
     </Routes>
   );
 };

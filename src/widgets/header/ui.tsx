@@ -1,12 +1,12 @@
 import { AppBar, Toolbar, useScrollTrigger } from "@mui/material";
 import { ReactNode, FC } from "react";
 
-interface TaskListHeaderProps {
+interface HeaderProps {
   after?: ReactNode;
   before?: ReactNode;
 }
 
-export const TaskListHeader: FC<TaskListHeaderProps> = ({ after, before }) => {
+export const Header: FC<HeaderProps> = ({ after, before }) => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 20,
