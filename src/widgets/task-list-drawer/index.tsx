@@ -1,22 +1,11 @@
-import {
-  Box,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Box, Divider, Drawer, IconButton, List } from "@mui/material";
 import { useState } from "react";
 import { AddTaskDialogListItemButton } from "@/features/tasks/add-task";
 import { RefreshTasksListItemButton } from "@/features/tasks/refresh-tasks";
-import { ChevronLeft, Menu, Settings } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { ChevronLeft, Menu } from "@mui/icons-material";
 
 export const TaskListDrawer = () => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -55,19 +44,6 @@ export const TaskListDrawer = () => {
           <List>
             <AddTaskDialogListItemButton />
             <RefreshTasksListItemButton />
-
-            <Divider sx={{ my: 1 }} />
-
-            <ListItemButton
-              onClick={() => {
-                navigate("/settings");
-              }}
-            >
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
           </List>
         </Box>
       </Drawer>

@@ -3,7 +3,6 @@ import { TaskListPage } from "./task-list";
 import { TaskDetails } from "./task-details";
 import { SignInPage } from "./sign-in";
 import { SignUpPage } from "./sign-up";
-import { SettingsPage } from "./settings";
 
 export const Routing = () => {
   return (
@@ -15,8 +14,6 @@ export const Routing = () => {
 
       <Route path="/tasks" element={<TaskListPage />} />
       <Route path="/tasks/:taskId" element={<TaskDetails />} />
-
-      <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   );
 };
