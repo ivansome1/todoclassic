@@ -1,14 +1,18 @@
-import { Box, BoxProps, Typography } from "@mui/material";
-import logo from "./logo.svg";
+import { Box, BoxProps } from "@mui/material";
+import logoColor from "./logo-color.svg";
+import logoFlat from "./logo-flat.svg";
 import { FC } from "react";
 
-export const Logo: FC<BoxProps> = (props) => {
+interface LogoProps extends BoxProps {
+  variant?: "color" | "flat";
+}
+
+export const Logo: FC<LogoProps> = ({ variant = "color", ...other }) => {
   return (
-    <Box sx={{ display: "flex", gap: 1 }}>
-      <Box component="img" {...props} src={logo} />
-      <Typography sx={{ letterSpacing: 1 }} color="text.primary" variant="h6">
-        Classic
-      </Typography>
-    </Box>
+    <Box
+      component="img"
+      {...other}
+      src={variant === "color" ? logoColor : logoFlat}
+    />
   );
 };

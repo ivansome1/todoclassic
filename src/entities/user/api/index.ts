@@ -18,8 +18,6 @@ export async function signUp(name: string, email: string, password: string) {
     );
     await updateProfile(userCredential.user, { displayName: name });
 
-    console.log(auth.currentUser);
-
     return auth.currentUser;
   } catch (err) {
     alert(err);

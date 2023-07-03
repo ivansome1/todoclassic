@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   TextField,
+  Tooltip,
   useTheme,
 } from "@mui/material";
 import { FC, useEffect, useRef, useState } from "react";
@@ -157,13 +158,16 @@ export const AddTaskDialogButton = () => {
 
   return (
     <>
-      <IconButton
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        <Add />
-      </IconButton>
+      <Tooltip title="Add task">
+        <IconButton
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Add />
+        </IconButton>
+      </Tooltip>
+
       <AddTaskDialog
         open={open}
         onClose={() => {

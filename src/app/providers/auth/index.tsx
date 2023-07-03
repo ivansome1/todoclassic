@@ -5,7 +5,7 @@ import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
 import { User, app } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
-import logo from "./logo.svg";
+import { Logo } from "@/shared/ui";
 
 const auth = getAuth(app);
 
@@ -46,10 +46,9 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
           <Box
             sx={{ display: "flex", m: "auto", flexDirection: "column", gap: 3 }}
           >
-            <Box
+            <Logo
               sx={{ width: "60px", height: "60px", mx: "auto" }}
-              component="img"
-              src={logo}
+              variant="flat"
             />
             <CircularProgress
               color="inherit"
