@@ -46,8 +46,12 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (open) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    }
+  }, [open]);
 
   return (
     <Dialog

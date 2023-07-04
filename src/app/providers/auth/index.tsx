@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
-import { User, app } from "@/shared/api";
+import { app } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { Logo } from "@/shared/ui";
 
@@ -20,14 +20,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     dispatch(userModel.setLoading(true));
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const viewer: User = {
-          displayName: user.displayName as string,
-          email: user.email as string,
-          photoURL: user.photoURL,
-          uid: user.uid,
-        };
-
-        dispatch(userModel.setUser(viewer));
+        dispatch(userModel.setUser(userModel.normalizeUser(user)));
         dispatch(taskModel.clearTasks());
       } else {
         dispatch(userModel.setUser(undefined));
