@@ -22,6 +22,21 @@ export const filterList: Filter[] = [
     title: "Undone",
     config: { completed: false },
   },
+  {
+    id: 3,
+    title: "Priority 3",
+    config: { priority: 2 },
+  },
+  {
+    id: 4,
+    title: "Priority 2",
+    config: { priority: 1 },
+  },
+  {
+    id: 5,
+    title: "Priority 1",
+    config: { priority: 0 },
+  },
 ];
 
 export const DEFAULT_FILTER_ID = 0;

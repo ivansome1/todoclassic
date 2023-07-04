@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 
 export type QueryConfig = {
   completed?: boolean;
+  priority?: number;
 };
 
 interface SliceState {
