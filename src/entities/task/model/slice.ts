@@ -36,7 +36,7 @@ export const taskSlice = createSlice({
       action: PayloadAction<{
         title: string;
         description: string;
-        color?: string;
+        priority: number;
       }>
     ) {
       state.data.unshift({
@@ -44,7 +44,7 @@ export const taskSlice = createSlice({
         completed: false,
         title: action.payload.title,
         description: action.payload.description,
-        color: action.payload.color,
+        priority: action.payload.priority,
       });
       state.saveAviable = true;
     },

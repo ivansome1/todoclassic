@@ -3,7 +3,7 @@ export type Task = {
   title: string;
   completed: boolean;
   description?: string;
-  color?: string;
+  priority: number;
 };
 
 export type User = {

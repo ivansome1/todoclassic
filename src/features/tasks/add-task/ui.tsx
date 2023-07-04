@@ -18,7 +18,6 @@ import {
   ThemeProvider,
   Tooltip,
   createTheme,
-  useTheme,
 } from "@mui/material";
 import { FC, useEffect, useRef, useState } from "react";
 import { Add, AddBox, Cancel, CheckCircle, Flag } from "@mui/icons-material";
@@ -30,23 +29,8 @@ interface PrioritySelectProps {
   onChange: (event: SelectChangeEvent<number>) => void;
 }
 
-function usePriorityColor(priority: number): string {
-  const theme = useTheme();
-
-  switch (priority) {
-    case 0:
-      return theme.palette.success.main;
-    case 1:
-      return theme.palette.warning.main;
-    case 2:
-      return theme.palette.error.main;
-  }
-
-  return theme.palette.primary.main;
-}
-
 const PrioritySelect: FC<PrioritySelectProps> = ({ value, onChange }) => {
-  const color = usePriorityColor(value);
+  const color = taskModel.usePriorityColor(value);
 
   const theme = createTheme({
     palette: {
@@ -90,12 +74,12 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(0);
-  const color = usePriorityColor(priority);
+  const color = taskModel.usePriorityColor(priority);
 
   const dispatch = useAppDispatch();
 
   function addTask() {
-    dispatch(taskModel.addTask({ title, description, color }));
+    dispatch(taskModel.addTask({ title, description, priority }));
   }
 
   function clear() {

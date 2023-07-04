@@ -57,7 +57,7 @@ const TaskListPage = () => {
             <TaskRow
               key={task.id}
               data={task}
-              before={<ToggleTask color={task.color} id={task.id} />}
+              before={<ToggleTask data={task} />}
               after={<TaskMenuButton id={task.id} />}
             />
           );

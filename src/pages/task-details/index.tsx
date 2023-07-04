@@ -32,9 +32,7 @@ const TaskDetails = () => {
           <>
             <TaskCard
               data={task}
-              actions={
-                <ToggleTask color={task.color} showStatus id={task.id} />
-              }
+              actions={<ToggleTask data={task} showStatus />}
             />
           </>
         ) : (
