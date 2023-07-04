@@ -20,7 +20,7 @@ const icon = (
   </Box>
 );
 
-export function SignUpPage() {
+function SignUpPage() {
   return (
     <Box
       sx={{
@@ -40,3 +40,5 @@ export function SignUpPage() {
     </Box>
   );
 }
+
+export default SignUpPage;

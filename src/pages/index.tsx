@@ -1,11 +1,29 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { TaskListPage } from "./task-list";
-import { TaskDetails } from "./task-details";
-import { SignInPage } from "./sign-in";
-import { SignUpPage } from "./sign-up";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, ElementType, Suspense, lazy } from "react";
 import { userModel } from "@/entities/user";
 import { MainLayout } from "./layouts";
+import { Box, CircularProgress } from "@mui/material";
+
+const Loadable = (Component: ElementType) => {
+  return () => (
+    <Suspense
+      fallback={
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
+          <CircularProgress size={30} color="inherit" sx={{ m: "auto" }} />
+        </Box>
+      }
+    >
+      <Component />
+    </Suspense>
+  );
+};
 
 const GuestGuard: FC<{ children: ReactNode }> = (props) => {
   const { children } = props;
@@ -24,6 +42,11 @@ const AuthGuard: FC<{ children: ReactNode }> = (props) => {
 
   return <> {children} </>;
 };
+
+const SignInPage = Loadable(lazy(() => import("./sign-in")));
+const SignUpPage = Loadable(lazy(() => import("./sign-up")));
+const TaskListPage = Loadable(lazy(() => import("./task-list")));
+const TaskDetailsPage = Loadable(lazy(() => import("./task-details")));
 
 export const Routing = () => {
   return (
@@ -60,7 +83,7 @@ export const Routing = () => {
           path="/tasks/:taskId"
           element={
             <GuestGuard>
-              <TaskDetails />
+              <TaskDetailsPage />
             </GuestGuard>
           }
         />

@@ -2,6 +2,7 @@ import { SignInForm } from "@/features/auth/sign-in";
 import { Lock } from "@mui/icons-material";
 import { Avatar, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { FC } from "react";
 
 const icon = (
   <Box
@@ -20,7 +21,7 @@ const icon = (
   </Box>
 );
 
-export function SignInPage() {
+const SignInPage: FC = () => {
   return (
     <Box
       sx={{
@@ -46,4 +47,6 @@ export function SignInPage() {
       </Box>
     </Box>
   );
-}
+};
+
+export default SignInPage;

@@ -5,7 +5,7 @@ import { useAppSelector } from "@/shared/model";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 
-export const TaskDetails = () => {
+const TaskDetails = () => {
   const taskId = useParams().taskId;
 
   if (taskId) {
@@ -46,3 +46,5 @@ export const TaskDetails = () => {
 
   return <div>Not found</div>;
 };
+
+export default TaskDetails;

@@ -25,7 +25,7 @@ const tasksSkeleton = (
   </Box>
 );
 
-export const TaskListPage = () => {
+const TaskListPage = () => {
   const tasks = useAppSelector((state) => state.task.data);
   const loading = useAppSelector((state) => state.task.loading);
   const saveAviable = useAppSelector((state) => state.task.saveAviable);
@@ -105,3 +105,5 @@ export const TaskListPage = () => {
     </Box>
   );
 };
+
+export default TaskListPage;
