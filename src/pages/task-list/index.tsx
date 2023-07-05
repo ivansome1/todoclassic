@@ -5,7 +5,7 @@ import { SaveTasksButton } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { TaskMenuButton } from "@/widgets/task-menu";
-import { SentimentNeutral } from "@mui/icons-material";
+import { AssignmentTurnedIn } from "@mui/icons-material";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { AddTaskDialogButton } from "@/features/tasks/add-task";
@@ -74,9 +74,11 @@ const TaskListPage = () => {
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Box sx={{ mx: "auto" }}>
-            <SentimentNeutral sx={{ color: "text.disabled" }} />
+            <AssignmentTurnedIn sx={{ color: "text.disabled" }} />
           </Box>
-          <Typography color="text.disabled">No tasks here</Typography>
+          <Typography color="text.disabled">
+            You have no tasks to do!
+          </Typography>
         </Box>
       </Box>
     );
