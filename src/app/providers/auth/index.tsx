@@ -35,7 +35,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
   if (loading) {
     return (
       <>
-        <Paper sx={{ borderRadius: 0, height: "100vh", display: "flex" }}>
+        <Paper sx={{ borderRadius: 0, height: "100dvh", display: "flex" }}>
           <Box
             sx={{ display: "flex", m: "auto", flexDirection: "column", gap: 3 }}
           >
