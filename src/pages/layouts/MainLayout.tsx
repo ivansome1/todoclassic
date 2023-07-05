@@ -21,7 +21,14 @@ export const MainLayout = () => {
   );
 
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+      }}
+    >
       <Header after={isAuth ? <UserMenuButton /> : authNavigation} />
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <Outlet />
