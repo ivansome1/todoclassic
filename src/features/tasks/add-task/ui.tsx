@@ -56,9 +56,9 @@ const PrioritySelect: FC<PrioritySelectProps> = ({ value, onChange }) => {
           onChange={onChange}
           label="Priority"
         >
-          <MenuItem value={2}>Priority 3</MenuItem>
+          <MenuItem value={2}>Priority 1</MenuItem>
           <MenuItem value={1}>Priority 2</MenuItem>
-          <MenuItem value={0}>Priority 1</MenuItem>
+          <MenuItem value={0}>Priority 3</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>

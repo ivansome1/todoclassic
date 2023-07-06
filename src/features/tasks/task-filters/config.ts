@@ -24,7 +24,7 @@ export const filterList: Filter[] = [
   },
   {
     id: 3,
-    title: "Priority 3",
+    title: "Priority 1",
     config: { priority: 2 },
   },
   {
@@ -34,7 +34,7 @@ export const filterList: Filter[] = [
   },
   {
     id: 5,
-    title: "Priority 1",
+    title: "Priority 3",
     config: { priority: 0 },
   },
 ];
