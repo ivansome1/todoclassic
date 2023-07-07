@@ -3,15 +3,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getTasks } from "../api";
 import { nanoid } from "nanoid";
 
-export type QueryConfig = {
+export type Config = {
   completed?: boolean;
   priority?: number;
 };
 
+export type Filter = {
+  id: number;
+  title: string;
+  config: Config;
+};
+
 interface SliceState {
   data: Task[];
-  queryConfig?: QueryConfig;
-  queryName: string;
+  filter?: Filter;
   loading: boolean;
   saveAviable: boolean;
 }
@@ -20,7 +25,6 @@ const initialState: SliceState = {
   data: [],
   loading: false,
   saveAviable: false,
-  queryName: "",
 };
 
 export const taskSlice = createSlice({
@@ -60,11 +64,8 @@ export const taskSlice = createSlice({
     clearTasks(state) {
       state.data = [];
     },
-    setQueryConfig(state, action: PayloadAction<QueryConfig>) {
-      state.queryConfig = action.payload;
-    },
-    setQueryName(state, action: PayloadAction<string>) {
-      state.queryName = action.payload;
+    setFilter(state, action: PayloadAction<Filter>) {
+      state.filter = action.payload;
     },
     setSaveAviable(state, action: PayloadAction<boolean>) {
       state.saveAviable = action.payload;
@@ -89,8 +90,7 @@ export const {
   addTask,
   toggleTask,
   removeTask,
-  setQueryConfig,
   clearTasks,
   setSaveAviable,
-  setQueryName,
+  setFilter,
 } = taskSlice.actions;

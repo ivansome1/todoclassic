@@ -1,12 +1,6 @@
 import { taskModel } from "@/entities/task";
 
-export type Filter = {
-  id: number;
-  title: string;
-  config: taskModel.QueryConfig;
-};
-
-export const filterList: Filter[] = [
+export const filterList: taskModel.Filter[] = [
   {
     id: 0,
     title: "All",

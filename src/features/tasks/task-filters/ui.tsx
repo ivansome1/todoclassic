@@ -1,6 +1,6 @@
 import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState, useEffect } from "react";
-import { DEFAULT_FILTER_ID, Filter, filterList } from "./config";
+import { DEFAULT_FILTER_ID, filterList } from "./config";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 import { Sort } from "@mui/icons-material";
@@ -10,15 +10,16 @@ export const TaskFiltersMenuButton = () => {
   const open = Boolean(anchor);
 
   const dispatch = useAppDispatch();
-  const queryConfig = useAppSelector((state) => state.task.queryConfig);
+  const config = useAppSelector((state) => state.task.filter?.config);
 
-  function onFilterClick(filter: Filter) {
-    dispatch(taskModel.setQueryConfig(filter.config));
-    dispatch(taskModel.setQueryName(filter.title));
+  function onFilterClick(filter: taskModel.Filter) {
+    dispatch(taskModel.setFilter(filter));
   }
 
   useEffect(() => {
-    onFilterClick(filterList[DEFAULT_FILTER_ID]);
+    if (!config) {
+      onFilterClick(filterList[DEFAULT_FILTER_ID]);
+    }
   }, []);
 
   return (
@@ -43,7 +44,7 @@ export const TaskFiltersMenuButton = () => {
         {filterList.map((filter) => {
           return (
             <MenuItem
-              selected={filter.config === queryConfig}
+              selected={filter.config === config}
               onClick={() => {
                 onFilterClick(filter);
               }}

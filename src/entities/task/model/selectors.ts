@@ -8,14 +8,14 @@ export function useTask(taskId: string) {
 
 export function useFilteredTasks() {
   const tasks = useAppSelector((state) => state.task.data);
-  const queryConfig = useAppSelector((state) => state.task.queryConfig);
+  const config = useAppSelector((state) => state.task.filter?.config);
 
-  if (queryConfig) {
-    if (typeof queryConfig.completed === "boolean") {
-      return tasks.filter((task) => task.completed === queryConfig.completed);
+  if (config) {
+    if (typeof config.completed === "boolean") {
+      return tasks.filter((task) => task.completed === config.completed);
     }
-    if (typeof queryConfig.priority === "number") {
-      return tasks.filter((task) => task.priority === queryConfig.priority);
+    if (typeof config.priority === "number") {
+      return tasks.filter((task) => task.priority === config.priority);
     }
   }
   return tasks;
