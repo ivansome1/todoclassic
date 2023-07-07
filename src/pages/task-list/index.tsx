@@ -97,9 +97,7 @@ const TaskListPage = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6">
-            Tasks {"(" + filteredTasks.length + ")"}
-          </Typography>
+          <Typography variant="h6">Tasks</Typography>
           {actions}
         </Box>
         {loading ? tasksSkeleton : tasksRoot}
