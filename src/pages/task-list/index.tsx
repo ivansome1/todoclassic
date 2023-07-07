@@ -31,6 +31,7 @@ const TaskListPage = () => {
   const saveAviable = useAppSelector((state) => state.task.saveAviable);
 
   const filteredTasks = taskModel.useFilteredTasks();
+  const queryName = useAppSelector((state) => state.task.queryName);
 
   const dispatch = useAppDispatch();
 
@@ -97,7 +98,10 @@ const TaskListPage = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6">Tasks</Typography>
+          <Typography variant="h6">
+            Tasks {queryName ? "- " + queryName : ""}{" "}
+            {"(" + filteredTasks.length + ")"}
+          </Typography>
           {actions}
         </Box>
         {loading ? tasksSkeleton : tasksRoot}

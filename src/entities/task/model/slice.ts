@@ -11,6 +11,7 @@ export type QueryConfig = {
 interface SliceState {
   data: Task[];
   queryConfig?: QueryConfig;
+  queryName: string;
   loading: boolean;
   saveAviable: boolean;
 }
@@ -19,6 +20,7 @@ const initialState: SliceState = {
   data: [],
   loading: false,
   saveAviable: false,
+  queryName: "",
 };
 
 export const taskSlice = createSlice({
@@ -61,6 +63,9 @@ export const taskSlice = createSlice({
     setQueryConfig(state, action: PayloadAction<QueryConfig>) {
       state.queryConfig = action.payload;
     },
+    setQueryName(state, action: PayloadAction<string>) {
+      state.queryName = action.payload;
+    },
     setSaveAviable(state, action: PayloadAction<boolean>) {
       state.saveAviable = action.payload;
     },
@@ -87,4 +92,5 @@ export const {
   setQueryConfig,
   clearTasks,
   setSaveAviable,
+  setQueryName,
 } = taskSlice.actions;

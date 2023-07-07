@@ -14,6 +14,7 @@ export const TaskFiltersMenuButton = () => {
 
   function onFilterClick(filter: Filter) {
     dispatch(taskModel.setQueryConfig(filter.config));
+    dispatch(taskModel.setQueryName(filter.title));
   }
 
   useEffect(() => {
