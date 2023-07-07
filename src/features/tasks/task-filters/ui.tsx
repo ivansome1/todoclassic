@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { DEFAULT_FILTER_ID, filterList } from "./config";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { taskModel } from "@/entities/task";
-import { Sort } from "@mui/icons-material";
+import { FilterAlt } from "@mui/icons-material";
 
 export const TaskFiltersMenuButton = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
@@ -30,7 +30,7 @@ export const TaskFiltersMenuButton = () => {
             setAnchor(e.currentTarget);
           }}
         >
-          <Sort />
+          <FilterAlt />
         </IconButton>
       </Tooltip>
 
