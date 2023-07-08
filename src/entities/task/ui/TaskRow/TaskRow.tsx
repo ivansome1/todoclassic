@@ -38,7 +38,16 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
           {data.description}
         </Typography>
       </Box>
-      <Box sx={{ mr: 1, ml: 3 }}>{after}</Box>
+
+      <Box
+        id="task-after"
+        sx={{
+          mr: 1,
+          ml: 3,
+        }}
+      >
+        {after}
+      </Box>
     </Paper>
   );
 };

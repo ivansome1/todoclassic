@@ -1,3 +1,4 @@
+import { Task } from "@/shared/api";
 import { useAppSelector } from "@/shared/model";
 
 export function useTask(taskId: string) {
@@ -6,8 +7,17 @@ export function useTask(taskId: string) {
   );
 }
 
-export function useFilteredTasks() {
+export function useSortedTasks(): Task[] {
   const tasks = useAppSelector((state) => state.task.data);
+  const tasksCopy = [...tasks];
+
+  tasksCopy.sort((a, b) => b.priority - a.priority);
+
+  return tasksCopy;
+}
+
+export function useFilteredTasks() {
+  const tasks = useSortedTasks();
   const config = useAppSelector((state) => state.task.filter?.config);
 
   if (config) {
