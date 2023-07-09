@@ -29,7 +29,7 @@ const GuestGuard: FC<{ children: ReactNode }> = (props) => {
   const { children } = props;
   const isAuth = userModel.useAuth();
 
-  if (!isAuth) return <Navigate to="/signin" />;
+  if (!isAuth) return <Navigate to="/signin" replace />;
 
   return <> {children} </>;
 };
@@ -38,7 +38,7 @@ const AuthGuard: FC<{ children: ReactNode }> = (props) => {
   const { children } = props;
   const isAuth = userModel.useAuth();
 
-  if (isAuth) return <Navigate to="/" />;
+  if (isAuth) return <Navigate to="/" replace />;
 
   return <> {children} </>;
 };
@@ -52,7 +52,7 @@ export const Routing = () => {
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route path="/" element={<Navigate to="/tasks" />} />
+        <Route path="/" element={<Navigate to="/tasks" replace />} />
 
         <Route
           path="/signup"
