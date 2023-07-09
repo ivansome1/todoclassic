@@ -4,6 +4,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Fab,
   FormControl,
   IconButton,
   InputAdornment,
@@ -19,7 +20,7 @@ import {
   Tooltip,
   createTheme,
 } from "@mui/material";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, forwardRef, useEffect, useRef, useState } from "react";
 import { Add, AddBox, Cancel, CheckCircle, Flag } from "@mui/icons-material";
 import { useAppDispatch } from "@/shared/model";
 import { taskModel } from "@/entities/task";
@@ -245,3 +246,27 @@ export const AddTaskDialogButton = () => {
     </>
   );
 };
+
+export const AddTaskFab = forwardRef<HTMLButtonElement>((_, ref) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Fab
+        ref={ref}
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <Add />
+      </Fab>
+
+      <AddTaskDialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      ></AddTaskDialog>
+    </>
+  );
+});

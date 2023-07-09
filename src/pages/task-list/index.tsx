@@ -1,14 +1,14 @@
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { TaskRow, getTasks, taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
-import { SaveTasksButton } from "@/features/tasks/save-tasks";
+import { SaveTasksButton, SaveTasksFab } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { TaskMenuButton } from "@/widgets/task-menu";
 import { AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography, useScrollTrigger } from "@mui/material";
 import { useEffect } from "react";
-import { AddTaskDialogButton } from "@/features/tasks/add-task";
+import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
 
 const tasksSkeleton = (
   <Box
@@ -40,6 +40,11 @@ const TaskListPage = () => {
       dispatch(getTasks());
     }
   }, []);
+
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 20,
+  });
 
   const actions = (
     <Box sx={{ ml: "auto" }}>
@@ -85,28 +90,46 @@ const TaskListPage = () => {
     );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-      <Box
-        sx={{
-          p: 2,
-          maxWidth: "700px",
-          width: "100%",
-          mx: "auto",
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h6">
-            Tasks {filterTitle ? "- " + filterTitle : ""}{" "}
-            {"(" + filteredTasks.length + ")"}
-          </Typography>
-          {actions}
+    <>
+      <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+        <Box
+          sx={{
+            p: 2,
+            maxWidth: "700px",
+            width: "100%",
+            mx: "auto",
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography variant="h6">
+              Tasks {filterTitle ? "- " + filterTitle : ""}{" "}
+              {"(" + filteredTasks.length + ")"}
+            </Typography>
+            {actions}
+          </Box>
+          {loading ? tasksSkeleton : tasksRoot}
         </Box>
-        {loading ? tasksSkeleton : tasksRoot}
       </Box>
-    </Box>
+      {trigger && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 16,
+            right: 16,
+            display: "flex",
+            gap: 2,
+            alignItems: "center",
+          }}
+        >
+          {saveAviable && <SaveTasksFab />}
+
+          <AddTaskFab />
+        </Box>
+      )}
+    </>
   );
 };
 
