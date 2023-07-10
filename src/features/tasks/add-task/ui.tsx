@@ -102,7 +102,7 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
   return (
     <Dialog
       PaperProps={{
-        sx: { width: "500px", m: 2 },
+        sx: { width: "500px", m: 2, border: 1, borderColor: "divider" },
       }}
       open={open}
       onClose={() => {

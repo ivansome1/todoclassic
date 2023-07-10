@@ -40,6 +40,12 @@ export const TaskFiltersMenuButton = () => {
         onClose={() => {
           setAnchor(null);
         }}
+        PaperProps={{
+          sx: {
+            border: 1,
+            borderColor: "divider",
+          },
+        }}
       >
         {filterList.map((filter) => {
           return (
