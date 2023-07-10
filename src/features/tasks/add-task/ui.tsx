@@ -19,9 +19,18 @@ import {
   ThemeProvider,
   Tooltip,
   createTheme,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { FC, forwardRef, useEffect, useRef, useState } from "react";
-import { Add, AddBox, Cancel, CheckCircle, Flag } from "@mui/icons-material";
+import {
+  Add,
+  AddBox,
+  Cancel,
+  CheckCircle,
+  Close,
+  Flag,
+} from "@mui/icons-material";
 import { useAppDispatch } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 
@@ -99,10 +108,18 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
     }
   }, [open]);
 
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Dialog
+      fullScreen={md}
       PaperProps={{
-        sx: { width: "500px", m: 2, border: 1, borderColor: "divider" },
+        sx: {
+          width: md ? undefined : "500px",
+          border: md ? undefined : 1,
+          borderColor: "divider",
+        },
       }}
       open={open}
       onClose={() => {
@@ -110,7 +127,20 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
         clear();
       }}
     >
-      <DialogTitle>Add task</DialogTitle>
+      <DialogTitle>
+        Add task
+        <IconButton
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <Close />
+        </IconButton>
+      </DialogTitle>
       <DialogContent
         sx={{
           display: "flex",
