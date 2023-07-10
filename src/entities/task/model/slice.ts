@@ -64,6 +64,19 @@ export const taskSlice = createSlice({
     clearTasks(state) {
       state.data = [];
     },
+    cloneTask(state, action: PayloadAction<string>) {
+      const taskIndex = state.data.findIndex(
+        (task) => task.id === action.payload
+      );
+      const task = state.data[taskIndex];
+      if (task) {
+        const newTasks: Task[] = JSON.parse(JSON.stringify(state.data));
+        newTasks.splice(taskIndex, 0, task);
+        newTasks[taskIndex].id = nanoid();
+        state.data = newTasks;
+        state.saveAviable = true;
+      }
+    },
     setFilter(state, action: PayloadAction<Filter>) {
       state.filter = action.payload;
     },
@@ -93,4 +106,5 @@ export const {
   clearTasks,
   setSaveAviable,
   setFilter,
+  cloneTask,
 } = taskSlice.actions;

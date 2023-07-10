@@ -113,22 +113,21 @@ const TaskListPage = () => {
           {loading ? tasksSkeleton : tasksRoot}
         </Box>
       </Box>
-      {trigger && (
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: 16,
-            right: 16,
-            display: "flex",
-            gap: 2,
-            alignItems: "center",
-          }}
-        >
-          {saveAviable && <SaveTasksFab />}
 
-          <AddTaskFab />
-        </Box>
-      )}
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 16,
+          right: 16,
+          display: "flex",
+          gap: 2,
+          alignItems: "center",
+        }}
+      >
+        <SaveTasksFab animationIn={saveAviable && trigger} />
+
+        <AddTaskFab animationIn={trigger} />
+      </Box>
     </>
   );
 };

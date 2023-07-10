@@ -18,11 +18,12 @@ import {
   TextField,
   ThemeProvider,
   Tooltip,
+  Zoom,
   createTheme,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { FC, forwardRef, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import {
   Add,
   AddBox,
@@ -277,19 +278,21 @@ export const AddTaskDialogButton = () => {
   );
 };
 
-export const AddTaskFab = forwardRef<HTMLButtonElement>((_, ref) => {
+export const AddTaskFab = ({ animationIn }: { animationIn: boolean }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Fab
-        ref={ref}
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        <Add />
-      </Fab>
+      <Zoom in={animationIn}>
+        <Fab
+          size="medium"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Add />
+        </Fab>
+      </Zoom>
 
       <AddTaskDialog
         open={open}
@@ -299,4 +302,4 @@ export const AddTaskFab = forwardRef<HTMLButtonElement>((_, ref) => {
       ></AddTaskDialog>
     </>
   );
-});
+};

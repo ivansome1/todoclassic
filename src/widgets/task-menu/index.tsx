@@ -1,5 +1,6 @@
+import { CloneTaskMenuItem } from "@/features/tasks/clone-task";
 import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
-import { ContentCopy, Edit, MoreVert } from "@mui/icons-material";
+import { Edit, MoreVert } from "@mui/icons-material";
 import {
   Divider,
   IconButton,
@@ -20,7 +21,7 @@ const StyledMenu = styled((props: MenuProps) => <Menu {...props} />)(
   ({ theme }) => ({
     "& .MuiPaper-root": {
       marginTop: theme.spacing(1),
-      minWidth: 130,
+      minWidth: 150,
       color:
         theme.palette.mode === "light"
           ? "rgb(55, 65, 81)"
@@ -73,12 +74,12 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           </ListItemIcon>
           <ListItemText>Edit</ListItemText>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentCopy />
-          </ListItemIcon>
-          <ListItemText>Copy & Paste</ListItemText>
-        </MenuItem>
+        <CloneTaskMenuItem
+          onClick={() => {
+            setAnchorEl(null);
+          }}
+          id={id}
+        />
         <Divider sx={{ py: 0, "&.MuiDivider-root": { my: 0.5 } }} />
         <RemoveTaskMenuItem id={id} />
       </StyledMenu>
