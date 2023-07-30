@@ -1,6 +1,6 @@
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
-import { Box, Button } from "@mui/material";
+import { Box, Button, ButtonGroup } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 import { userModel } from "@/entities/user";
 import { UserMenuButton } from "@/widgets/user-menu";
@@ -10,13 +10,15 @@ export const MainLayout = () => {
 
   const authNavigation = (
     <>
-      <Button color="primary" component={Link} to="signup" sx={{ ml: 2 }}>
-        Sign up
-      </Button>
+      <ButtonGroup>
+        <Button component={Link} to="signup" sx={{ ml: 2 }}>
+          Sign up
+        </Button>
 
-      <Button color="primary" component={Link} to="signin" sx={{ ml: 2 }}>
-        Sign in
-      </Button>
+        <Button component={Link} to="signin">
+          Sign in
+        </Button>
+      </ButtonGroup>
     </>
   );
 
