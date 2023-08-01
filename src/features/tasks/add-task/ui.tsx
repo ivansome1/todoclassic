@@ -18,7 +18,6 @@ import {
   TextField,
   ThemeProvider,
   Tooltip,
-  Zoom,
   createTheme,
   useMediaQuery,
   useTheme,
@@ -278,21 +277,19 @@ export const AddTaskDialogButton = () => {
   );
 };
 
-export const AddTaskFab = ({ animationIn }: { animationIn: boolean }) => {
+export const AddTaskFab = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Zoom in={animationIn}>
-        <Fab
-          size="medium"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <Add />
-        </Fab>
-      </Zoom>
+      <Fab
+        size="medium"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <Add />
+      </Fab>
 
       <AddTaskDialog
         open={open}

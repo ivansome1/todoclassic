@@ -6,7 +6,7 @@ import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { TaskMenuButton } from "@/widgets/task-menu";
 import { AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Skeleton, Typography, useScrollTrigger } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
 
@@ -40,11 +40,6 @@ const TaskListPage = () => {
       dispatch(getTasks());
     }
   }, []);
-
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 20,
-  });
 
   const actions = (
     <Box sx={{ ml: "auto" }}>
@@ -94,7 +89,7 @@ const TaskListPage = () => {
       <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
         <Box
           sx={{
-            p: 2,
+            p: 1,
             maxWidth: "700px",
             width: "100%",
             mx: "auto",
@@ -104,8 +99,8 @@ const TaskListPage = () => {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography variant="h6">
-              Tasks {filterTitle ? "- " + filterTitle : ""}{" "}
+            <Typography sx={{ fontWeight: "500" }}>
+              {filterTitle ? filterTitle : ""}{" "}
               {"(" + filteredTasks.length + ")"}
             </Typography>
             {actions}
@@ -124,9 +119,9 @@ const TaskListPage = () => {
           alignItems: "center",
         }}
       >
-        <SaveTasksFab animationIn={saveAviable && trigger} />
+        <SaveTasksFab animationIn={saveAviable} />
 
-        <AddTaskFab animationIn={trigger} />
+        <AddTaskFab />
       </Box>
     </>
   );

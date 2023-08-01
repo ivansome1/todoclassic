@@ -13,7 +13,7 @@ export const TaskCard: FC<TaskCardProps> = (props) => {
   const color = usePriorityColor(data.priority);
 
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card sx={{ position: "relative", boxShadow: "none" }}>
       <Box
         sx={{
           backgroundColor: color,

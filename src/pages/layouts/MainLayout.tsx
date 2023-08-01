@@ -32,7 +32,9 @@ export const MainLayout = () => {
       }}
     >
       <Header after={isAuth ? <UserMenuButton /> : authNavigation} />
-      <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mb: 4 }}
+      >
         <Outlet />
       </Box>
       <Footer />

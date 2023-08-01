@@ -27,7 +27,7 @@ const SignInPage: FC = () => {
       sx={{
         flexGrow: 1,
         width: "100%",
-        p: 2,
+        p: 1,
         display: "flex",
       }}
     >

@@ -1,4 +1,4 @@
-import { Fab, IconButton, Tooltip, Zoom } from "@mui/material";
+import { Fab, IconButton, Slide, Tooltip } from "@mui/material";
 import { saveTasks } from "./api";
 import { taskModel } from "@/entities/task";
 import { Save } from "@mui/icons-material";
@@ -30,11 +30,11 @@ export const SaveTasksFab = ({ animationIn }: { animationIn: boolean }) => {
   }
 
   return (
-    <Zoom in={animationIn}>
+    <Slide direction="up" in={animationIn}>
       <Fab variant="extended" onClick={onClick}>
         <Save sx={{ mr: 1 }} />
         Save tasks
       </Fab>
-    </Zoom>
+    </Slide>
   );
 };
