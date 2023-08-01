@@ -31,9 +31,13 @@ export const RemoveTaskButton: FC<RemoveTaskButtonProps> = ({ id }) => {
 
 interface RemoveTaskMenuItemProps {
   id: string;
+  onClick: () => void;
 }
 
-export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({ id }) => {
+export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({
+  id,
+  onClick,
+}) => {
   const dispatch = useDispatch();
 
   return (
@@ -41,6 +45,7 @@ export const RemoveTaskMenuItem: FC<RemoveTaskMenuItemProps> = ({ id }) => {
       onClick={() => {
         dispatch(taskModel.removeTask(id));
         dispatch(taskModel.setSaveAviable(true));
+        onClick();
       }}
     >
       <ListItemIcon>

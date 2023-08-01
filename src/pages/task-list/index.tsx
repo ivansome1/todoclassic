@@ -6,9 +6,11 @@ import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { TaskMenuButton } from "@/widgets/task-menu";
 import { AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Collapse, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
+import { TransitionGroup } from "react-transition-group";
+import { Task } from "@/shared/api";
 
 const tasksSkeleton = (
   <Box
@@ -50,20 +52,32 @@ const TaskListPage = () => {
     </Box>
   );
 
+  interface RenderTaskOptions {
+    task: Task;
+  }
+
+  function renderTask({ task }: RenderTaskOptions) {
+    return (
+      <Box sx={{ my: 0.5 }} key={task.id}>
+        <TaskRow
+          data={task}
+          before={<ToggleTask data={task} />}
+          after={<TaskMenuButton id={task.id} />}
+        />
+      </Box>
+    );
+  }
+
   const tasksRoot =
     tasks.length != 0 ? (
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 1, mt: 1 }}>
+      <TransitionGroup
+        component={Box}
+        sx={{ display: "flex", flexDirection: "column", mt: 1 }}
+      >
         {filteredTasks.map((task) => {
-          return (
-            <TaskRow
-              key={task.id}
-              data={task}
-              before={<ToggleTask data={task} />}
-              after={<TaskMenuButton id={task.id} />}
-            />
-          );
+          return <Collapse key={task.id}>{renderTask({ task })}</Collapse>;
         })}
-      </Box>
+      </TransitionGroup>
     ) : (
       <Box
         sx={{

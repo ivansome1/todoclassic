@@ -81,7 +81,12 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           id={id}
         />
         <Divider sx={{ py: 0, "&.MuiDivider-root": { my: 0.5 } }} />
-        <RemoveTaskMenuItem id={id} />
+        <RemoveTaskMenuItem
+          onClick={() => {
+            setAnchorEl(null);
+          }}
+          id={id}
+        />
       </StyledMenu>
     </>
   );
