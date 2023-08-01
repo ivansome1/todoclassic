@@ -126,6 +126,17 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
         onClose();
         clear();
       }}
+      onKeyDown={(event) => {
+        if (event.altKey && event.key === "3") {
+          setPriority(2);
+        }
+        if (event.altKey && event.key === "2") {
+          setPriority(1);
+        }
+        if (event.altKey && event.key === "1") {
+          setPriority(0);
+        }
+      }}
     >
       <DialogTitle>
         Add task
@@ -168,6 +179,13 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           onChange={(event) => {
             setTitle(event.target.value);
           }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter" && title) {
+              addTask();
+              onClose();
+              clear();
+            }
+          }}
           fullWidth
           label="Title"
         />
@@ -187,6 +205,13 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           }}
           onChange={(event) => {
             setDescription(event.target.value);
+          }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter" && title) {
+              addTask();
+              onClose();
+              clear();
+            }
           }}
           fullWidth
           label="Description"

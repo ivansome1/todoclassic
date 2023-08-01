@@ -26,7 +26,7 @@ const TaskDetails = () => {
           >
             <ArrowBack />
           </IconButton>
-          <Typography sx={{ fontWeight: "500" }}>Task#{taskIndex}</Typography>
+          <Typography variant="h6">Task#{taskIndex}</Typography>
         </Box>
         {task ? (
           <>

@@ -113,7 +113,7 @@ const TaskListPage = () => {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography sx={{ fontWeight: "500" }}>
+            <Typography variant="h6">
               {filterTitle ? filterTitle : ""}{" "}
               {"(" + filteredTasks.length + ")"}
             </Typography>
