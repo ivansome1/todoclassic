@@ -1,16 +1,7 @@
 import { CloneTaskMenuItem } from "@/features/tasks/clone-task";
 import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
-import { Edit, MoreVert } from "@mui/icons-material";
-import {
-  Divider,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuProps,
-  styled,
-} from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
+import { Divider, IconButton, Menu, MenuProps, styled } from "@mui/material";
 import { FC, useState } from "react";
 
 interface TaskMenuProps {
@@ -68,12 +59,6 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           },
         }}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <Edit />
-          </ListItemIcon>
-          <ListItemText>Edit</ListItemText>
-        </MenuItem>
         <CloneTaskMenuItem
           onClick={() => {
             setAnchorEl(null);
