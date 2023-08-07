@@ -2,4 +2,5 @@
 
 ToDo app made with React, MUI, Typescript and Feature Sliced Design.
 
+![изображение](https://github.com/ivansome1/todoclassic/assets/119253797/c12f3a30-3c23-4469-94c9-419272127260)
 
