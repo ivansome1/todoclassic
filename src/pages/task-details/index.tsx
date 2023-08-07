@@ -16,7 +16,7 @@ const TaskDetails = () => {
     const navigate = useNavigate();
 
     return (
-      <Box sx={{ p: 2, maxWidth: "700px", width: "100%", mx: "auto" }}>
+      <Box sx={{ p: 1, maxWidth: "700px", width: "100%", mx: "auto" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
           <IconButton
             onClick={() => {

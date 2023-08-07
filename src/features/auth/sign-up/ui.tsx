@@ -62,11 +62,13 @@ export const SignUpForm = () => {
         onChange={(e) => {
           setEmail(e.target.value);
         }}
+        autoComplete="off"
         fullWidth
         label="Email"
       />
       <PasswordInput
         value={password}
+        autoComplete="off"
         onChange={(e) => {
           setPassword(e.target.value);
         }}

@@ -28,6 +28,8 @@ export const UserMenuButton = () => {
         PaperProps={{
           sx: {
             width: "210px",
+            border: 1,
+            borderColor: "divider",
           },
         }}
         anchorOrigin={{

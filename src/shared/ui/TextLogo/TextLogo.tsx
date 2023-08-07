@@ -19,7 +19,7 @@ export const TextLogo: FC<TextLogoProps> = ({
         src={variant === "color" ? logoColor : logoFlat}
       />
       <Typography sx={{ letterSpacing: 1 }} color="text.primary" variant="h6">
-        Classic
+        Todo Classic
       </Typography>
     </Box>
   );

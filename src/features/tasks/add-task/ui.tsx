@@ -4,6 +4,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Fab,
   FormControl,
   IconButton,
   InputAdornment,
@@ -18,9 +19,18 @@ import {
   ThemeProvider,
   Tooltip,
   createTheme,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { FC, useEffect, useRef, useState } from "react";
-import { Add, AddBox, Cancel, CheckCircle, Flag } from "@mui/icons-material";
+import {
+  Add,
+  AddBox,
+  Cancel,
+  CheckCircle,
+  Close,
+  Flag,
+} from "@mui/icons-material";
 import { useAppDispatch } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 
@@ -98,18 +108,50 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
     }
   }, [open]);
 
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Dialog
+      fullScreen={md}
       PaperProps={{
-        sx: { width: "500px", m: 2 },
+        sx: {
+          width: md ? undefined : "500px",
+          border: md ? undefined : 1,
+          borderColor: "divider",
+        },
       }}
       open={open}
       onClose={() => {
         onClose();
         clear();
       }}
+      onKeyDown={(event) => {
+        if (event.altKey && event.key === "3") {
+          setPriority(2);
+        }
+        if (event.altKey && event.key === "2") {
+          setPriority(1);
+        }
+        if (event.altKey && event.key === "1") {
+          setPriority(0);
+        }
+      }}
     >
-      <DialogTitle>Add task</DialogTitle>
+      <DialogTitle>
+        Add task
+        <IconButton
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <Close />
+        </IconButton>
+      </DialogTitle>
       <DialogContent
         sx={{
           display: "flex",
@@ -137,6 +179,13 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           onChange={(event) => {
             setTitle(event.target.value);
           }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter" && title) {
+              addTask();
+              onClose();
+              clear();
+            }
+          }}
           fullWidth
           label="Title"
         />
@@ -156,6 +205,13 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           }}
           onChange={(event) => {
             setDescription(event.target.value);
+          }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter" && title) {
+              addTask();
+              onClose();
+              clear();
+            }
           }}
           fullWidth
           label="Description"
@@ -235,6 +291,30 @@ export const AddTaskDialogButton = () => {
           <Add />
         </IconButton>
       </Tooltip>
+
+      <AddTaskDialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      ></AddTaskDialog>
+    </>
+  );
+};
+
+export const AddTaskFab = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Fab
+        size="medium"
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <Add />
+      </Fab>
 
       <AddTaskDialog
         open={open}

@@ -14,6 +14,10 @@ import "@fontsource/roboto/700.css";
 const theme = createTheme({
   palette: {
     mode: "dark",
+    background: {
+      default: "#191919",
+      paper: "#191919",
+    },
   },
   components: {
     MuiSkeleton: {

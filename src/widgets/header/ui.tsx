@@ -1,6 +1,13 @@
-import { AppBar, Box, Toolbar, useScrollTrigger } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  useMediaQuery,
+  useScrollTrigger,
+  useTheme,
+} from "@mui/material";
 import { ReactNode, FC } from "react";
-import { TextLogo } from "@/shared/ui";
+import { Logo, TextLogo } from "@/shared/ui";
 import { Link } from "react-router-dom";
 import { userModel } from "@/entities/user";
 
@@ -17,6 +24,15 @@ export const Header: FC<HeaderProps> = ({ after, before }) => {
 
   const isAuth = userModel.useAuth();
 
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const logo = sm ? (
+    <Logo sx={{ height: "32px" }} />
+  ) : (
+    <TextLogo sx={{ height: "32px" }} />
+  );
+
   return (
     <AppBar
       position="sticky"
@@ -28,12 +44,13 @@ export const Header: FC<HeaderProps> = ({ after, before }) => {
     >
       <Toolbar sx={{ alignItems: "center" }}>
         <div>{before}</div>
+
         <Box
           sx={{ textDecoration: "none" }}
           component={Link}
           to={isAuth ? "tasks" : "signin"}
         >
-          <TextLogo sx={{ width: "32px", height: "32px" }} />
+          {logo}
         </Box>
         <Box sx={{ ml: "auto" }}>{after}</Box>
       </Toolbar>
