@@ -11,7 +11,10 @@ export function useSortedTasks(): Task[] {
   const tasks = useAppSelector((state) => state.task.data);
   const tasksCopy = [...tasks];
 
-  tasksCopy.sort((a, b) => b.priority - a.priority);
+  tasksCopy.sort(
+    (a, b) =>
+      b.priority - a.priority || Number(a.completed) - Number(b.completed)
+  );
 
   return tasksCopy;
 }
