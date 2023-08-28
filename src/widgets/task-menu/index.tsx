@@ -1,4 +1,5 @@
 import { CloneTaskMenuItem } from "@/features/tasks/clone-task";
+import { EditTaskMenuItem } from "@/features/tasks/edit-task";
 import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
 import { MoreVert } from "@mui/icons-material";
 import { Divider, IconButton, Menu, MenuProps, styled } from "@mui/material";
@@ -59,6 +60,7 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           },
         }}
       >
+        <EditTaskMenuItem id={id} />
         <CloneTaskMenuItem
           onClick={() => {
             setAnchorEl(null);

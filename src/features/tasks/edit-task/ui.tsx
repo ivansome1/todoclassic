@@ -1,8 +1,6 @@
-import { taskModel } from "@/entities/task";
-import { Task } from "@/shared/api";
+import { PrioritySelect, taskModel } from "@/entities/task";
 import { useAppDispatch } from "@/shared/model";
-import { PrioritySelect } from "@/entities/task";
-import { AddBox, Cancel, CheckCircle, Close } from "@mui/icons-material";
+import { Cancel, CheckCircle, Close, Edit } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -20,7 +18,7 @@ import {
 import { FC, useEffect, useRef, useState } from "react";
 
 interface EditTaskDialogProps {
-  task: Task;
+  id: string;
   open: boolean;
   onClose: () => void;
 }
@@ -28,11 +26,15 @@ interface EditTaskDialogProps {
 export const EditTaskDialog: FC<EditTaskDialogProps> = ({
   open,
   onClose,
-  task,
+  id,
 }) => {
-  const [title, setTitle] = useState(task.title);
-  const [description, setDescription] = useState(task.description);
-  const [priority, setPriority] = useState(task.priority);
+  const task = taskModel.useTask(id);
+
+  const [title, setTitle] = useState(task?.title ? task.title : "");
+  const [description, setDescription] = useState(
+    task?.description ? task.description : ""
+  );
+  const [priority, setPriority] = useState(task?.priority ? task.priority : 0);
   const color = taskModel.usePriorityColor(priority);
 
   const dispatch = useAppDispatch();
@@ -40,7 +42,7 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
   function editTask() {
     dispatch(
       taskModel.editTask({
-        task,
+        id,
         title,
         description: description ? description : "",
         priority,
@@ -49,9 +51,9 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
   }
 
   function clear() {
-    setTitle("");
-    setDescription("");
-    setPriority(0);
+    setTitle(task?.title ? task.title : "");
+    setDescription(task?.description ? task.description : "");
+    setPriority(task?.priority ? task.priority : 2);
   }
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -95,7 +97,7 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
       }}
     >
       <DialogTitle>
-        Add task
+        Edit task
         <IconButton
           onClick={onClose}
           sx={{
@@ -193,7 +195,11 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
           cancel
         </Button>
         <Button
-          disabled={!title}
+          disabled={
+            title === task?.title &&
+            description === task?.description &&
+            priority === task?.priority
+          }
           onClick={() => {
             editTask();
             onClose();
@@ -201,14 +207,14 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
           }}
           startIcon={<CheckCircle />}
         >
-          add
+          edit
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export const EditTaskMenuItem: FC<{ task: Task }> = ({ task }) => {
+export const EditTaskMenuItem: FC<{ id: string }> = ({ id }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -219,12 +225,12 @@ export const EditTaskMenuItem: FC<{ task: Task }> = ({ task }) => {
         }}
       >
         <ListItemIcon>
-          <AddBox />
+          <Edit />
         </ListItemIcon>
-        <ListItemText primary="Add task" />
+        <ListItemText primary="Edit" />
       </MenuItem>
       <EditTaskDialog
-        task={task}
+        id={id}
         open={open}
         onClose={() => {
           setOpen(false);

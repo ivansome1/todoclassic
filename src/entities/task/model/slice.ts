@@ -58,13 +58,13 @@ export const taskSlice = createSlice({
     editTask(
       state,
       action: PayloadAction<{
-        task: Task;
+        id: string;
         title: string;
         description: string;
         priority: number;
       }>
     ) {
-      const task = state.data.find((task) => task === action.payload.task);
+      const task = state.data.find((task) => task.id === action.payload.id);
       if (task) {
         task.title = action.payload.title;
         task.description = action.payload.description;
@@ -86,6 +86,7 @@ export const taskSlice = createSlice({
         (task) => task.id === action.payload
       );
       const task = state.data[taskIndex];
+
       if (task) {
         const newTasks: Task[] = JSON.parse(JSON.stringify(state.data));
         newTasks.splice(taskIndex, 0, task);
