@@ -1,10 +1,9 @@
-import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
-import { useState, useEffect } from "react";
-import { DEFAULT_FILTER_ID, filterList } from "./config";
-import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { taskModel } from "@/entities/task";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { FilterAlt } from "@mui/icons-material";
-
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import { useEffect, useState } from "react";
+import { DEFAULT_FILTER_ID, filterList } from "./config";
 export const TaskFiltersMenuButton = () => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const open = Boolean(anchor);
