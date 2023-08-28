@@ -1,39 +1,51 @@
-import { PrioritySelect, taskModel } from "@/entities/task";
+import { taskModel } from "@/entities/task";
+import { Task } from "@/shared/api";
 import { useAppDispatch } from "@/shared/model";
-import { Add, AddBox, Cancel, CheckCircle, Close } from "@mui/icons-material";
+import { PrioritySelect } from "@/entities/task";
+import { AddBox, Cancel, CheckCircle, Close } from "@mui/icons-material";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Fab,
   IconButton,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
   TextField,
-  Tooltip,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { FC, useEffect, useRef, useState } from "react";
 
-interface AddTaskDialogProps {
+interface EditTaskDialogProps {
+  task: Task;
   open: boolean;
   onClose: () => void;
 }
 
-export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState(0);
+export const EditTaskDialog: FC<EditTaskDialogProps> = ({
+  open,
+  onClose,
+  task,
+}) => {
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
+  const [priority, setPriority] = useState(task.priority);
   const color = taskModel.usePriorityColor(priority);
 
   const dispatch = useAppDispatch();
 
-  function addTask() {
-    dispatch(taskModel.addTask({ title, description, priority }));
+  function editTask() {
+    dispatch(
+      taskModel.editTask({
+        task,
+        title,
+        description: description ? description : "",
+        priority,
+      })
+    );
   }
 
   function clear() {
@@ -125,7 +137,7 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           }}
           onKeyUp={(event) => {
             if (event.key === "Enter" && title) {
-              addTask();
+              editTask();
               onClose();
               clear();
             }
@@ -152,7 +164,7 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
           }}
           onKeyUp={(event) => {
             if (event.key === "Enter" && title) {
-              addTask();
+              editTask();
               onClose();
               clear();
             }
@@ -183,7 +195,7 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
         <Button
           disabled={!title}
           onClick={() => {
-            addTask();
+            editTask();
             onClose();
             clear();
           }}
@@ -196,12 +208,12 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
   );
 };
 
-export const AddTaskDialogListItemButton = () => {
+export const EditTaskMenuItem: FC<{ task: Task }> = ({ task }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <ListItemButton
+      <MenuItem
         onClick={() => {
           setOpen(true);
         }}
@@ -210,62 +222,14 @@ export const AddTaskDialogListItemButton = () => {
           <AddBox />
         </ListItemIcon>
         <ListItemText primary="Add task" />
-      </ListItemButton>
-      <AddTaskDialog
+      </MenuItem>
+      <EditTaskDialog
+        task={task}
         open={open}
         onClose={() => {
           setOpen(false);
         }}
-      ></AddTaskDialog>
-    </>
-  );
-};
-
-export const AddTaskDialogButton = () => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Tooltip title="Add task">
-        <IconButton
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <Add />
-        </IconButton>
-      </Tooltip>
-
-      <AddTaskDialog
-        open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
-      ></AddTaskDialog>
-    </>
-  );
-};
-
-export const AddTaskFab = () => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <Fab
-        size="medium"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        <Add />
-      </Fab>
-
-      <AddTaskDialog
-        open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
-      ></AddTaskDialog>
+      ></EditTaskDialog>
     </>
   );
 };

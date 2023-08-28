@@ -55,6 +55,23 @@ export const taskSlice = createSlice({
       });
       state.saveAviable = true;
     },
+    editTask(
+      state,
+      action: PayloadAction<{
+        task: Task;
+        title: string;
+        description: string;
+        priority: number;
+      }>
+    ) {
+      const task = state.data.find((task) => task === action.payload.task);
+      if (task) {
+        task.title = action.payload.title;
+        task.description = action.payload.description;
+        task.priority = action.payload.priority;
+        state.saveAviable = true;
+      }
+    },
     removeTask(state, action: PayloadAction<string>) {
       const taskIndex = state.data.findIndex(
         (task) => task.id === action.payload
@@ -107,4 +124,5 @@ export const {
   setSaveAviable,
   setFilter,
   cloneTask,
+  editTask,
 } = taskSlice.actions;
