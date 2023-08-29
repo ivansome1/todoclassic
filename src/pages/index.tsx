@@ -1,8 +1,17 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { FC, ReactNode, ElementType, Suspense, lazy } from "react";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import {
+  FC,
+  ReactNode,
+  ElementType,
+  Suspense,
+  lazy,
+  PropsWithChildren,
+  useEffect,
+} from "react";
 import { userModel } from "@/entities/user";
 import { MainLayout } from "./layouts";
 import { Box, CircularProgress } from "@mui/material";
+import { taskModel } from "@/entities/task";
 
 const Loadable = (Component: ElementType) => {
   return () => (
@@ -43,11 +52,38 @@ const AuthGuard: FC<{ children: ReactNode }> = (props) => {
   return <> {children} </>;
 };
 
-const SignInPage = Loadable(lazy(() => import("./sign-in")));
+const Page: FC<{ title: string } & PropsWithChildren> = ({
+  title,
+  children,
+}) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  return <>{children}</>;
+};
+
+const LoginPage = Loadable(lazy(() => import("./sign-in")));
 const SignUpPage = Loadable(lazy(() => import("./sign-up")));
 const TaskListPage = Loadable(lazy(() => import("./task-list")));
 const TaskDetailsPage = Loadable(lazy(() => import("./task-details")));
 const GreetingPage = Loadable(lazy(() => import("./greeting")));
+
+const TaskDetailsPageWithTaskId = () => {
+  const taskId = useParams().taskId;
+  const task = taskModel.useTask(taskId || "");
+
+  if (task) {
+    return (
+      <Page title={task.title}>
+        <GuestGuard>
+          <TaskDetailsPage />
+        </GuestGuard>
+      </Page>
+    );
+  }
+  return null;
+};
 
 export const Routing = () => {
   return (
@@ -58,44 +94,45 @@ export const Routing = () => {
         <Route
           path="/greeting"
           element={
-            <AuthGuard>
-              <GreetingPage />
-            </AuthGuard>
+            <Page title="Welcome!">
+              <AuthGuard>
+                <GreetingPage />
+              </AuthGuard>
+            </Page>
           }
         />
         <Route
           path="/signup"
           element={
-            <AuthGuard>
-              <SignUpPage />
-            </AuthGuard>
+            <Page title="Sign up">
+              <AuthGuard>
+                <SignUpPage />
+              </AuthGuard>
+            </Page>
           }
         />
         <Route
-          path="/signin"
+          path="/login"
           element={
-            <AuthGuard>
-              <SignInPage />
-            </AuthGuard>
+            <Page title="Login">
+              <AuthGuard>
+                <LoginPage />
+              </AuthGuard>
+            </Page>
           }
         />
 
         <Route
           path="/tasks"
           element={
-            <GuestGuard>
-              <TaskListPage />
-            </GuestGuard>
+            <Page title="Home">
+              <GuestGuard>
+                <TaskListPage />
+              </GuestGuard>
+            </Page>
           }
         />
-        <Route
-          path="/tasks/:taskId"
-          element={
-            <GuestGuard>
-              <TaskDetailsPage />
-            </GuestGuard>
-          }
-        />
+        <Route path="/tasks/:taskId" element={<TaskDetailsPageWithTaskId />} />
       </Route>
     </Routes>
   );

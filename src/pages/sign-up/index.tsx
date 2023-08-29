@@ -35,8 +35,8 @@ function SignUpPage() {
         <SignUpForm />
         <Typography sx={{ mt: 2, textAlign: "center" }}>
           Already have an account?{" "}
-          <Typography component={Link} color="primary" to="/signin">
-            Sign in
+          <Typography component={Link} color="primary" to="/login">
+            Login
           </Typography>
         </Typography>
       </Box>
