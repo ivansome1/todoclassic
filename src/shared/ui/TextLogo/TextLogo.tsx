@@ -9,11 +9,13 @@ interface TextLogoProps extends BoxProps {
 
 export const TextLogo: FC<TextLogoProps> = ({
   variant = "color",
+  sx,
   ...other
 }) => {
   return (
     <Box
       component="img"
+      sx={{ display: "block", ...sx }}
       {...other}
       src={variant === "color" ? logoColor : logoFlat}
     />
