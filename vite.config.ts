@@ -7,6 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 const vitePwa = VitePWA({
   registerType: "autoUpdate",
   workbox: {
+    cleanupOutdatedCaches: true,
     globDirectory: "dist/",
     swDest: "dist/sw.js",
     globPatterns: ["**/*.{css,woff2,png,svg,jpg,jpeg,js}"],
