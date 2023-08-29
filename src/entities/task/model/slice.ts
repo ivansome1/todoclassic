@@ -55,6 +55,23 @@ export const taskSlice = createSlice({
       });
       state.saveAviable = true;
     },
+    editTask(
+      state,
+      action: PayloadAction<{
+        id: string;
+        title: string;
+        description: string;
+        priority: number;
+      }>
+    ) {
+      const task = state.data.find((task) => task.id === action.payload.id);
+      if (task) {
+        task.title = action.payload.title;
+        task.description = action.payload.description;
+        task.priority = action.payload.priority;
+        state.saveAviable = true;
+      }
+    },
     removeTask(state, action: PayloadAction<string>) {
       const taskIndex = state.data.findIndex(
         (task) => task.id === action.payload
@@ -69,6 +86,7 @@ export const taskSlice = createSlice({
         (task) => task.id === action.payload
       );
       const task = state.data[taskIndex];
+
       if (task) {
         const newTasks: Task[] = JSON.parse(JSON.stringify(state.data));
         newTasks.splice(taskIndex, 0, task);
@@ -107,4 +125,5 @@ export const {
   setSaveAviable,
   setFilter,
   cloneTask,
+  editTask,
 } = taskSlice.actions;

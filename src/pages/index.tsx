@@ -29,7 +29,7 @@ const GuestGuard: FC<{ children: ReactNode }> = (props) => {
   const { children } = props;
   const isAuth = userModel.useAuth();
 
-  if (!isAuth) return <Navigate to="/signin" replace />;
+  if (!isAuth) return <Navigate to="/greeting" />;
 
   return <> {children} </>;
 };
@@ -47,6 +47,7 @@ const SignInPage = Loadable(lazy(() => import("./sign-in")));
 const SignUpPage = Loadable(lazy(() => import("./sign-up")));
 const TaskListPage = Loadable(lazy(() => import("./task-list")));
 const TaskDetailsPage = Loadable(lazy(() => import("./task-details")));
+const GreetingPage = Loadable(lazy(() => import("./greeting")));
 
 export const Routing = () => {
   return (
@@ -54,6 +55,14 @@ export const Routing = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Navigate to="/tasks" replace />} />
 
+        <Route
+          path="/greeting"
+          element={
+            <AuthGuard>
+              <GreetingPage />
+            </AuthGuard>
+          }
+        />
         <Route
           path="/signup"
           element={

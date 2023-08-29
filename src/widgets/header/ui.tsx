@@ -1,15 +1,7 @@
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  useMediaQuery,
-  useScrollTrigger,
-  useTheme,
-} from "@mui/material";
-import { ReactNode, FC } from "react";
-import { Logo, TextLogo } from "@/shared/ui";
+import { TextLogo } from "@/shared/ui";
+import { AppBar, Box, Toolbar, useScrollTrigger } from "@mui/material";
+import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { userModel } from "@/entities/user";
 
 interface HeaderProps {
   after?: ReactNode;
@@ -21,17 +13,6 @@ export const Header: FC<HeaderProps> = ({ after, before }) => {
     disableHysteresis: true,
     threshold: 20,
   });
-
-  const isAuth = userModel.useAuth();
-
-  const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const logo = sm ? (
-    <Logo sx={{ height: "32px" }} />
-  ) : (
-    <TextLogo sx={{ height: "32px" }} />
-  );
 
   return (
     <AppBar
@@ -45,12 +26,8 @@ export const Header: FC<HeaderProps> = ({ after, before }) => {
       <Toolbar sx={{ alignItems: "center" }}>
         <div>{before}</div>
 
-        <Box
-          sx={{ textDecoration: "none" }}
-          component={Link}
-          to={isAuth ? "tasks" : "signin"}
-        >
-          {logo}
+        <Box sx={{ textDecoration: "none" }} component={Link} to={"/"}>
+          <TextLogo sx={{ height: "32px" }} />
         </Box>
         <Box sx={{ ml: "auto" }}>{after}</Box>
       </Toolbar>

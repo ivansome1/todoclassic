@@ -4,7 +4,13 @@ import { Logout } from "@mui/icons-material";
 
 export const LogoutMenuItem = () => {
   return (
-    <MenuItem onClick={logout}>
+    <MenuItem
+      onClick={() => {
+        if (confirm("Are you sure you want to logout?")) {
+          logout();
+        }
+      }}
+    >
       <ListItemIcon>
         <Logout />
       </ListItemIcon>

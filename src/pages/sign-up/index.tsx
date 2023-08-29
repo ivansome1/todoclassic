@@ -11,7 +11,7 @@ const icon = (
       width: "100%",
     }}
   >
-    <Avatar sx={{ bgcolor: "secondary.main", mx: "auto" }}>
+    <Avatar sx={{ bgcolor: "primary.main", mx: "auto" }}>
       <Lock />
     </Avatar>
     <Typography sx={{ mx: "auto", width: "fit-content" }} variant="h5">
@@ -33,8 +33,11 @@ function SignUpPage() {
       <Box sx={{ maxWidth: "500px", width: "100%", m: "auto" }}>
         {icon}
         <SignUpForm />
-        <Typography color="primary" component={Link} to="/signin">
-          Already have an account? Sign in
+        <Typography sx={{ mt: 2, textAlign: "center" }}>
+          Already have an account?{" "}
+          <Typography component={Link} color="primary" to="/signin">
+            Sign in
+          </Typography>
         </Typography>
       </Box>
     </Box>
