@@ -12,7 +12,7 @@ const icon = (
       width: "100%",
     }}
   >
-    <Avatar sx={{ bgcolor: "success.main", mx: "auto" }}>
+    <Avatar sx={{ bgcolor: "primary.main", mx: "auto" }}>
       <Lock />
     </Avatar>
     <Typography sx={{ mx: "auto", width: "fit-content" }} variant="h5">
@@ -41,8 +41,11 @@ const SignInPage: FC = () => {
         {icon}
         <SignInForm />
 
-        <Typography color="primary" component={Link} to="/signup">
-          Don't have an account? Sign up
+        <Typography sx={{ mt: 2, textAlign: "center" }}>
+          Don't have an account?{" "}
+          <Typography component={Link} color="primary" to="/signup">
+            Create new one
+          </Typography>
         </Typography>
       </Box>
     </Box>

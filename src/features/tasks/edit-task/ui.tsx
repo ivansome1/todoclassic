@@ -50,12 +50,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
     );
   }
 
-  function clear() {
-    setTitle(task?.title ? task.title : "");
-    setDescription(task?.description ? task.description : "");
-    setPriority(task?.priority ? task.priority : 2);
-  }
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -82,7 +76,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
       open={open}
       onClose={() => {
         onClose();
-        clear();
       }}
       onKeyDown={(event) => {
         if (event.altKey && event.key === "3") {
@@ -141,7 +134,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
             if (event.key === "Enter" && title) {
               editTask();
               onClose();
-              clear();
             }
           }}
           fullWidth
@@ -168,7 +160,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
             if (event.key === "Enter" && title) {
               editTask();
               onClose();
-              clear();
             }
           }}
           fullWidth
@@ -189,7 +180,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
           startIcon={<Cancel />}
           onClick={() => {
             onClose();
-            clear();
           }}
         >
           cancel
@@ -203,7 +193,6 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
           onClick={() => {
             editTask();
             onClose();
-            clear();
           }}
           startIcon={<CheckCircle />}
         >
@@ -214,7 +203,10 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
   );
 };
 
-export const EditTaskMenuItem: FC<{ id: string }> = ({ id }) => {
+export const EditTaskMenuItem: FC<{ id: string; onClose: () => void }> = ({
+  id,
+  onClose,
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -234,6 +226,7 @@ export const EditTaskMenuItem: FC<{ id: string }> = ({ id }) => {
         open={open}
         onClose={() => {
           setOpen(false);
+          onClose();
         }}
       ></EditTaskDialog>
     </>

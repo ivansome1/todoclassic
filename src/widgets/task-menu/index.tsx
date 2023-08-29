@@ -60,7 +60,12 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           },
         }}
       >
-        <EditTaskMenuItem id={id} />
+        <EditTaskMenuItem
+          onClose={() => {
+            setAnchorEl(null);
+          }}
+          id={id}
+        />
         <CloneTaskMenuItem
           onClick={() => {
             setAnchorEl(null);
