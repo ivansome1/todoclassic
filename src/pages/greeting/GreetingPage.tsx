@@ -36,6 +36,7 @@ export const GreetingPage = () => {
           to="/signin"
           variant="contained"
           sx={{ borderRadius: 100 }}
+          color='secondary'
         >
           Login
         </Button>
