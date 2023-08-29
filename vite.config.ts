@@ -32,7 +32,7 @@ const vitePwa = VitePWA({
     name: "ToDo Classic",
     short_name: "Classic",
     description: "A To Do app for perfectionists.",
-    theme_color: "#4caf50",
+    theme_color: "#191919",
     background_color: "#191919",
     icons: [
       {
