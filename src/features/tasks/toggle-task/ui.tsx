@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import { useAppDispatch } from "@/shared/model";
 import { taskModel } from "@/entities/task";
 import { Task } from "@/shared/api";
+import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
 
 interface ToggleTaskProps {
   data: Task;
@@ -17,6 +18,8 @@ export const ToggleTask: FC<ToggleTaskProps> = (props) => {
 
   const checkbox = (
     <Checkbox
+      icon={<RadioButtonUnchecked />}
+      checkedIcon={<CheckCircle />}
       checked={data.completed}
       onChange={() => {
         dispatch(taskModel.setSaveAviable(true));
