@@ -1,16 +1,15 @@
-import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { TaskRow, getTasks, taskModel } from "@/entities/task";
+import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
 import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
 import { SaveTasksButton, SaveTasksFab } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
+import { Task } from "@/shared/api";
+import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { TaskMenuButton } from "@/widgets/task-menu";
 import { AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Collapse, Skeleton, Typography } from "@mui/material";
+import { Box, Divider, Skeleton, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
-import { TransitionGroup } from "react-transition-group";
-import { Task } from "@/shared/api";
 
 const tasksSkeleton = (
   <Box
@@ -54,11 +53,32 @@ const TaskListPage = () => {
 
   interface RenderTaskOptions {
     task: Task;
+    index: number;
   }
 
-  function renderTask({ task }: RenderTaskOptions) {
+  function renderTask({ task, index }: RenderTaskOptions) {
+    const showCaption = filteredTasks[index - 1]?.priority != task.priority;
+
+    const taskPriority =
+      task.priority === 0
+        ? 3
+        : task.priority === 1
+        ? 2
+        : task.priority === 2
+        ? 1
+        : 0;
+
     return (
-      <Box sx={{ my: 0.5 }} key={task.id}>
+      <Box key={task.id}>
+        {showCaption && (
+          <>
+            <Typography variant="caption" color="textSecondary">
+              Priority {taskPriority}
+            </Typography>
+            <Divider sx={{ mb: 0.5 }} />
+          </>
+        )}
+
         <TaskRow
           data={task}
           before={<ToggleTask data={task} />}
@@ -70,14 +90,11 @@ const TaskListPage = () => {
 
   const tasksRoot =
     tasks.length != 0 ? (
-      <TransitionGroup
-        component={Box}
-        sx={{ display: "flex", flexDirection: "column", mt: 1 }}
-      >
-        {filteredTasks.map((task) => {
-          return <Collapse key={task.id}>{renderTask({ task })}</Collapse>;
+      <Box sx={{ display: "flex", flexDirection: "column", mt: 1 }}>
+        {filteredTasks.map((task, index) => {
+          return renderTask({ task, index });
         })}
-      </TransitionGroup>
+      </Box>
     ) : (
       <Box
         sx={{
