@@ -1,6 +1,7 @@
+import { useThemeColor } from "@/shared/model";
 import { TextLogo } from "@/shared/ui";
 import { AppBar, Box, Toolbar, useScrollTrigger } from "@mui/material";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
@@ -13,6 +14,12 @@ export const Header: FC<HeaderProps> = ({ after, before }) => {
     disableHysteresis: true,
     threshold: 20,
   });
+
+  const setThemeColor = useThemeColor()[1];
+
+  useEffect(() => {
+    setThemeColor(trigger ? "#2E2E2E" : "#191919");
+  }, [trigger]);
 
   return (
     <AppBar

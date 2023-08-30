@@ -4,7 +4,7 @@ import { FC, PropsWithChildren, useEffect } from "react";
 import { userModel } from "@/entities/user";
 import { taskModel } from "@/entities/task";
 import { app } from "@/shared/api";
-import { useAppDispatch, useAppSelector } from "@/shared/model";
+import { useAppDispatch, useAppSelector, useThemeColor } from "@/shared/model";
 import { Logo } from "@/shared/ui";
 
 const auth = getAuth(app);
@@ -15,9 +15,12 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
   const loading = useAppSelector((state) => state.user.loading);
 
   const dispatch = useAppDispatch();
+  const setThemeColor = useThemeColor()[1];
 
   useEffect(() => {
     dispatch(userModel.setLoading(true));
+    setThemeColor("#252525");
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(userModel.setUser(userModel.normalizeUser(user)));
@@ -27,6 +30,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
       }
       setTimeout(() => {
         dispatch(userModel.setLoading(false));
+        setThemeColor("#191919");
       }, 2000);
     });
     return () => unsubscribe();
