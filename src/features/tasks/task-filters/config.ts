@@ -3,17 +3,17 @@ import { taskModel } from "@/entities/task";
 export const filterList: taskModel.Filter[] = [
   {
     id: 0,
-    title: "Tasks",
+    title: "All",
     config: {},
   },
   {
     id: 1,
-    title: "Done tasks",
+    title: "Done",
     config: { completed: true },
   },
   {
     id: 2,
-    title: "Undone tasks",
+    title: "Undone",
     config: { completed: false },
   },
 ];

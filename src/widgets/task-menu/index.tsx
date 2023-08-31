@@ -44,7 +44,7 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           setAnchorEl(event.currentTarget);
         }}
       >
-        <MoreVert />
+        <MoreVert sx={{ color: "text.secondary" }} />
       </IconButton>
 
       <StyledMenu
