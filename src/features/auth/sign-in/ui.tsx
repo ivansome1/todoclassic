@@ -43,7 +43,7 @@ export const SignInForm = () => {
         variant="contained"
         fullWidth
       >
-        Sign In
+        Login
       </LoadingButton>
     </Box>
   );

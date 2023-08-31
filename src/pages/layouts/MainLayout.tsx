@@ -11,7 +11,7 @@ export const MainLayout = () => {
   return (
     <Box
       sx={{
-        minHeight: "100dvh",
+        height: "100dvh",
         display: "flex",
         flexDirection: "column",
         position: "relative",
@@ -19,7 +19,13 @@ export const MainLayout = () => {
     >
       <Header after={isAuth ? <UserMenuButton /> : undefined} />
       <Box
-        sx={{ flexGrow: 1, display: "flex", flexDirection: "column", mb: 4 }}
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          overflowY: "auto",
+          mb: 4,
+        }}
       >
         <Outlet />
       </Box>

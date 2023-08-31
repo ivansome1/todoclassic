@@ -29,6 +29,35 @@ const theme = createTheme({
         animation: "wave",
       },
     },
+    MuiMenu: {
+      defaultProps: {
+        transitionDuration: 0,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+        transformOrigin: {
+          vertical: "top",
+          horizontal: "center",
+        },
+      },
+      styleOverrides: {
+        list: {
+          paddingTop: 4,
+          paddingBottom: 4,
+          gap: 0,
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: { borderRadius: 4 },
+        gutters: {
+          marginLeft: 4,
+          marginRight: 4,
+        },
+      },
+    },
   },
 });
 

@@ -1,8 +1,8 @@
+import { taskModel } from "@/entities/task";
+import { useAppDispatch } from "@/shared/model";
+import { Save } from "@mui/icons-material";
 import { Fab, IconButton, Slide, Tooltip } from "@mui/material";
 import { saveTasks } from "./api";
-import { taskModel } from "@/entities/task";
-import { Save } from "@mui/icons-material";
-import { useAppDispatch } from "@/shared/model";
 
 export const SaveTasksButton = () => {
   const dispatch = useAppDispatch();

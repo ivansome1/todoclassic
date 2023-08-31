@@ -42,7 +42,7 @@ export const UserMenuButton = () => {
         }}
       >
         <UserDataColumn sx={{ mx: 2, my: 1 }} />
-        <Divider sx={{ my: 1 }} />
+        <Divider sx={{ "&.MuiDivider-root": { margin: 0.5 } }} />
         <LogoutMenuItem />
       </Menu>
     </>

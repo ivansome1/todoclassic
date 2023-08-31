@@ -249,10 +249,13 @@ export const AddTaskDialogButton = () => {
 export const AddTaskFab = () => {
   const [open, setOpen] = useState(false);
 
+  const theme = useTheme();
+  const isUnderMd = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <>
       <Fab
-        size="medium"
+        size={!isUnderMd ? "medium" : "large"}
         onClick={() => {
           setOpen(true);
         }}

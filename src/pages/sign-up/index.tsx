@@ -1,7 +1,7 @@
 import { SignUpForm } from "@/features/auth/sign-up";
 import { Avatar, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Lock } from "@mui/icons-material";
+import { LockOpen } from "@mui/icons-material";
 
 const icon = (
   <Box
@@ -11,8 +11,15 @@ const icon = (
       width: "100%",
     }}
   >
-    <Avatar sx={{ bgcolor: "primary.main", mx: "auto" }}>
-      <Lock />
+    <Avatar
+      sx={{
+        bgcolor: "background.default",
+        mx: "auto",
+        border: 2,
+        borderColor: "primary.main",
+      }}
+    >
+      <LockOpen color="primary" />
     </Avatar>
     <Typography sx={{ mx: "auto", width: "fit-content" }} variant="h5">
       Sign up

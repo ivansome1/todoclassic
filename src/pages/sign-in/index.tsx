@@ -16,7 +16,7 @@ const icon = (
       <Lock />
     </Avatar>
     <Typography sx={{ mx: "auto", width: "fit-content" }} variant="h5">
-      Sign in
+      Login
     </Typography>
   </Box>
 );
