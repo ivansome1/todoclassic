@@ -17,18 +17,19 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
       <Box
         sx={{
           display: "flex",
-          alignItems: "center",
           px: 1,
         }}
       >
-        <Box sx={{ pr: 2 }}> {before}</Box>
+        <Box sx={{ pr: 2, my: "auto" }}> {before}</Box>
 
         <Box
           sx={{
-            py: 0.5,
             flexGrow: 1,
             textDecoration: "none",
             minWidth: "3px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
           component={Link}
           to={"/tasks/" + data.id}
@@ -44,6 +45,7 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
         <Box
           sx={{
             ml: 3,
+            my: "auto",
           }}
         >
           {after}

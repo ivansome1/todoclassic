@@ -1,17 +1,17 @@
-import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import { taskModel } from "@/entities/task";
+import { userModel } from "@/entities/user";
+import { Box, CircularProgress } from "@mui/material";
 import {
-  FC,
-  ReactNode,
   ElementType,
+  FC,
+  PropsWithChildren,
+  ReactNode,
   Suspense,
   lazy,
-  PropsWithChildren,
   useEffect,
 } from "react";
-import { userModel } from "@/entities/user";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import { MainLayout } from "./layouts";
-import { Box, CircularProgress } from "@mui/material";
-import { taskModel } from "@/entities/task";
 
 const Loadable = (Component: ElementType) => {
   return () => (
@@ -132,6 +132,7 @@ export const Routing = () => {
             </Page>
           }
         />
+
         <Route path="/tasks/:taskId" element={<TaskDetailsPageWithTaskId />} />
       </Route>
     </Routes>

@@ -1,16 +1,19 @@
 import { Task, app } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { get, getDatabase, ref, set } from "firebase/database";
+import { removeCompletedTasks } from "../model";
 
 const db = getDatabase(app);
 
 export const saveTasks = createAsyncThunk<void, void, { state: RootState }>(
   "task/saveTasks",
-  async (_, { getState }) => {
-    const tasks = getState().task.data;
+  async (_, { getState, dispatch }) => {
     const user = getState().user.data;
 
     if (user) {
+      dispatch(removeCompletedTasks());
+      const tasks = getState().task.data;
+
       await set(ref(db, `tasks/${user.uid}`), tasks);
     }
   }

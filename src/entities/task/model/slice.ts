@@ -101,6 +101,20 @@ export const taskSlice = createSlice({
     setSaveAviable(state, action: PayloadAction<boolean>) {
       state.saveAviable = action.payload;
     },
+    removeCompletedTasks(state) {
+      const idsToRemove: string[] = [];
+      state.data.forEach((task) => {
+        if (task.completed) {
+          idsToRemove.push(task.id);
+        }
+      });
+      idsToRemove.forEach((id) => {
+        state.data.splice(
+          state.data.findIndex((task) => task.id === id),
+          1
+        );
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getTasks.pending, (state) => {
@@ -126,4 +140,5 @@ export const {
   setFilter,
   cloneTask,
   editTask,
+  removeCompletedTasks,
 } = taskSlice.actions;
