@@ -53,15 +53,18 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
   }, [open]);
 
   const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
+  const isUnderMd = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Dialog
-      fullScreen={md}
       PaperProps={{
         sx: {
-          width: md ? undefined : "500px",
-          border: md ? undefined : 1,
+          margin: 1,
+          maxWidth: isUnderMd ? `calc(100% - ${theme.spacing(1)})` : "500px",
+          width: "100%",
+          maxHeight: isUnderMd ? `calc(100% - ${theme.spacing(2)})` : undefined,
+          height: isUnderMd ? "100%" : undefined,
+          border: 1,
           borderColor: "divider",
         },
       }}
@@ -71,13 +74,13 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
         clear();
       }}
       onKeyDown={(event) => {
-        if (event.altKey && event.key === "3") {
+        if (event.altKey && event.key === "1") {
           setPriority(2);
         }
         if (event.altKey && event.key === "2") {
           setPriority(1);
         }
-        if (event.altKey && event.key === "1") {
+        if (event.altKey && event.key === "3") {
           setPriority(0);
         }
       }}

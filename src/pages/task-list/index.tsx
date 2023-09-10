@@ -20,7 +20,13 @@ const tasksSkeleton = (
       mt: 1,
     }}
   >
+    <Skeleton variant="rounded">
+      <Typography variant="caption">Priority 1</Typography>
+    </Skeleton>
     <Skeleton variant="rounded" sx={{ height: 60 }} />
+    <Skeleton variant="rounded">
+      <Typography variant="caption">Priority 2 a</Typography>
+    </Skeleton>
     <Skeleton variant="rounded" sx={{ height: 60 }} />
     <Skeleton variant="rounded" sx={{ height: 60 }} />
   </Box>
@@ -43,7 +49,7 @@ const TaskListPage = () => {
   }, []);
 
   const actions = (
-    <Box sx={{ ml: "auto" }}>
+    <Box sx={{ ml: "auto", display: "flex", gap: 1 }}>
       {saveAviable && <SaveTasksButton />}
       <AddTaskDialogButton />
       <TaskFiltersMenuButton />
@@ -56,29 +62,9 @@ const TaskListPage = () => {
     index: number;
   }
 
-  function renderTask({ task, index }: RenderTaskOptions) {
-    const showCaption = filteredTasks[index - 1]?.priority != task.priority;
-
-    const taskPriority =
-      task.priority === 0
-        ? 3
-        : task.priority === 1
-        ? 2
-        : task.priority === 2
-        ? 1
-        : 0;
-
+  function renderTask({ task }: RenderTaskOptions) {
     return (
       <Box key={task.id}>
-        {showCaption && (
-          <>
-            <Typography variant="caption" color="textSecondary">
-              Priority {taskPriority}
-            </Typography>
-            <Divider sx={{ mb: 0.5 }} />
-          </>
-        )}
-
         <TaskRow
           data={task}
           before={<ToggleTask data={task} />}
@@ -90,7 +76,7 @@ const TaskListPage = () => {
 
   const tasksRoot =
     tasks.length != 0 ? (
-      <Box sx={{ display: "flex", flexDirection: "column", mt: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         {filteredTasks.map((task, index) => {
           return renderTask({ task, index });
         })}
@@ -136,6 +122,7 @@ const TaskListPage = () => {
             </Typography>
             {actions}
           </Box>
+          <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
           {loading ? tasksSkeleton : tasksRoot}
         </Box>
       </Box>

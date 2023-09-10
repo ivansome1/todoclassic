@@ -1,6 +1,6 @@
 import { SignInForm } from "@/features/auth/sign-in";
 import { Lock } from "@mui/icons-material";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FC } from "react";
 
@@ -43,9 +43,9 @@ const SignInPage: FC = () => {
 
         <Typography sx={{ mt: 2, textAlign: "center" }}>
           Don't have an account?{" "}
-          <Typography component={Link} color="primary" to="/signup">
+          <MuiLink component={Link} color="primary" to="/signup">
             Create new one
-          </Typography>
+          </MuiLink>
         </Typography>
       </Box>
     </Box>

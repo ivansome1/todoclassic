@@ -25,6 +25,13 @@ export const ToggleTask: FC<ToggleTaskProps> = (props) => {
         dispatch(taskModel.setSaveAviable(true));
         dispatch(taskModel.toggleTask(data.id));
       }}
+      color={
+        data.priority === 0
+          ? "primary"
+          : data.priority === 1
+          ? "secondary"
+          : "error"
+      }
       sx={{
         svg: {
           fill: priorityColor,

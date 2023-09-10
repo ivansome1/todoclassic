@@ -39,12 +39,6 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
             },
           },
         }}
-        PaperProps={{
-          sx: {
-            border: 1,
-            borderColor: "divider",
-          },
-        }}
       >
         <EditTaskMenuItem
           onClose={() => {
@@ -58,7 +52,15 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
           }}
           id={id}
         />
-        <Divider sx={{ "&.MuiDivider-root": { margin: 0.5 } }} />
+        <Divider
+          sx={{
+            "&.MuiDivider-root": {
+              marginX: 0.5,
+              marginBottom: 0,
+              marginTop: 0,
+            },
+          }}
+        />
         <RemoveTaskMenuItem
           onClick={() => {
             setAnchorEl(null);

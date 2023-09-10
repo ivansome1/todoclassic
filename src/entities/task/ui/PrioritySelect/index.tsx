@@ -9,6 +9,7 @@ import {
   SelectChangeEvent,
   ThemeProvider,
   createTheme,
+  useTheme,
 } from "@mui/material";
 import { FC } from "react";
 
@@ -23,7 +24,8 @@ export const PrioritySelect: FC<PrioritySelectProps> = ({
 }) => {
   const color = usePriorityColor(value);
 
-  const theme = createTheme({
+  const globalTheme = useTheme();
+  const localTheme = createTheme({
     palette: {
       mode: "dark",
       primary: {
@@ -33,10 +35,11 @@ export const PrioritySelect: FC<PrioritySelectProps> = ({
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={localTheme}>
       <FormControl>
         <InputLabel>Priority</InputLabel>
         <Select
+          sx={{ borderRadius: globalTheme.shape.borderRadius / 4 }}
           startAdornment={
             <InputAdornment position="start">
               <Flag sx={{ color: color }} />

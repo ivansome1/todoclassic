@@ -48,7 +48,7 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
           {after}
         </Box>
       </Box>
-      <Divider sx={{ my: 0.5 }} />
+      <Divider sx={{ my: 1 }} />
     </Box>
   );
 };

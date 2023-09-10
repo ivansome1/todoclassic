@@ -1,5 +1,5 @@
 import "./index.css";
-import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
+import { CssBaseline, createTheme, ThemeProvider, Fade } from "@mui/material";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Routing } from "@/pages";
@@ -13,6 +13,7 @@ import "@fontsource/roboto/700.css";
 import { green, cyan } from "@mui/material/colors";
 
 const theme = createTheme({
+  shape: { borderRadius: 6 },
   palette: {
     mode: "dark",
 
@@ -31,7 +32,13 @@ const theme = createTheme({
     },
     MuiMenu: {
       defaultProps: {
-        transitionDuration: 0,
+        PaperProps: {
+          sx: {
+            border: 1,
+            borderColor: "divider",
+          },
+        },
+        TransitionComponent: Fade,
         anchorOrigin: {
           vertical: "bottom",
           horizontal: "center",
@@ -45,7 +52,9 @@ const theme = createTheme({
         list: {
           paddingTop: 4,
           paddingBottom: 4,
-          gap: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: 4,
         },
       },
     },
@@ -55,6 +64,91 @@ const theme = createTheme({
         gutters: {
           marginLeft: 4,
           marginRight: 4,
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            top: "-8px",
+            bottom: "-8px",
+            left: "-8px",
+            right: "-8px",
+            display: "block",
+            opacity: 0.3,
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            top: "-8px",
+            bottom: "-8px",
+            left: "-8px",
+            right: "-8px",
+            display: "block",
+            opacity: 0.3,
+          },
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            top: "-8px",
+            bottom: "-8px",
+            left: "-8px",
+            right: "-8px",
+            display: "block",
+            opacity: 0.3,
+          },
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            top: "-8px",
+            bottom: "-8px",
+            left: "-8px",
+            right: "-8px",
+            display: "block",
+            opacity: 0.3,
+          },
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          position: "relative",
+          "&:after": {
+            content: '""',
+            position: "absolute",
+            top: "-8px",
+            bottom: "-8px",
+            left: "-8px",
+            right: "-8px",
+            display: "block",
+            opacity: 0.3,
+          },
         },
       },
     },

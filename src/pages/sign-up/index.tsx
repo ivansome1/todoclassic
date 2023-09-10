@@ -1,5 +1,5 @@
 import { SignUpForm } from "@/features/auth/sign-up";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import { LockOpen } from "@mui/icons-material";
 
@@ -42,9 +42,9 @@ function SignUpPage() {
         <SignUpForm />
         <Typography sx={{ mt: 2, textAlign: "center" }}>
           Already have an account?{" "}
-          <Typography component={Link} color="primary" to="/login">
+          <MuiLink component={Link} color="primary" to="/login">
             Login
-          </Typography>
+          </MuiLink>
         </Typography>
       </Box>
     </Box>
