@@ -61,15 +61,18 @@ export const EditTaskDialog: FC<EditTaskDialogProps> = ({
   }, [open]);
 
   const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
+  const isUnderMd = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Dialog
-      fullScreen={md}
       PaperProps={{
         sx: {
-          width: md ? undefined : "500px",
-          border: md ? undefined : 1,
+          margin: 0,
+          maxWidth: isUnderMd ? "100%" : "500px",
+          width: "100%",
+          maxHeight: isUnderMd ? "100%" : undefined,
+          height: isUnderMd ? "100%" : undefined,
+          border: 1,
           borderColor: "divider",
         },
       }}

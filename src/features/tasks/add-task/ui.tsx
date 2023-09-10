@@ -59,10 +59,10 @@ export const AddTaskDialog: FC<AddTaskDialogProps> = ({ open, onClose }) => {
     <Dialog
       PaperProps={{
         sx: {
-          margin: 1,
-          maxWidth: isUnderMd ? `calc(100% - ${theme.spacing(1)})` : "500px",
+          margin: 0,
+          maxWidth: isUnderMd ? "100%" : "500px",
           width: "100%",
-          maxHeight: isUnderMd ? `calc(100% - ${theme.spacing(2)})` : undefined,
+          maxHeight: isUnderMd ? "100%" : undefined,
           height: isUnderMd ? "100%" : undefined,
           border: 1,
           borderColor: "divider",

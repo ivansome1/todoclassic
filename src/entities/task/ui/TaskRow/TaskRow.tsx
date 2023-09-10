@@ -18,9 +18,10 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
         sx={{
           display: "flex",
           alignItems: "center",
+          px: 1,
         }}
       >
-        <Box sx={{ pr: 1 }}> {before}</Box>
+        <Box sx={{ pr: 2 }}> {before}</Box>
 
         <Box
           sx={{
