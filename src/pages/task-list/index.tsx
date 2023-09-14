@@ -1,16 +1,15 @@
 import { TaskRow, getTasks, taskModel } from "@/entities/task";
-import { AddTaskDialogButton, AddTaskFab } from "@/features/tasks/add-task";
 import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
 import { SaveTasksButton, SaveTasksFab } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { Task } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
+import { AddTaskDrawerContext } from "@/widgets/add-task-drawer";
 import { TaskMenuButton } from "@/widgets/task-menu";
-import { AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Divider, Skeleton, Typography } from "@mui/material";
-import { useEffect } from "react";
-
+import { Add, AssignmentTurnedIn } from "@mui/icons-material";
+import { Box, Divider, IconButton, Skeleton, Typography } from "@mui/material";
+import { useContext, useEffect } from "react";
 const tasksSkeleton = (
   <Box
     sx={{
@@ -41,6 +40,7 @@ const TaskListPage = () => {
   const filterTitle = useAppSelector((state) => state.task.filter?.title);
 
   const dispatch = useAppDispatch();
+  const { setOpen } = useContext(AddTaskDrawerContext);
 
   useEffect(() => {
     if (!tasks[0]) {
@@ -51,7 +51,13 @@ const TaskListPage = () => {
   const actions = (
     <Box sx={{ ml: "auto", display: "flex", gap: 1 }}>
       {saveAviable && <SaveTasksButton />}
-      <AddTaskDialogButton />
+      <IconButton
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <Add />
+      </IconButton>
       <TaskFiltersMenuButton />
       <RefreshTasksButton />
     </Box>
@@ -138,8 +144,6 @@ const TaskListPage = () => {
         }}
       >
         <SaveTasksFab animationIn={saveAviable} />
-
-        <AddTaskFab />
       </Box>
     </>
   );

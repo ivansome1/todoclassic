@@ -57,7 +57,7 @@ export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
             "&.MuiDivider-root": {
               marginX: 0.5,
               marginBottom: 0,
-              marginTop: 0.000000001,
+              marginTop: 0,
             },
           }}
         />

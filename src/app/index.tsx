@@ -11,6 +11,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { green, cyan } from "@mui/material/colors";
+import { AddTaskDrawerProvider } from "@/widgets/add-task-drawer";
 
 const theme = createTheme({
   shape: { borderRadius: 6 },
@@ -25,6 +26,15 @@ const theme = createTheme({
     secondary: cyan,
   },
   components: {
+    MuiButtonBase: {
+      defaultProps: {
+        sx: {
+          "&& .MuiTouchRipple-rippleVisible": {
+            animationDuration: "350ms",
+          },
+        },
+      },
+    },
     MuiSkeleton: {
       defaultProps: {
         animation: "wave",
@@ -162,7 +172,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <AuthProvider>
-              <Routing />
+              <AddTaskDrawerProvider>
+                <Routing />
+              </AddTaskDrawerProvider>
             </AuthProvider>
           </CssBaseline>
         </ThemeProvider>
