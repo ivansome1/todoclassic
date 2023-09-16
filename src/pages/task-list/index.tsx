@@ -5,7 +5,7 @@ import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { Task } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
-import { AddTaskDrawerContext } from "@/widgets/add-task-drawer";
+import { DockContext } from "@/widgets/dock";
 import { TaskMenuButton } from "@/widgets/task-menu";
 import { Add, AssignmentTurnedIn } from "@mui/icons-material";
 import { Box, Divider, IconButton, Skeleton, Typography } from "@mui/material";
@@ -40,7 +40,7 @@ const TaskListPage = () => {
   const filterTitle = useAppSelector((state) => state.task.filter?.title);
 
   const dispatch = useAppDispatch();
-  const { setOpen } = useContext(AddTaskDrawerContext);
+  const { setOpen } = useContext(DockContext);
 
   useEffect(() => {
     if (!tasks[0]) {
@@ -68,7 +68,7 @@ const TaskListPage = () => {
     index: number;
   }
 
-  function renderTask({ task }: RenderTaskOptions) {
+  function renderTask({ task, index }: RenderTaskOptions) {
     return (
       <Box key={task.id}>
         <TaskRow
@@ -76,6 +76,8 @@ const TaskListPage = () => {
           before={<ToggleTask data={task} />}
           after={<TaskMenuButton id={task.id} />}
         />
+
+        {index + 1 !== tasks.length && <Divider />}
       </Box>
     );
   }
@@ -128,7 +130,6 @@ const TaskListPage = () => {
             </Typography>
             {actions}
           </Box>
-          <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
           {loading ? tasksSkeleton : tasksRoot}
         </Box>
       </Box>

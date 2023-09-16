@@ -1,12 +1,12 @@
 import { AddTaskForm } from "@/features/tasks/add-task";
 import { Global } from "@emotion/react";
-import { Add, Close } from "@mui/icons-material";
-import { Box, Fab, SwipeableDrawer, styled } from "@mui/material";
+import { Add, Close, Menu, Search } from "@mui/icons-material";
+import { Box, Fab, IconButton, SwipeableDrawer, styled } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { FC, PropsWithChildren, useState } from "react";
-import { AddTaskDrawerContext } from "./model";
+import { FC, PropsWithChildren, ReactNode, useState } from "react";
+import { DockContext } from "./model";
 
-const drawerBleeding = 38;
+const drawerBleeding = 54;
 const drawerWidth = 700;
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -21,15 +21,18 @@ const Root = styled("div")(({ theme }) => ({
       : theme.palette.background.default,
 }));
 
-export const AddTaskDrawerProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [open, setOpen] = useState(true);
+export const DockProvider: FC<PropsWithChildren & { after?: ReactNode }> = ({
+  children,
+  after,
+}) => {
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
 
   return (
-    <AddTaskDrawerContext.Provider value={{ open, setOpen }}>
+    <DockContext.Provider value={{ open, setOpen }}>
       {children}
       <Root>
         <Global
@@ -70,11 +73,14 @@ export const AddTaskDrawerProvider: FC<PropsWithChildren> = ({ children }) => {
               left: 0,
               maxWidth: drawerWidth,
               width: "100%",
-              maxHeight: 60,
+              maxHeight: drawerBleeding,
               height: "100%",
               boxShadow: "none",
               borderTop: 1,
               borderColor: "divider",
+              display: "flex",
+              alignItems: "center",
+              px: 2,
             }}
           >
             <Fab
@@ -93,6 +99,13 @@ export const AddTaskDrawerProvider: FC<PropsWithChildren> = ({ children }) => {
             >
               {open ? <Close /> : <Add />}
             </Fab>
+
+            <IconButton sx={{ mr: "auto" }}>
+              <Menu />
+            </IconButton>
+            <IconButton>
+              <Search />
+            </IconButton>
           </StyledBox>
           <StyledBox
             sx={{
@@ -108,6 +121,6 @@ export const AddTaskDrawerProvider: FC<PropsWithChildren> = ({ children }) => {
           </StyledBox>
         </SwipeableDrawer>
       </Root>
-    </AddTaskDrawerContext.Provider>
+    </DockContext.Provider>
   );
 };
