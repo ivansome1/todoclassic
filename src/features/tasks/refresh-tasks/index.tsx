@@ -16,7 +16,7 @@ export const RefreshTasksButton = () => {
 
   if (loading) {
     return (
-      <IconButton disabled>
+      <IconButton size="large" disabled>
         <Refresh />
       </IconButton>
     );
@@ -25,6 +25,7 @@ export const RefreshTasksButton = () => {
   return (
     <Tooltip title="Refresh">
       <IconButton
+        size="large"
         onClick={() => {
           dispatch(getTasks());
           dispatch(taskModel.setSaveAviable(false));

@@ -29,7 +29,7 @@ export const ToggleTask: FC<ToggleTaskProps> = (props) => {
         data.priority === 0
           ? "primary"
           : data.priority === 1
-          ? "secondary"
+          ? "warning"
           : "error"
       }
       sx={{

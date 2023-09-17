@@ -27,12 +27,10 @@ const theme = createTheme({
     secondary: cyan,
   },
   components: {
-    MuiButtonBase: {
-      defaultProps: {
-        sx: {
-          "&& .MuiTouchRipple-rippleVisible": {
-            animationDuration: "350ms",
-          },
+    MuiTouchRipple: {
+      styleOverrides: {
+        root: {
+          anim: 100,
         },
       },
     },

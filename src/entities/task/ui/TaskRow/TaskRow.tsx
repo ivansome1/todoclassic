@@ -1,20 +1,23 @@
 import { Task } from "@/shared/api";
-import { Box, Typography } from "@mui/material";
+import { MoreHoriz } from "@mui/icons-material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 interface TaskRowProps {
   data: Task;
   before?: ReactNode;
-  after?: ReactNode;
+  onMenuOpen: (anchorEl: HTMLElement) => void;
 }
 
 export const TaskRow: FC<TaskRowProps> = (props) => {
-  const { data, before, after } = props;
+  const { data, before, onMenuOpen } = props;
 
   return (
-    <Box
+    <Paper
+      elevation={1}
       sx={{
+        boxShadow: "none",
         display: "flex",
         px: 1,
         py: 0.5,
@@ -48,8 +51,14 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
           my: "auto",
         }}
       >
-        {after}
+        <IconButton
+          onClick={(event) => {
+            onMenuOpen(event.currentTarget);
+          }}
+        >
+          <MoreHoriz />
+        </IconButton>
       </Box>
-    </Box>
+    </Paper>
   );
 };

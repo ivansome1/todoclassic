@@ -29,7 +29,7 @@ export const MainLayout = () => {
       >
         <Outlet />
       </Box>
-      <Footer />
+      {!isAuth && <Footer />}
     </Box>
   );
 };

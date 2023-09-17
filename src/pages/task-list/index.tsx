@@ -6,10 +6,11 @@ import { ToggleTask } from "@/features/tasks/toggle-task";
 import { Task } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { DockContext } from "@/widgets/dock";
-import { TaskMenuButton } from "@/widgets/task-menu";
+import { TaskMenu } from "@/widgets/task-menu";
 import { Add, AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, Divider, IconButton, Skeleton, Typography } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { Box, IconButton, Skeleton, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+
 const tasksSkeleton = (
   <Box
     sx={{
@@ -41,6 +42,10 @@ const TaskListPage = () => {
 
   const dispatch = useAppDispatch();
   const { setOpen } = useContext(DockContext);
+  const [taskMenuAnchorEl, setTaskMenuAnchorEl] = useState<HTMLElement | null>(
+    null
+  );
+  const [taskMenuTaskId, setTaskMenuTaskId] = useState("");
 
   useEffect(() => {
     if (!tasks[0]) {
@@ -52,6 +57,7 @@ const TaskListPage = () => {
     <Box sx={{ ml: "auto", display: "flex", gap: 1 }}>
       {saveAviable && <SaveTasksButton />}
       <IconButton
+        size="large"
         onClick={() => {
           setOpen(true);
         }}
@@ -68,16 +74,17 @@ const TaskListPage = () => {
     index: number;
   }
 
-  function renderTask({ task, index }: RenderTaskOptions) {
+  function renderTask({ task }: RenderTaskOptions) {
     return (
-      <Box key={task.id}>
+      <Box key={task.id} sx={{ mb: 0.5 }}>
         <TaskRow
           data={task}
           before={<ToggleTask data={task} />}
-          after={<TaskMenuButton id={task.id} />}
+          onMenuOpen={(anchorEl) => {
+            setTaskMenuTaskId(task.id);
+            setTaskMenuAnchorEl(anchorEl);
+          }}
         />
-
-        {index + 1 !== tasks.length && <Divider />}
       </Box>
     );
   }
@@ -123,7 +130,7 @@ const TaskListPage = () => {
             flexGrow: 1,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
             <Typography variant="h6">
               Tasks {filterTitle ? "- " + filterTitle : ""}{" "}
               {"(" + filteredTasks.length + ")"}
@@ -133,6 +140,14 @@ const TaskListPage = () => {
           {loading ? tasksSkeleton : tasksRoot}
         </Box>
       </Box>
+
+      <TaskMenu
+        id={taskMenuTaskId}
+        anchorEl={taskMenuAnchorEl}
+        onClose={() => {
+          setTaskMenuAnchorEl(null);
+        }}
+      />
 
       <Box
         sx={{

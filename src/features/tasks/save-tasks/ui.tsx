@@ -14,7 +14,7 @@ export const SaveTasksButton = () => {
 
   return (
     <Tooltip title="Save tasks">
-      <IconButton onClick={onClick}>
+      <IconButton size="large" onClick={onClick}>
         <Save />
       </IconButton>
     </Tooltip>
