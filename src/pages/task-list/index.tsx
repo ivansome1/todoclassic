@@ -1,14 +1,21 @@
 import { TaskRow, getTasks, taskModel } from "@/entities/task";
 import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
-import { SaveTasksButton, SaveTasksFab } from "@/features/tasks/save-tasks";
+import { useSaveTasks } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
 import { ToggleTask } from "@/features/tasks/toggle-task";
 import { Task } from "@/shared/api";
 import { useAppDispatch, useAppSelector } from "@/shared/model";
 import { DockContext } from "@/widgets/dock";
 import { TaskMenu } from "@/widgets/task-menu";
-import { Add, AssignmentTurnedIn } from "@mui/icons-material";
-import { Box, IconButton, Skeleton, Typography } from "@mui/material";
+import { Add, AssignmentTurnedIn, Save } from "@mui/icons-material";
+import {
+  Badge,
+  Box,
+  IconButton,
+  Skeleton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 
 const tasksSkeleton = (
@@ -46,6 +53,7 @@ const TaskListPage = () => {
     null
   );
   const [taskMenuTaskId, setTaskMenuTaskId] = useState("");
+  const { saveTasks } = useSaveTasks();
 
   useEffect(() => {
     if (!tasks[0]) {
@@ -55,15 +63,30 @@ const TaskListPage = () => {
 
   const actions = (
     <Box sx={{ ml: "auto", display: "flex", gap: 1 }}>
-      {saveAviable && <SaveTasksButton />}
-      <IconButton
-        size="large"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        <Add />
-      </IconButton>
+      {saveAviable && (
+        <Tooltip title="Save">
+          <IconButton
+            size="large"
+            onClick={() => {
+              saveTasks();
+            }}
+          >
+            <Badge variant="dot" color="primary">
+              <Save />
+            </Badge>
+          </IconButton>
+        </Tooltip>
+      )}
+      <Tooltip title="Add task">
+        <IconButton
+          size="large"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Add />
+        </IconButton>
+      </Tooltip>
       <TaskFiltersMenuButton />
       <RefreshTasksButton />
     </Box>
@@ -148,19 +171,6 @@ const TaskListPage = () => {
           setTaskMenuAnchorEl(null);
         }}
       />
-
-      <Box
-        sx={{
-          position: "fixed",
-          bottom: 16,
-          right: 16,
-          display: "flex",
-          gap: 2,
-          alignItems: "center",
-        }}
-      >
-        <SaveTasksFab animationIn={saveAviable} />
-      </Box>
     </>
   );
 };

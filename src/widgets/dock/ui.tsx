@@ -1,11 +1,19 @@
 import { AddTaskForm } from "@/features/tasks/add-task";
 import { Global } from "@emotion/react";
-import { Add, Close, Menu, Search } from "@mui/icons-material";
-import { Box, Fab, IconButton, SwipeableDrawer, styled } from "@mui/material";
+import { Add, Close, Menu, Save } from "@mui/icons-material";
+import {
+  Badge,
+  Box,
+  Fab,
+  IconButton,
+  SwipeableDrawer,
+  styled,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { FC, PropsWithChildren, ReactNode, useState } from "react";
 import { DockContext } from "./model";
 import { userModel } from "@/entities/user";
+import { useSaveTasks } from "@/features/tasks/save-tasks";
 
 const drawerBleeding = 54;
 const drawerWidth = 700;
@@ -31,6 +39,7 @@ export const DockProvider: FC<PropsWithChildren & { after?: ReactNode }> = ({
     setOpen(newOpen);
   };
   const isAuth = userModel.useAuth();
+  const { saveAviable, saveTasks } = useSaveTasks();
 
   return (
     <DockContext.Provider value={{ open, setOpen }}>
@@ -102,8 +111,19 @@ export const DockProvider: FC<PropsWithChildren & { after?: ReactNode }> = ({
               <IconButton sx={{ mr: "auto" }}>
                 <Menu />
               </IconButton>
-              <IconButton>
-                <Search />
+
+              <IconButton
+                onClick={() => {
+                  saveTasks();
+                }}
+                disabled={!saveAviable}
+              >
+                <Badge
+                  variant="dot"
+                  color={saveAviable ? "primary" : undefined}
+                >
+                  <Save />
+                </Badge>
               </IconButton>
             </StyledBox>
             <StyledBox

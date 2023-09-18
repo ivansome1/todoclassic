@@ -1,3 +1,4 @@
+import { taskModel } from "@/entities/task";
 import { CloneTaskMenuItem } from "@/features/tasks/clone-task";
 import { EditTaskMenuItem } from "@/features/tasks/edit-task";
 import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
@@ -7,6 +8,7 @@ import {
   Menu,
   MenuList,
   SwipeableDrawer,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -24,35 +26,59 @@ export const TaskMenu: FC<TaskMenuProps> = ({ id, anchorEl, onClose }) => {
   const theme = useTheme();
   const isUnderMd = useMediaQuery(theme.breakpoints.down("md"));
 
+  const task = taskModel.useTask(id);
+
+  if (!task) {
+    return null;
+  }
+
   const content = (
-    <MenuList
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 0.5,
-        paddingTop: 0,
-        paddingBottom: 0,
-        "& .MuiMenuItem-root": {
-          "& .MuiSvgIcon-root": {
-            fontSize: 18,
-            marginRight: theme.spacing(1.5),
-          },
-        },
-      }}
-    >
-      <EditTaskMenuItem onClose={onClose} id={id} />
-      <CloneTaskMenuItem onClick={onClose} id={id} />
-      <Divider
+    <>
+      {isUnderMd && (
+        <>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="button" sx={{ mx: 2 }}>
+              {task.title}
+            </Typography>
+            <Typography variant="caption" sx={{ mx: 2 }}>
+              {task.description}
+            </Typography>
+          </Box>
+
+          <Divider sx={{ mt: 1 }} />
+        </>
+      )}
+
+      <MenuList
         sx={{
-          "&.MuiDivider-root": {
-            marginX: 0.5,
-            marginBottom: 0,
-            marginTop: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: 0.5,
+
+          paddingTop: isUnderMd ? 0.5 : 0,
+          paddingBottom: 0,
+          "& .MuiMenuItem-root": {
+            "& .MuiSvgIcon-root": {
+              fontSize: !isUnderMd ? 18 : undefined,
+              marginRight: theme.spacing(isUnderMd ? 2 : 1.5),
+            },
           },
         }}
-      />
-      <RemoveTaskMenuItem onClick={onClose} id={id} />
-    </MenuList>
+      >
+        <EditTaskMenuItem onClose={onClose} id={id} />
+        <CloneTaskMenuItem onClick={onClose} id={id} />
+        <Divider
+          sx={{
+            "&.MuiDivider-root": {
+              marginX: 0.5,
+              marginBottom: 0,
+              marginTop: 0,
+            },
+          }}
+        />
+        <RemoveTaskMenuItem onClick={onClose} id={id} />
+      </MenuList>
+    </>
   );
 
   if (isUnderMd) {
@@ -64,11 +90,8 @@ export const TaskMenu: FC<TaskMenuProps> = ({ id, anchorEl, onClose }) => {
         disableSwipeToOpen
         open={open}
         onClose={onClose}
-        PaperProps={{
-          sx: { borderRadius: 1 },
-        }}
       >
-        <Box sx={{ my: 0.5 }}>{content}</Box>
+        <Box sx={{ my: 0.5, mt: 1 }}>{content}</Box>
       </SwipeableDrawer>
     );
   }
