@@ -16,11 +16,13 @@ import { FC } from "react";
 interface PrioritySelectProps {
   value: number;
   onChange: (event: SelectChangeEvent<number>) => void;
+  showLabel?: boolean;
 }
 
 export const PrioritySelect: FC<PrioritySelectProps> = ({
   value,
   onChange,
+  showLabel = true,
 }) => {
   const color = usePriorityColor(value);
 
@@ -37,9 +39,12 @@ export const PrioritySelect: FC<PrioritySelectProps> = ({
   return (
     <ThemeProvider theme={localTheme}>
       <FormControl>
-        <InputLabel>Priority</InputLabel>
+        {showLabel && <InputLabel>Priority</InputLabel>}
+
         <Select
-          sx={{ borderRadius: globalTheme.shape.borderRadius / 4 }}
+          sx={{
+            borderRadius: globalTheme.shape.borderRadius / 4,
+          }}
           startAdornment={
             <InputAdornment position="start">
               <Flag sx={{ color: color }} />
@@ -48,7 +53,7 @@ export const PrioritySelect: FC<PrioritySelectProps> = ({
           size="small"
           value={value}
           onChange={onChange}
-          label="Priority"
+          label={showLabel ? "Priority" : ""}
         >
           <MenuItem value={2}>Priority 1</MenuItem>
           <MenuItem value={1}>Priority 2</MenuItem>

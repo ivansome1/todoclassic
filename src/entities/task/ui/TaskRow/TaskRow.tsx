@@ -8,10 +8,15 @@ interface TaskRowProps {
   data: Task;
   before?: ReactNode;
   onMenuOpen: (anchorEl: HTMLElement) => void;
+  editForm: ReactNode;
 }
 
 export const TaskRow: FC<TaskRowProps> = (props) => {
-  const { data, before, onMenuOpen } = props;
+  const { data, before, onMenuOpen, editForm } = props;
+
+  if (editForm) {
+    return <Paper sx={{ p: 1 }}>{editForm}</Paper>;
+  }
 
   return (
     <Paper

@@ -1,10 +1,21 @@
 import { Task } from "@/shared/api";
 import { useAppSelector } from "@/shared/model";
+import { nanoid } from "nanoid";
 
-export function useTask(taskId: string) {
-  return useAppSelector((state) =>
+export function useTask(taskId: string): Task {
+  const task = useAppSelector((state) =>
     state.task.data.find((task) => task.id === taskId)
   );
+  if (!task) {
+    return {
+      title: "",
+      description: "",
+      completed: false,
+      priority: 2,
+      id: nanoid(),
+    };
+  }
+  return task;
 }
 
 export function useSortedTasks(): Task[] {

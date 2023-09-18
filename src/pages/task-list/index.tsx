@@ -1,4 +1,5 @@
 import { TaskRow, getTasks, taskModel } from "@/entities/task";
+import { EditTaskContext, EditTaskForm } from "@/features/tasks/edit-task";
 import { RefreshTasksButton } from "@/features/tasks/refresh-tasks";
 import { useSaveTasks } from "@/features/tasks/save-tasks";
 import { TaskFiltersMenuButton } from "@/features/tasks/task-filters";
@@ -54,6 +55,7 @@ const TaskListPage = () => {
   );
   const [taskMenuTaskId, setTaskMenuTaskId] = useState("");
   const { saveTasks } = useSaveTasks();
+  const { editId } = useContext(EditTaskContext);
 
   useEffect(() => {
     if (!tasks[0]) {
@@ -107,6 +109,7 @@ const TaskListPage = () => {
             setTaskMenuTaskId(task.id);
             setTaskMenuAnchorEl(anchorEl);
           }}
+          editForm={editId === task.id ? <EditTaskForm /> : undefined}
         />
       </Box>
     );
