@@ -12,8 +12,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { green, cyan } from "@mui/material/colors";
 import { DockProvider } from "@/widgets/dock";
-import { UserMenuButton } from "@/widgets/user-menu";
 import { EditTaskProvider } from "@/features/tasks/edit-task";
+import { MainMenuButton } from "@/widgets/main-menu";
 
 const theme = createTheme({
   shape: { borderRadius: 6 },
@@ -172,7 +172,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline>
             <AuthProvider>
-              <DockProvider after={<UserMenuButton />}>
+              <DockProvider before={<MainMenuButton />}>
                 <EditTaskProvider>
                   <Routing />
                 </EditTaskProvider>

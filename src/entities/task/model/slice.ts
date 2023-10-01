@@ -19,12 +19,16 @@ interface SliceState {
   filter?: Filter;
   loading: boolean;
   saveAviable: boolean;
+  sortByCompleted: boolean;
+  sortByPriority: boolean;
 }
 
 const initialState: SliceState = {
   data: [],
   loading: false,
   saveAviable: false,
+  sortByCompleted: false,
+  sortByPriority: true,
 };
 
 export const taskSlice = createSlice({
@@ -115,6 +119,12 @@ export const taskSlice = createSlice({
         );
       });
     },
+    setSortByPriority(state, action: PayloadAction<boolean>) {
+      state.sortByPriority = action.payload;
+    },
+    setSortByCompleted(state, action: PayloadAction<boolean>) {
+      state.sortByCompleted = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getTasks.pending, (state) => {
@@ -140,5 +150,7 @@ export const {
   setFilter,
   cloneTask,
   editTask,
+  setSortByCompleted,
+  setSortByPriority,
   removeCompletedTasks,
 } = taskSlice.actions;

@@ -1,6 +1,6 @@
 import { AddTaskForm } from "@/features/tasks/add-task";
 import { Global } from "@emotion/react";
-import { Add, Close, Menu, Save } from "@mui/icons-material";
+import { Add, Close, Save } from "@mui/icons-material";
 import {
   Badge,
   Box,
@@ -30,8 +30,9 @@ const Root = styled("div")(({ theme }) => ({
       : theme.palette.background.default,
 }));
 
-export const DockProvider: FC<PropsWithChildren & { after?: ReactNode }> = ({
+export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
   children,
+  before,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -108,11 +109,10 @@ export const DockProvider: FC<PropsWithChildren & { after?: ReactNode }> = ({
                 {open ? <Close /> : <Add />}
               </Fab>
 
-              <IconButton sx={{ mr: "auto" }}>
-                <Menu />
-              </IconButton>
+              {before}
 
               <IconButton
+                sx={{ ml: "auto" }}
                 onClick={() => {
                   saveTasks();
                 }}
