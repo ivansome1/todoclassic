@@ -21,6 +21,7 @@ interface SliceState {
   saveAviable: boolean;
   sortByCompleted: boolean;
   sortByPriority: boolean;
+  removeCompleted: boolean;
 }
 
 const initialState: SliceState = {
@@ -29,6 +30,7 @@ const initialState: SliceState = {
   saveAviable: false,
   sortByCompleted: false,
   sortByPriority: true,
+  removeCompleted: false,
 };
 
 export const taskSlice = createSlice({
@@ -106,24 +108,29 @@ export const taskSlice = createSlice({
       state.saveAviable = action.payload;
     },
     removeCompletedTasks(state) {
-      const idsToRemove: string[] = [];
-      state.data.forEach((task) => {
-        if (task.completed) {
-          idsToRemove.push(task.id);
-        }
-      });
-      idsToRemove.forEach((id) => {
-        state.data.splice(
-          state.data.findIndex((task) => task.id === id),
-          1
-        );
-      });
+      if (state.removeCompleted) {
+        const idsToRemove: string[] = [];
+        state.data.forEach((task) => {
+          if (task.completed) {
+            idsToRemove.push(task.id);
+          }
+        });
+        idsToRemove.forEach((id) => {
+          state.data.splice(
+            state.data.findIndex((task) => task.id === id),
+            1
+          );
+        });
+      }
     },
     setSortByPriority(state, action: PayloadAction<boolean>) {
       state.sortByPriority = action.payload;
     },
     setSortByCompleted(state, action: PayloadAction<boolean>) {
       state.sortByCompleted = action.payload;
+    },
+    setRemoveCompleted(state, action: PayloadAction<boolean>) {
+      state.removeCompleted = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -153,4 +160,5 @@ export const {
   setSortByCompleted,
   setSortByPriority,
   removeCompletedTasks,
+  setRemoveCompleted,
 } = taskSlice.actions;

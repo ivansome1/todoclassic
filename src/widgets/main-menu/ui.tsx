@@ -9,6 +9,7 @@ export const MainMenuButton = () => {
   const dispatch = useAppDispatch();
   const sortByCompleted = useAppSelector((state) => state.task.sortByCompleted);
   const sortByPriority = useAppSelector((state) => state.task.sortByPriority);
+  const removeCompleted = useAppSelector((state) => state.task.removeCompleted);
 
   useEffect(() => {
     dispatch(
@@ -18,6 +19,12 @@ export const MainMenuButton = () => {
 
   useEffect(() => {
     dispatch(taskModel.setSortByPriority(!!localStorage.getItem("sortPrior")));
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      taskModel.setRemoveCompleted(!!localStorage.getItem("removeCompleted"))
+    );
   }, []);
 
   return (
@@ -63,6 +70,15 @@ export const MainMenuButton = () => {
           }}
         >
           {sortByCompleted ? "Disable" : "Enable"} sort by completed
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            dispatch(taskModel.setRemoveCompleted(!removeCompleted));
+            localStorage.setItem("removeCompleted", removeCompleted ? "" : "e");
+            setAnchorEl(null);
+          }}
+        >
+          {removeCompleted ? "Disable" : "Enable"} remove completed on save
         </MenuItem>
       </MaterialMenu>
     </>
