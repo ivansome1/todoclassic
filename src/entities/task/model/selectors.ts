@@ -20,12 +20,24 @@ export function useTask(taskId: string): Task {
 
 export function useSortedTasks(): Task[] {
   const tasks = useAppSelector((state) => state.task.data);
+  const sortByCompleted = useAppSelector((state) => state.task.sortByCompleted);
+  const sortByPriority = useAppSelector((state) => state.task.sortByPriority);
   const tasksCopy = [...tasks];
 
-  tasksCopy.sort(
-    (a, b) =>
-      b.priority - a.priority || Number(a.completed) - Number(b.completed)
-  );
+  if (sortByCompleted) {
+    tasksCopy.sort((a, b) => Number(a.completed) - Number(b.completed));
+  }
+
+  if (sortByPriority) {
+    tasksCopy.sort((a, b) => b.priority - a.priority);
+  }
+
+  if (sortByCompleted && sortByPriority) {
+    tasksCopy.sort(
+      (a, b) =>
+        b.priority - a.priority || Number(a.completed) - Number(b.completed)
+    );
+  }
 
   return tasksCopy;
 }
