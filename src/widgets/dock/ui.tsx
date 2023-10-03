@@ -6,7 +6,7 @@ import {
   Box,
   Fab,
   IconButton,
-  Drawer,
+  SwipeableDrawer,
   styled,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
@@ -53,7 +53,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
               },
             }}
           />
-          <Drawer
+          <SwipeableDrawer
             anchor="bottom"
             open={open}
             onClose={toggleDrawer(false)}
@@ -137,7 +137,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
             >
               <AddTaskForm />
             </StyledBox>
-          </Drawer>
+          </SwipeableDrawer>
         </Root>
       )}
       {children}
