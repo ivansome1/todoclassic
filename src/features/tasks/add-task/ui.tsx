@@ -2,9 +2,9 @@ import { PrioritySelect, taskModel } from "@/entities/task";
 import { useAppDispatch } from "@/shared/model";
 import { Send } from "@mui/icons-material";
 import { Box, Button, TextField } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-export const AddTaskForm = ({ open }: { open: boolean }) => {
+export const AddTaskForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(0);

@@ -136,7 +136,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
                 boxShadow: "none",
               }}
             >
-              <AddTaskForm open={open} />
+              <AddTaskForm />
             </StyledBox>
           </SwipeableDrawer>
         </Root>
