@@ -24,14 +24,6 @@ export const AddTaskForm = ({ open }: { open: boolean }) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 0);
-    }
-  }, [open]);
-
   return (
     <Box
       sx={{
