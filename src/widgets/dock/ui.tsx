@@ -59,7 +59,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
             onClose={toggleDrawer(false)}
             onOpen={toggleDrawer(true)}
             swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={true}
+            disableSwipeToOpen={false}
             ModalProps={{
               keepMounted: true,
             }}
