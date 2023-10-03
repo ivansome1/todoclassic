@@ -4,7 +4,7 @@ import { Send } from "@mui/icons-material";
 import { Box, Button, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
-export const AddTaskForm = () => {
+export const AddTaskForm = ({ open }: { open: boolean }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(0);
@@ -25,10 +25,12 @@ export const AddTaskForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
-  }, []);
+    if (open) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    }
+  }, [open]);
 
   return (
     <Box
