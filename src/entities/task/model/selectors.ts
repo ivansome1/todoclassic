@@ -1,20 +1,43 @@
 import { Task } from "@/shared/api";
 import { useAppSelector } from "@/shared/model";
+import { nanoid } from "nanoid";
 
-export function useTask(taskId: string) {
-  return useAppSelector((state) =>
+export function useTask(taskId: string): Task {
+  const task = useAppSelector((state) =>
     state.task.data.find((task) => task.id === taskId)
   );
+  if (!task) {
+    return {
+      title: "",
+      description: "",
+      completed: false,
+      priority: 2,
+      id: nanoid(),
+    };
+  }
+  return task;
 }
 
 export function useSortedTasks(): Task[] {
   const tasks = useAppSelector((state) => state.task.data);
+  const sortByCompleted = useAppSelector((state) => state.task.sortByCompleted);
+  const sortByPriority = useAppSelector((state) => state.task.sortByPriority);
   const tasksCopy = [...tasks];
 
-  tasksCopy.sort(
-    (a, b) =>
-      b.priority - a.priority || Number(a.completed) - Number(b.completed)
-  );
+  if (sortByCompleted) {
+    tasksCopy.sort((a, b) => Number(a.completed) - Number(b.completed));
+  }
+
+  if (sortByPriority) {
+    tasksCopy.sort((a, b) => b.priority - a.priority);
+  }
+
+  if (sortByCompleted && sortByPriority) {
+    tasksCopy.sort(
+      (a, b) =>
+        b.priority - a.priority || Number(a.completed) - Number(b.completed)
+    );
+  }
 
   return tasksCopy;
 }

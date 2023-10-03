@@ -28,10 +28,9 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
       } else {
         dispatch(userModel.setUser(undefined));
       }
-      setTimeout(() => {
-        dispatch(userModel.setLoading(false));
-        setThemeColor("#191919");
-      }, 2000);
+
+      dispatch(userModel.setLoading(false));
+      setThemeColor("#191919");
     });
     return () => unsubscribe();
   }, []);

@@ -25,6 +25,7 @@ export const TaskFiltersMenuButton = () => {
     <>
       <Tooltip title="Filters">
         <IconButton
+          size="large"
           onClick={(e) => {
             setAnchor(e.currentTarget);
           }}

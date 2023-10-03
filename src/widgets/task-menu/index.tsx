@@ -1,73 +1,111 @@
+import { taskModel } from "@/entities/task";
 import { CloneTaskMenuItem } from "@/features/tasks/clone-task";
-import { EditTaskMenuItem } from "@/features/tasks/edit-task";
+import { EditTaskContext } from "@/features/tasks/edit-task";
 import { RemoveTaskMenuItem } from "@/features/tasks/remove-task";
-import { MoreVert } from "@mui/icons-material";
-import { Divider, IconButton, Menu, useTheme } from "@mui/material";
-import { FC, useState } from "react";
+import { Edit } from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+  SwipeableDrawer,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { FC, useContext } from "react";
 
 interface TaskMenuProps {
   id: string;
+  anchorEl: HTMLElement | null;
+  onClose: () => void;
 }
 
-export const TaskMenuButton: FC<TaskMenuProps> = ({ id }) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+export const TaskMenu: FC<TaskMenuProps> = ({ id, anchorEl, onClose }) => {
   const open = Boolean(anchorEl);
 
   const theme = useTheme();
+  const isUnderMd = useMediaQuery(theme.breakpoints.down("md"));
 
-  return (
-    <>
-      <IconButton
-        onClick={(event) => {
-          setAnchorEl(event.currentTarget);
+  const task = taskModel.useTask(id);
+  const { setEditId } = useContext(EditTaskContext);
+
+  const content = (
+    <MenuList
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 0.5,
+
+        paddingTop: isUnderMd ? 0.5 : 0,
+        paddingBottom: 0,
+        "& .MuiMenuItem-root": {
+          "& .MuiSvgIcon-root": {
+            fontSize: !isUnderMd ? 18 : undefined,
+            marginRight: theme.spacing(isUnderMd ? 2 : 1.5),
+          },
+        },
+      }}
+    >
+      {isUnderMd && (
+        <Box>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography variant="button" sx={{ mx: 2 }}>
+              {task.title}
+            </Typography>
+            <Typography variant="caption" sx={{ mx: 2 }}>
+              {task.description}
+            </Typography>
+          </Box>
+
+          <Divider sx={{ mt: 1 }} />
+        </Box>
+      )}
+      <MenuItem
+        onClick={() => {
+          setEditId(id);
+          onClose();
         }}
       >
-        <MoreVert sx={{ color: "text.secondary" }} />
-      </IconButton>
-
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => {
-          setAnchorEl(null);
-        }}
+        <ListItemIcon>
+          <Edit />
+        </ListItemIcon>
+        <ListItemText>Edit</ListItemText>
+      </MenuItem>
+      <CloneTaskMenuItem onClick={onClose} id={id} />
+      <Divider
         sx={{
-          "& .MuiMenuItem-root": {
-            "& .MuiSvgIcon-root": {
-              fontSize: 18,
-              marginRight: theme.spacing(1.5),
-            },
+          "&.MuiDivider-root": {
+            marginX: 0.5,
+            marginBottom: 0,
+            marginTop: 0,
           },
         }}
+      />
+      <RemoveTaskMenuItem onClick={onClose} id={id} />
+    </MenuList>
+  );
+
+  if (isUnderMd) {
+    return (
+      <SwipeableDrawer
+        anchor="bottom"
+        elevation={4}
+        onOpen={() => {}}
+        disableSwipeToOpen
+        open={open}
+        onClose={onClose}
       >
-        <EditTaskMenuItem
-          onClose={() => {
-            setAnchorEl(null);
-          }}
-          id={id}
-        />
-        <CloneTaskMenuItem
-          onClick={() => {
-            setAnchorEl(null);
-          }}
-          id={id}
-        />
-        <Divider
-          sx={{
-            "&.MuiDivider-root": {
-              marginX: 0.5,
-              marginBottom: 0,
-              marginTop: 0.000000001,
-            },
-          }}
-        />
-        <RemoveTaskMenuItem
-          onClick={() => {
-            setAnchorEl(null);
-          }}
-          id={id}
-        />
-      </Menu>
-    </>
+        <Box sx={{ my: 0.5, mt: 1 }}>{content}</Box>
+      </SwipeableDrawer>
+    );
+  }
+  return (
+    <Menu anchorEl={anchorEl} open={open} onClose={onClose}>
+      {content}
+    </Menu>
   );
 };
