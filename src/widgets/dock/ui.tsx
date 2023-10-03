@@ -57,6 +57,9 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
             anchor="bottom"
             open={open}
             onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
+            swipeAreaWidth={drawerBleeding}
+            disableSwipeToOpen={true}
             ModalProps={{
               keepMounted: true,
             }}
@@ -132,7 +135,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
                 boxShadow: "none",
               }}
             >
-              <AddTaskForm open={open} />
+              <AddTaskForm />
             </StyledBox>
           </Drawer>
         </Root>
