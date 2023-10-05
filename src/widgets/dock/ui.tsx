@@ -1,19 +1,12 @@
+import { userModel } from "@/entities/user";
 import { AddTaskForm } from "@/features/tasks/add-task";
+import { useSaveTasks } from "@/features/tasks/save-tasks";
 import { Global } from "@emotion/react";
 import { Add, Close, Save } from "@mui/icons-material";
-import {
-  Badge,
-  Box,
-  Fab,
-  IconButton,
-  SwipeableDrawer,
-  styled,
-} from "@mui/material";
+import { Badge, Box, Drawer, Fab, IconButton, styled } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { FC, PropsWithChildren, ReactNode, useState } from "react";
 import { DockContext } from "./model";
-import { userModel } from "@/entities/user";
-import { useSaveTasks } from "@/features/tasks/save-tasks";
 
 const drawerBleeding = 54;
 const drawerWidth = 700;
@@ -53,14 +46,10 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
               },
             }}
           />
-          <SwipeableDrawer
-            allowSwipeInChildren
+          <Drawer
             anchor="bottom"
             open={open}
             onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-            swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={true}
             ModalProps={{
               keepMounted: true,
             }}
@@ -69,7 +58,6 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
                 maxWidth: drawerWidth,
                 width: "100%",
                 mx: "auto",
-                boxShadow: "none",
               },
             }}
           >
@@ -138,7 +126,7 @@ export const DockProvider: FC<PropsWithChildren & { before: ReactNode }> = ({
             >
               <AddTaskForm />
             </StyledBox>
-          </SwipeableDrawer>
+          </Drawer>
         </Root>
       )}
       {children}
