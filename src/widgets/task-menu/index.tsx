@@ -11,7 +11,7 @@ import {
   Menu,
   MenuItem,
   MenuList,
-  SwipeableDrawer,
+  Drawer,
   Typography,
   useMediaQuery,
   useTheme,
@@ -91,16 +91,9 @@ export const TaskMenu: FC<TaskMenuProps> = ({ id, anchorEl, onClose }) => {
 
   if (isUnderMd) {
     return (
-      <SwipeableDrawer
-        anchor="bottom"
-        elevation={4}
-        onOpen={() => {}}
-        disableSwipeToOpen
-        open={open}
-        onClose={onClose}
-      >
+      <Drawer anchor="bottom" elevation={4} open={open} onClose={onClose}>
         <Box sx={{ my: 0.5, mt: 1 }}>{content}</Box>
-      </SwipeableDrawer>
+      </Drawer>
     );
   }
   return (
