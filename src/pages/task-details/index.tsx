@@ -1,38 +1,32 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { TaskCard, taskModel } from "@/entities/task";
 import { ToggleTask } from "@/features/tasks/toggle-task";
-import { taskModel, TaskCard } from "@/entities/task";
-import { useAppSelector } from "@/shared/model";
-import { Box, Typography, IconButton } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 
 const TaskDetails = () => {
   const taskId = useParams().taskId;
 
   if (taskId) {
     const task = taskModel.useTask(taskId);
-    const tasks = useAppSelector((state) => state.task.data);
-    const taskIndex = tasks.findIndex((el) => el.id === task?.id);
-
     const navigate = useNavigate();
 
     return (
       <Box sx={{ p: 1, maxWidth: "700px", width: "100%", mx: "auto" }}>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-          <IconButton
-            onClick={() => {
-              navigate(-1);
-            }}
-            size="small"
-          >
-            <ArrowBack />
-          </IconButton>
-          <Typography variant="h6">Task#{taskIndex}</Typography>
-        </Box>
         {task ? (
           <>
             <TaskCard
               data={task}
               actions={<ToggleTask data={task} showStatus />}
+              afterRow={
+                <IconButton
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  <Close sx={{ color: "text.secondary" }} />
+                </IconButton>
+              }
             />
           </>
         ) : (
