@@ -1,0 +1,29 @@
+.containerPaper {
+  box-shadow: none !important;
+  display: flex;
+  padding: 0px 8px 0px 8px;
+}
+
+.editFormPaper {
+  padding: 8px;
+  box-shadow: none !important;
+}
+
+.beforeBox {
+  margin: auto 8px auto 0px;
+  padding: 3px 0px 3px 0px;
+}
+
+.linkBox {
+  flex-grow: 1;
+  text-decoration: none;
+  min-width: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0px 8px 0px;
+}
+
+.afterBox {
+  margin: auto 0px auto 24px;
+}

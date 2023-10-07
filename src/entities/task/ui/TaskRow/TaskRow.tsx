@@ -3,6 +3,7 @@ import { MoreHoriz } from "@mui/icons-material";
 import { Box, IconButton, Paper, Typography } from "@mui/material";
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import styles from "./TaskRow.module.scss";
 
 interface TaskRowProps {
   data: Task;
@@ -15,33 +16,14 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
   const { data, before, onMenuOpen, editForm } = props;
 
   if (editForm) {
-    return <Paper sx={{ p: 1 }}>{editForm}</Paper>;
+    return <Paper className={styles.editFormPaper}>{editForm}</Paper>;
   }
 
   return (
-    <Paper
-      elevation={1}
-      sx={{
-        boxShadow: "none",
-        display: "flex",
-        px: 1,
-      }}
-    >
-      <Box sx={{ pr: 1, my: "auto" }}> {before}</Box>
+    <Paper elevation={1} className={styles.containerPaper}>
+      <Box className={styles.beforeBox}>{before}</Box>
 
-      <Box
-        sx={{
-          flexGrow: 1,
-          textDecoration: "none",
-          minWidth: "3px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          py: 1,
-        }}
-        component={Link}
-        to={"/tasks/" + data.id}
-      >
+      <Box className={styles.linkBox} component={Link} to={"/tasks/" + data.id}>
         <Typography noWrap color="text.primary">
           {data.title}
         </Typography>
@@ -50,12 +32,7 @@ export const TaskRow: FC<TaskRowProps> = (props) => {
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          ml: 3,
-          my: "auto",
-        }}
-      >
+      <Box className={styles.afterBox}>
         <IconButton
           onClick={(event) => {
             onMenuOpen(event.currentTarget);
